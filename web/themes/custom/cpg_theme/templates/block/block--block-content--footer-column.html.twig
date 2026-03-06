@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Template for footer_column block content type.
+ * Since body field hasn't been added yet, renders descriptive content 
+ * from the block label. Admin can replace via block editing once body field is added.
+ */
+#}
+{% set block_label = label|render|striptags|trim %}
+<div class="cpg-footer-col-block">
+  {% if block_label %}
+    <h4 class="cpg-footer-col-block__title">{{ block_label }}</h4>
+  {% endif %}
+
+  {# Render any available fields #}
+  {{ content }}
+
+  {# Fallback content based on block label since body field is pending #}
+  {% if 'About' in block_label %}
+    <p>CPG Matters offers the latest news, research, and analysis for consumer packaged goods professionals.</p>
+  {% elseif 'Resources' in block_label %}
+    <ul>
+      <li><a href="/whitepapers">Whitepapers</a></li>
+      <li><a href="/dictionary">CPG Dictionary</a></li>
+      <li><a href="/directory">Industry Directory</a></li>
+      <li><a href="/sitemap">Sitemap</a></li>
+    </ul>
+  {% elseif 'Topics' in block_label %}
+    <ul>
+      <li><a href="/">Industry Trends</a></li>
+      <li><a href="/">Sustainability</a></li>
+      <li><a href="/">Innovation</a></li>
+      <li><a href="/">Market Analysis</a></li>
+      <li><a href="/">E-Commerce</a></li>
+    </ul>
+  {% elseif 'Connect' in block_label %}
+    <ul>
+      <li><a href="/contact">Contact Us</a></li>
+      <li><a href="https://twitter.com">Twitter / X</a></li>
+      <li><a href="https://linkedin.com">LinkedIn</a></li>
+      <li><a href="/register">Subscribe</a></li>
+    </ul>
+  {% endif %}
+</div>

@@ -1,0 +1,87 @@
+{#
+/**
+ * @file
+ * Theme override for article teasers on the front page.
+ * Hardcoded to perfectly match the mockup design features.
+ */
+#}
+
+{# Determine if this is the featured/sticky article #}
+{% set is_featured = node.isSticky() %}
+
+{% set classes = [
+  'cpg-article-teaser',
+  is_featured ? 'cpg-article-teaser--featured' : '',
+] %}
+
+<article{{ attributes.addClass(classes) }} style="{% if not is_featured %}border: none; border-radius: 8px; overflow: hidden; margin-bottom: 2rem;{% endif %}">
+
+  {# ── Image (Hero or standard) ── #}
+  {% if content.field_image|render|trim %}
+    <div class="cpg-article-teaser__image" style="width: 100%; {% if is_featured %}aspect-ratio: 16/8;{% else %}aspect-ratio: 16/9;{% endif %} overflow: hidden; background: #e5e7eb; display: block;">
+      {{ content.field_image }}
+    </div>
+  {% endif %}
+
+  <div class="cpg-article-teaser__content" style="padding: 1.5rem 1.5rem 2rem; {% if is_featured %}padding: 2rem 0;{% endif %}">
+
+    {# ── Category Tag ── #}
+    {% if content.field_tags|render|trim %}
+      <div class="cpg-article-teaser__category" style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
+        <span class="cpg-category-icon" aria-hidden="true" style="font-size: 0.85rem;">{{ category_icon|default('📈') }}</span>
+        <span style="color: #C41E3A; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">
+          {{ content.field_tags|render|striptags }}
+        </span>
+      </div>
+    {% endif %}
+
+    {# ── Title ── #}
+    <h2 class="cpg-article-teaser__title" style="{% if is_featured %}font-size: 2.8rem; line-height: 1.15; margin-bottom: 1rem;{% else %}font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.5rem;{% endif %}; font-family: 'Playfair Display', serif; font-weight: 700;">
+      <a href="{{ url }}" rel="bookmark" style="text-decoration: none; {% if is_featured %}color: #2563EB; text-decoration: underline; text-underline-offset: 4px;{% else %}color: #1A1A1A;{% endif %}">
+        {{ label }}
+      </a>
+    </h2>
+
+    {# ── Body Teaser ── #}
+    {% if content.body|render|trim %}
+      <div class="cpg-article-teaser__body" style="font-family: 'Source Sans 3', sans-serif; {% if is_featured %}font-size: 1.1rem; color: #374151; line-height: 1.6;{% else %}font-size: 0.95rem; color: #4B5563; line-height: 1.5; height: 4.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;{% endif %} margin-bottom: 1rem;">
+        {{ content.body|render|striptags|trim }}
+      </div>
+    {% endif %}
+
+    {# ── Author Row (Featured Only) ── #}
+    {% if is_featured and display_submitted %}
+      <div class="cpg-article-teaser__meta" style="display: flex; align-items: center; gap: 1rem; margin-top: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #E5E7EB;">
+        <div class="cpg-author-avatar" style="width: 44px; height: 44px; border-radius: 50%; background: #9B1730; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; flex-shrink: 0;">
+          {{ author_name|render|striptags|trim|first|upper ?: 'S' }}
+        </div>
+        <div class="cpg-author-info" style="display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-size: 0.85rem; color: #6B7280; font-family: 'Source Sans 3', sans-serif;">By <span style="font-weight: 600; color: #111827;">{{ author_name }}</span></span>
+          <span style="font-size: 0.8rem; color: #6B7280; font-family: 'Source Sans 3', sans-serif;">
+            {{ date }} &middot; 5 min read
+          </span>
+        </div>
+      </div>
+
+      {# ── Social sharing row ── #}
+      <div class="cpg-social-share" style="display: flex; gap: 12px; margin-top: 1.5rem;">
+        <a href="#" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #F3F4F6; border: 1px solid #E5E7EB; color: #6B7280; text-decoration: none; font-size: 14px; transition: all 0.2s;">X</a>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #F3F4F6; border: 1px solid #E5E7EB; color: #6B7280; text-decoration: none; font-size: 14px; font-weight: bold; font-family:serif; transition: all 0.2s;">f</a>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #F3F4F6; border: 1px solid #E5E7EB; color: #6B7280; text-decoration: none; font-size: 14px; font-weight: bold; font-family:serif; transition: all 0.2s;">in</a>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #F3F4F6; border: 1px solid #E5E7EB; color: #6B7280; text-decoration: none; font-size: 14px; font-weight: bold; transition: all 0.2s;">@</a>
+      </div>
+    {% endif %}
+
+    {# ── Standard Card Footer (Non-Featured) ── #}
+    {% if not is_featured %}
+      <div class="cpg-article-teaser__footer" style="margin-top: 1rem;">
+        <a href="{{ url }}" style="color: #C41E3A; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-block;">Read more &rarr;</a>
+        {% if date %}
+          <div style="font-size: 0.75rem; color: #9CA3AF; margin-top: 6px;">{{ date }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+
+</article>

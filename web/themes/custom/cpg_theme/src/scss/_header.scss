@@ -1,0 +1,204 @@
+// ================================================================
+// HEADER — sticky header with red bottom border, subscribe button
+// ================================================================
+@use 'variables' as *;
+
+.cpg-layout__header {
+    background: $cpg-bg-white;
+    border-bottom: 4px solid $cpg-red;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: $shadow-sm;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $gap-xl;
+    padding: 0.75rem $gap-lg;
+}
+
+// ── Branding — red serif logo ──
+.header-branding {
+    .block-system-branding-block {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .site-logo img {
+        height: 40px;
+        width: auto;
+    }
+
+    .site-name a {
+        font-family: $font-heading;
+        font-size: 2rem;
+        font-weight: 900;
+        color: $cpg-red;
+        letter-spacing: -0.03em;
+        line-height: 1;
+    }
+
+    .site-slogan {
+        font-size: 0.55rem;
+        color: $cpg-text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        margin-top: 2px;
+    }
+}
+
+// ── Nav — horizontal menu ──
+.header-nav {
+    flex: 1;
+
+    ul.menu {
+        display: flex;
+        justify-content: center;
+        gap: $gap-lg;
+        margin: 0;
+        padding: 0;
+    }
+
+    .menu-item a {
+        color: $cpg-text;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: $gap-xs 0;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: $cpg-red;
+            transition: width 0.3s;
+        }
+
+        &:hover {
+            color: $cpg-red;
+
+            &::after {
+                width: 100%;
+            }
+        }
+
+        &.is-active::after {
+            width: 100%;
+        }
+    }
+}
+
+// ── Header actions — subscribe + search ──
+.header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+
+    .search-form {
+        display: flex;
+    }
+
+    .form-search,
+    input[type="search"] {
+        border: 1px solid $cpg-border;
+        border-radius: $radius 0 0 $radius;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.82rem;
+        font-family: $font-body;
+        outline: none;
+        min-width: 150px;
+        transition: border-color $transition;
+
+        &:focus {
+            border-color: $cpg-blue;
+        }
+    }
+
+    .form-submit,
+    input[type="submit"] {
+        background: $cpg-text;
+        color: $cpg-text-light;
+        border: 1px solid $cpg-text;
+        border-left: none;
+        border-radius: 0 $radius $radius 0;
+        padding: 0.4rem 0.85rem;
+        font-size: 0.82rem;
+        cursor: pointer;
+        font-family: $font-body;
+        font-weight: 700;
+        transition: background $transition;
+
+        &:hover {
+            background: #374151;
+        }
+    }
+}
+
+// ── Subscribe button — red rounded pill ──
+.cpg-subscribe-btn {
+    display: inline-block;
+    background: $cpg-red;
+    color: $cpg-text-light !important;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 1.4rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: background $transition, transform $transition;
+    text-decoration: none;
+
+    &:hover {
+        background: $cpg-red-dark;
+        color: $cpg-text-light !important;
+        transform: translateY(-1px);
+    }
+}
+
+.header-search-wrapper {
+    display: flex;
+}
+
+// ── Responsive header ──
+@media (max-width: 1000px) {
+    .header-inner {
+        flex-wrap: wrap;
+        gap: $gap-md;
+        padding: $gap-sm $gap-md;
+    }
+
+    .header-nav {
+        order: 3;
+        width: 100%;
+
+        ul.menu {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: $gap-sm $gap-md;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .header-actions {
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .cpg-subscribe-btn {
+        text-align: center;
+    }
+}

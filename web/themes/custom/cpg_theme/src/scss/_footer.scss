@@ -1,0 +1,110 @@
+// ================================================================
+// FOOTER — dark background, 4-column grid
+// ================================================================
+@use 'variables' as *;
+
+.cpg-layout__footer {
+    background: $cpg-bg-footer;
+    color: $cpg-text-light;
+    padding: $gap-2xl 0 0;
+    margin-top: auto;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $gap-xl;
+}
+
+// ── Footer column blocks ──
+.cpg-footer-col-block {
+    &__title {
+        color: $cpg-text-light;
+        font-family: $font-heading;
+        font-size: 1.1rem;
+        margin-bottom: $gap-md;
+    }
+
+    &__content,
+    p {
+        color: #9CA3AF;
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+
+    li {
+        margin-bottom: $gap-xs;
+    }
+
+    a {
+        color: #9CA3AF;
+        font-size: 0.85rem;
+        line-height: 2;
+        transition: color $transition;
+
+        &:hover {
+            color: $cpg-text-light;
+        }
+    }
+}
+
+// ── Footer column generic overrides ──
+.footer-col {
+    p {
+        color: #9CA3AF;
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+
+    a {
+        color: #9CA3AF;
+        font-size: 0.85rem;
+        line-height: 2;
+        transition: color $transition;
+
+        &:hover {
+            color: $cpg-text-light;
+        }
+    }
+
+    .block {
+
+        h2,
+        h4 {
+            color: $cpg-text-light;
+            font-family: $font-heading;
+            font-size: 1.1rem;
+            margin-bottom: $gap-md;
+            font-weight: 700;
+        }
+    }
+}
+
+// ── Footer bottom bar ──
+.footer-bottom {
+    margin-top: $gap-2xl;
+    padding: $gap-md 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.8rem;
+    color: #6B7280;
+
+    p {
+        margin: 0;
+        color: #6B7280;
+    }
+}
+
+// ── Responsive footer ──
+@media (max-width: 900px) {
+    .footer-columns {
+        grid-template-columns: 1fr 1fr;
+        gap: $gap-lg;
+    }
+}
+
+@media (max-width: 500px) {
+    .footer-columns {
+        grid-template-columns: 1fr;
+    }
+}

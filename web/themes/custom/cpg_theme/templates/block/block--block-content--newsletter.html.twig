@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Template for newsletter block content type.
+ * Renders the red "Stay Informed" subscription box matching mockup.
+ */
+#}
+<div{{ attributes.addClass('cpg-newsletter-block') }}>
+  <h3 class="cpg-newsletter-block__title">
+    {% if content.field_subtitle|render|trim %}
+      {{ content.field_subtitle }}
+    {% else %}
+      Stay Informed
+    {% endif %}
+  </h3>
+  <div class="cpg-newsletter-block__desc">
+    <p>Get the latest CPG news delivered to your inbox</p>
+  </div>
+  <form action="#" class="cpg-newsletter-block__form">
+    <input type="email" placeholder="Your email address" class="cpg-newsletter-block__input" required>
+    <button type="submit" class="cpg-newsletter-block__btn">Subscribe</button>
+  </form>
+</div>

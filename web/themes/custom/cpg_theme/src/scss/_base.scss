@@ -1,0 +1,72 @@
+// ========== RESET & BASE ==========
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-body;
+    color: $cpg-text;
+    background: $cpg-bg;
+    line-height: 1.65;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: $cpg-text;
+    text-decoration: none;
+    transition: color $transition;
+
+    &:hover {
+        color: $cpg-red;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-heading;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 $gap-sm;
+    color: $cpg-text;
+}
+
+h1 {
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+h2 {
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h4 {
+    font-size: 1.05rem;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0 0 $gap-md;
+}

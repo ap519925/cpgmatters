@@ -1,0 +1,307 @@
+// ================================================================
+// ARTICLE TEASERS — cards with pastel category backgrounds,
+// featured hero treatment, social sharing
+// ================================================================
+@use 'variables' as *;
+
+// ── Category pastel background map for nth-child cycling ──
+$category-colors: (
+    1: $cat-purple,
+    2: $cat-pink,
+    3: $cat-blue,
+    4: $cat-orange,
+    5: $cat-green,
+    6: $cat-yellow,
+);
+
+.cpg-article-teaser {
+    background: $cpg-bg-white;
+    border-radius: $radius;
+    overflow: hidden;
+    margin-bottom: $gap-xl;
+    transition: box-shadow $transition, transform $transition;
+    border: 1px solid $cpg-border;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-2px);
+    }
+
+    // ── Pastel backgrounds for NON-featured teasers ──
+    &:not(.cpg-article-teaser--featured) {
+        @each $i, $color in $category-colors {
+            &:nth-child(6n+#{$i}) {
+                background: $color;
+                border-color: transparent;
+            }
+        }
+    }
+
+    // ── Image ──
+    &__image {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: $cpg-border;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+    }
+
+    &:hover &__image img {
+        transform: scale(1.03);
+    }
+
+    // ── Content container ──
+    &__content {
+        padding: $gap-lg $gap-xl $gap-xl;
+    }
+
+    // ── Category tag with icon ──
+    &__category {
+        margin-bottom: $gap-sm;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+
+        a,
+        .field__item {
+            display: inline-block;
+            color: $cpg-red;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0;
+        }
+
+        .field__label {
+            display: none;
+        }
+    }
+
+    // ── Title ──
+    &__title {
+        font-size: clamp(1.15rem, 2vw, 1.6rem);
+        margin-bottom: $gap-sm;
+        line-height: 1.25;
+
+        a {
+            color: $cpg-text;
+
+            &:hover {
+                color: $cpg-red;
+            }
+        }
+    }
+
+    // ── Body ──
+    &__body {
+        color: $cpg-text;
+        font-size: 1rem;
+        line-height: 1.65;
+        margin-bottom: $gap-md;
+        opacity: 0.85;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // ── Meta / Author row ──
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: $gap-md;
+        font-size: 0.85rem;
+        color: $cpg-text-secondary;
+        margin-bottom: $gap-sm;
+        padding-top: $gap-md;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    &__author {
+        font-weight: 600;
+        color: $cpg-text;
+        font-size: 0.85rem;
+    }
+
+    &__date-read {
+        color: $cpg-text-secondary;
+        font-size: 0.8rem;
+    }
+
+    &__date {
+        font-size: 0.78rem;
+        color: $cpg-text-secondary;
+        display: block;
+        margin-top: $gap-xs;
+    }
+
+    // ── Read more ──
+    &__readmore a {
+        color: $cpg-red;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.02em;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // ── Time ago ──
+    &__time-ago {
+        font-size: 0.78rem;
+        color: $cpg-text-secondary;
+        margin-top: $gap-xs;
+    }
+
+    // ── Hide Drupal node links and field labels ──
+    .node__links,
+    .links {
+        display: none;
+    }
+
+    .field--type-image {
+        margin: 0;
+        padding: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .field__label {
+        display: none;
+    }
+}
+
+// ── Category icon emoji ──
+.cpg-category-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+// ── Author avatar circle ──
+.cpg-author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $cpg-red;
+    color: $cpg-text-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.cpg-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cpg-meta-dot {
+    margin: 0 0.3rem;
+}
+
+.cpg-read-time {
+    color: $cpg-text-secondary;
+}
+
+// ================================================================
+// FEATURED (sticky) article — hero treatment
+// ================================================================
+.cpg-article-teaser--featured {
+    background: $cpg-bg-white !important;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    &:hover {
+        box-shadow: none;
+        transform: none;
+    }
+
+    .cpg-article-teaser__content {
+        padding: $gap-lg 0 $gap-xl;
+    }
+
+    .cpg-article-teaser__title {
+        font-size: clamp(1.6rem, 3vw, 2.5rem);
+        line-height: 1.15;
+        margin-bottom: $gap-md;
+
+        a {
+            color: $cpg-blue;
+            text-decoration: underline;
+
+            &:hover {
+                color: $cpg-red;
+            }
+        }
+    }
+
+    .cpg-article-teaser__body {
+        font-size: 1.1rem;
+        opacity: 1;
+        color: #374151;
+    }
+}
+
+// ================================================================
+// SOCIAL SHARING ICONS
+// ================================================================
+.cpg-social-share {
+    display: flex;
+    gap: $gap-sm;
+    padding-top: $gap-lg;
+    margin-top: $gap-md;
+    border-top: 1px solid $cpg-border;
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid $cpg-border;
+        color: $cpg-text-secondary;
+        background: $cpg-bg-white;
+        transition: all $transition;
+
+        &:hover {
+            color: $cpg-text-light;
+            background: $cpg-text;
+            border-color: $cpg-text;
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+// ================================================================
+// "Latest News" section heading
+// ================================================================
+.cpg-content-main {
+
+    h2.cpg-latest-heading,
+    .views-element-container h2 {
+        font-size: 1.75rem;
+        border-bottom: 3px solid $cpg-text;
+        padding-bottom: $gap-sm;
+        margin-bottom: $gap-xl;
+    }
+}

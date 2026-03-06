@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Template for ad_banner block content type.
+ * ad_size variable is set by cpg_theme_preprocess_block().
+ */
+#}
+{% set size = ad_size|default('300x250') %}
+{% set dims = size|split('x') %}
+{% set w = dims[0]|default('300') %}
+{% set h = dims[1]|default('250') %}
+
+<div{{ attributes.addClass('cpg-ad-banner') }} style="
+  max-width: {{ w }}px;
+  min-height: {{ h }}px;
+  width: 100%;
+">
+  {% if content.field_ad_image|render|trim %}
+    {{ content.field_ad_image }}
+  {% else %}
+    <div>
+      <span style="display:block; font-weight:700; color:#64748B; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em;">
+        SAMPLE BANNER
+      </span>
+      <span style="display:block; color:#94A3B8; font-size:0.65rem; margin-top:2px; text-transform:uppercase;">
+        {{ size }}
+      </span>
+    </div>
+  {% endif %}
+</div>

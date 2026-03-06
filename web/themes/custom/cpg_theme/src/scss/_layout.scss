@@ -1,0 +1,14 @@
+// ========== LAYOUT SHELL ==========
+@use 'variables' as *;
+
+.cpg-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.cpg-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 $gap-lg;
+}

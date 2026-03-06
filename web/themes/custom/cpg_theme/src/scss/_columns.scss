@@ -1,0 +1,61 @@
+// ================================================================
+// 3-COLUMN LAYOUT — with red vertical dividers
+// ================================================================
+@use 'variables' as *;
+
+.cpg-layout__main {
+    flex: 1;
+}
+
+.cpg-columns {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: 0;
+    margin: 0;
+    align-items: start;
+}
+
+// ── Red vertical dividers between columns ──
+.cpg-sidebar--first {
+    border-right: 3px solid $cpg-red;
+    padding: $gap-lg $gap-lg $gap-lg 0;
+    min-height: 400px;
+}
+
+.cpg-content-main {
+    padding: $gap-lg $gap-xl;
+}
+
+.cpg-sidebar--second {
+    border-left: 3px solid $cpg-red;
+    padding: $gap-lg 0 $gap-lg $gap-lg;
+}
+
+.cpg-sidebar .block {
+    margin-bottom: $gap-xl;
+}
+
+// ── Responsive columns ──
+@media (max-width: 1200px) {
+    .cpg-columns {
+        grid-template-columns: 1fr 300px;
+    }
+
+    .cpg-sidebar--first {
+        display: none;
+    }
+
+    .cpg-sidebar--second {
+        border-left: 3px solid $cpg-red;
+    }
+}
+
+@media (max-width: 768px) {
+    .cpg-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .cpg-sidebar--second {
+        display: none;
+    }
+}

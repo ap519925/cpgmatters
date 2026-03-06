@@ -1,0 +1,6 @@
+global:
+  css:
+    theme:
+      dist/css/main.css: { minified: true }
+  js:
+    dist/js/main.js: { minified: true }

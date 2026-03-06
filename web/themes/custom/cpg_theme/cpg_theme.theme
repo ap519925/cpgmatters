@@ -1,0 +1,120 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the CPG Matters theme.
+ */
+
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ *
+ * Adds template suggestions for block_content entities based on their bundle.
+ * This enables templates like block--block-content--ad-banner.html.twig
+ */
+function cpg_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  // Provide block content type based suggestions.
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $block_content = $variables['elements']['content']['#block_content'];
+    $bundle = $block_content->bundle();
+
+    // Add suggestion based on block content type (bundle).
+    $suggestions[] = 'block__block_content__' . $bundle;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_node_alter().
+ *
+ * Already provided by core, but explicit for documentation.
+ */
+function cpg_theme_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  $node = $variables['elements']['#node'];
+  $view_mode = $variables['elements']['#view_mode'];
+  // node--article--teaser is already suggested by core.
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function cpg_theme_preprocess_node(array &$variables) {
+  // Make the node view mode available.
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+
+  // For article teasers, map the category tag to an icon emoji.
+  if ($variables['node']->getType() === 'article' && $variables['view_mode'] === 'teaser') {
+    $category_icon = '📈'; // Default icon.
+
+    // Try to get the category name from field_tags.
+    if ($variables['node']->hasField('field_tags') && !$variables['node']->get('field_tags')->isEmpty()) {
+      $term = $variables['node']->get('field_tags')->entity;
+      if ($term) {
+        $term_name = strtolower($term->getName());
+        $icon_map = [
+          'industry trends' => '📈',
+          'sustainability' => '🌿',
+          'e-commerce' => '💻',
+          'market analysis' => '📊',
+          'innovation' => '💡',
+          'm&a' => '🤝',
+          'analytics' => '📋',
+          'strategy' => '📐',
+          'finance' => '💰',
+          'design' => '🎨',
+          'tech' => '💻',
+          'leadership' => '🎯',
+          'marketing' => '📢',
+          'research' => '🔬',
+          'events' => '📅',
+        ];
+        $category_icon = $icon_map[$term_name] ?? '📈';
+      }
+    }
+    $variables['category_icon'] = $category_icon;
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ *
+ * Passes block_content entity data to block templates.
+ */
+function cpg_theme_preprocess_block(array &$variables) {
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $block_content = $variables['elements']['content']['#block_content'];
+    $variables['block_bundle'] = $block_content->bundle();
+
+    // Pass ad_size for ad_banner blocks.
+    if ($block_content->bundle() === 'ad_banner' && $block_content->hasField('field_ad_size')) {
+      $variables['ad_size'] = $block_content->get('field_ad_size')->value ?? '300x250';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ *
+ * Hide field labels in teaser view modes.
+ * Also fixes the #title array key warning by checking for it.
+ */
+function cpg_theme_preprocess_field(array &$variables) {
+  if (isset($variables['element']['#view_mode']) && $variables['element']['#view_mode'] === 'teaser') {
+    $variables['label_hidden'] = TRUE;
+  }
+
+  // Ensure #title is set to avoid "Undefined array key" warnings.
+  if (!isset($variables['element']['#title'])) {
+    $variables['element']['#title'] = '';
+  }
+}
+
+/**
+ * Implements hook_preprocess_html().
+ *
+ * Adds body classes for front page detection.
+ */
+function cpg_theme_preprocess_html(array &$variables) {
+  // Add front page class.
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['attributes']['class'][] = 'is-front';
+  }
+}
