@@ -1,0 +1,23 @@
+uuid: bc1af363-b5a1-45a5-8f4a-cad42d63293e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:ad_banner:c1738716-0b0a-4cf9-8289-6f631c7637e4'
+  module:
+    - block_content
+  theme:
+    - cpg_theme
+id: cpg_top_banner_ad
+theme: cpg_theme
+region: top_banner
+weight: 0
+provider: null
+plugin: 'block_content:c1738716-0b0a-4cf9-8289-6f631c7637e4'
+settings:
+  id: 'block_content:c1738716-0b0a-4cf9-8289-6f631c7637e4'
+  label: 'Top Banner Ad (728x90)'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility: {  }
