@@ -1,0 +1,372 @@
+// ================================================================
+// ARTICLE FULL PAGE — detailed article display matching mockup
+// ================================================================
+@use 'variables' as *;
+
+// ── Main article container ──
+.cpg-article-full {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 0 $gap-2xl;
+}
+
+// ── Category label ──
+.cpg-article-full__category {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: $gap-md;
+
+    .cpg-category-icon {
+        font-size: 1rem;
+    }
+}
+
+.cpg-article-full__category-text {
+    a,
+    .field__item {
+        color: $cpg-red;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .field__label {
+        display: none;
+    }
+}
+
+// ── Title / Headline ──
+.cpg-article-full__title {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: $cpg-text;
+    margin: 0 0 $gap-lg;
+    letter-spacing: -0.01em;
+}
+
+// ── Summary / Lead text ──
+.cpg-article-full__summary {
+    font-family: $font-body;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #374151;
+    margin-bottom: $gap-xl;
+
+    p {
+        margin: 0;
+    }
+
+    .field__label {
+        display: none;
+    }
+}
+
+// ── Author meta bar ──
+.cpg-article-full__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $gap-lg 0;
+    border-top: 1px solid $cpg-border;
+    border-bottom: 1px solid $cpg-border;
+    margin-bottom: $gap-xl;
+}
+
+.cpg-article-full__meta-left {
+    display: flex;
+    align-items: center;
+    gap: $gap-md;
+}
+
+.cpg-article-full__author {
+    font-family: $font-body;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $cpg-text;
+    display: block;
+}
+
+.cpg-article-full__date-read {
+    font-family: $font-body;
+    font-size: 0.85rem;
+    color: $cpg-text-secondary;
+    display: block;
+    margin-top: 2px;
+}
+
+.cpg-article-full__meta-right {
+    .cpg-social-share {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+// ── Featured image ──
+.cpg-article-full__hero-image {
+    margin: 0 0 $gap-xl;
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        display: block;
+    }
+
+    .field--type-image {
+        margin: 0;
+        padding: 0;
+    }
+
+    .field__label {
+        display: none;
+    }
+}
+
+// ── Image caption ──
+.cpg-article-full__caption {
+    font-family: $font-body;
+    font-size: 0.85rem;
+    color: $cpg-text-secondary;
+    font-style: italic;
+    margin-top: $gap-sm;
+    padding-left: $gap-md;
+    border-left: 3px solid $cpg-red;
+    line-height: 1.5;
+}
+
+// ── Article body ──
+.cpg-article-full__body {
+    font-family: $font-body;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #2D3748;
+
+    .field__label {
+        display: none;
+    }
+
+    p {
+        margin-bottom: 1.5em;
+
+        &:first-child strong:first-child {
+            font-weight: 700;
+            color: $cpg-text;
+        }
+    }
+
+    // Subheadings
+    h2 {
+        font-family: $font-heading;
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-weight: 700;
+        color: $cpg-text;
+        margin: 2.5rem 0 1rem;
+        line-height: 1.2;
+    }
+
+    h3 {
+        font-family: $font-heading;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        font-weight: 700;
+        color: $cpg-text;
+        margin: 2rem 0 0.75rem;
+        line-height: 1.25;
+    }
+
+    // Blockquotes / Pull quotes
+    blockquote {
+        margin: 2rem 0;
+        padding: $gap-lg $gap-xl;
+        border-left: 4px solid $cpg-red;
+        background: #FFF5F5;
+        border-radius: 0 $radius $radius 0;
+        font-style: italic;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #4A4A4A;
+
+        p {
+            margin-bottom: 0.5em;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        cite,
+        strong:last-child {
+            font-style: normal;
+            font-weight: 600;
+            color: $cpg-text-secondary;
+            display: block;
+            margin-top: 0.5em;
+            font-size: 0.95rem;
+        }
+    }
+
+    // Centered large pull quotes (editorial style)
+    .pull-quote, 
+    .text-align-center blockquote,
+    p.text-align-center em {
+        text-align: center;
+        font-family: $font-heading;
+        font-size: 1.4rem;
+        color: $cpg-red;
+        font-weight: 700;
+        line-height: 1.4;
+    }
+
+    // Lists
+    ul, ol {
+        margin: 1.5em 0;
+        padding-left: 1.5em;
+
+        li {
+            margin-bottom: 0.5em;
+            line-height: 1.6;
+
+            strong {
+                color: $cpg-text;
+            }
+        }
+    }
+
+    ul li {
+        list-style: disc;
+    }
+
+    ol li {
+        list-style: decimal;
+    }
+
+    // Images within body
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+        margin: 1.5em 0;
+    }
+
+    // Links
+    a {
+        color: $cpg-red;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        transition: color $transition;
+
+        &:hover {
+            color: $cpg-red-dark;
+        }
+    }
+
+    // Inline ad banners inside body
+    .cpg-ad-banner {
+        margin: 2rem auto;
+    }
+
+    // Tables
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2em 0;
+        font-size: 0.95rem;
+
+        th, td {
+            border: 1px solid $cpg-border;
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        th {
+            background: #F3F4F6;
+            font-weight: 700;
+            color: $cpg-text;
+        }
+
+        tr:nth-child(even) td {
+            background: #FAFAFA;
+        }
+    }
+}
+
+// ── Related Topics at bottom ──
+.cpg-article-full__topics {
+    margin-top: $gap-2xl;
+    padding-top: $gap-xl;
+    border-top: 2px solid $cpg-border;
+}
+
+.cpg-article-full__topics-label {
+    display: block;
+    font-family: $font-body;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $cpg-text-secondary;
+    margin-bottom: $gap-md;
+}
+
+.cpg-article-full__topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap-sm;
+
+    .field__label {
+        display: none;
+    }
+
+    .field__items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $gap-sm;
+    }
+
+    .field__item {
+        a {
+            display: inline-block;
+            background: #F3F4F6;
+            color: $cpg-text;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all $transition;
+
+            &:hover {
+                background: $cpg-red;
+                color: $cpg-text-light;
+            }
+        }
+    }
+}
+
+// ── Hide stray Drupal elements ──
+.cpg-article-full {
+    .node__links,
+    .links,
+    .hidden {
+        display: none !important;
+    }
+
+    .field__label {
+        display: none;
+    }
+}
+
+// ── Hide the page title block on article pages 
+// (title is rendered inside the article template) ──
+body.node-type-article #block-cpg-page-title {
+    display: none;
+}

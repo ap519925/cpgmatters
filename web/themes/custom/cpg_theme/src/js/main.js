@@ -1,5 +1,5 @@
 import '../scss/main.scss';
-
+import { initMobileMenu } from './mobile-menu.js';
 /**
  * Main JavaScript for CPG Theme
  */
@@ -9,7 +9,7 @@ import '../scss/main.scss';
     Drupal.behaviors.cpgThemeGlobal = {
         attach: function (context, settings) {
             console.log('CPG Theme initialized!');
-            // Implement any modern vanilla JS interactions here.
+            initMobileMenu();
         }
     };
 

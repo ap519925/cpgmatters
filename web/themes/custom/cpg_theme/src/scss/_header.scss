@@ -18,27 +18,68 @@
     justify-content: space-between;
     gap: $gap-xl;
     padding: 0.75rem $gap-lg;
+    position: relative;
+}
+
+// ── Mobile Menu Toggle (Hamburger) ──
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1050; // Above overlay
+
+    .hamburger-box {
+        width: 24px;
+        height: 18px;
+        display: inline-block;
+        position: relative;
+    }
+
+    .hamburger-inner {
+        display: block;
+        top: 50%;
+        margin-top: -1px;
+
+        &, &::before, &::after {
+            width: 24px;
+            height: 2px;
+            background-color: $cpg-text;
+            border-radius: 2px;
+            position: absolute;
+            transition: transform 0.15s ease;
+        }
+
+        &::before {
+            content: "";
+            top: -8px;
+        }
+
+        &::after {
+            content: "";
+            bottom: -8px;
+        }
+    }
 }
 
 // ── Branding — red serif logo ──
 .header-branding {
-    .block-system-branding-block {
-        display: flex;
-        flex-direction: column;
+    flex: 0 0 auto;
+
+    .site-branding-link {
+        display: block;
+        text-decoration: none;
     }
 
-    .site-logo img {
-        height: 40px;
-        width: auto;
-    }
-
-    .site-name a {
+    .site-title {
         font-family: $font-heading;
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 900;
         color: $cpg-red;
         letter-spacing: -0.03em;
         line-height: 1;
+        margin: 0;
     }
 
     .site-slogan {
@@ -47,23 +88,31 @@
         text-transform: uppercase;
         letter-spacing: 0.14em;
         font-weight: 700;
-        margin-top: 2px;
+        margin-top: 4px;
     }
 }
 
 // ── Nav — horizontal menu ──
 .header-nav {
-    flex: 1;
+    flex: 1 1 auto;
+    text-align: center;
 
-    ul.menu {
+    ul.menu, ul {
         display: flex;
         justify-content: center;
         gap: $gap-lg;
         margin: 0;
         padding: 0;
+        list-style: none;
     }
 
-    .menu-item a {
+    li, .menu-item {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li a, .menu-item a {
         color: $cpg-text;
         font-weight: 600;
         font-size: 0.85rem;
@@ -71,6 +120,7 @@
         letter-spacing: 0.04em;
         padding: $gap-xs 0;
         position: relative;
+        text-decoration: none;
 
         &::after {
             content: '';
@@ -102,21 +152,23 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 6px;
+    gap: 8px;
 
     .search-form {
         display: flex;
+        align-items: center;
     }
 
     .form-search,
     input[type="search"] {
         border: 1px solid $cpg-border;
+        border-right: none;
         border-radius: $radius 0 0 $radius;
         padding: 0.4rem 0.75rem;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-family: $font-body;
         outline: none;
-        min-width: 150px;
+        width: 180px;
         transition: border-color $transition;
 
         &:focus {
@@ -125,14 +177,15 @@
     }
 
     .form-submit,
-    input[type="submit"] {
+    input[type="submit"],
+    button[type="submit"] {
         background: $cpg-text;
         color: $cpg-text-light;
         border: 1px solid $cpg-text;
         border-left: none;
         border-radius: 0 $radius $radius 0;
         padding: 0.4rem 0.85rem;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         cursor: pointer;
         font-family: $font-body;
         font-weight: 700;
@@ -153,52 +206,177 @@
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 0.45rem 1.4rem;
-    border-radius: 50px;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 1.2rem;
+    border-radius: 4px; // mockup uses slightly rounded square buttons
     border: none;
     cursor: pointer;
+    line-height: 1;
     transition: background $transition, transform $transition;
     text-decoration: none;
 
     &:hover {
         background: $cpg-red-dark;
         color: $cpg-text-light !important;
-        transform: translateY(-1px);
     }
 }
 
-.header-search-wrapper {
+
+// ================================================================
+// MOBILE FLYOUT DRAWER
+// ================================================================
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1010;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-flyout {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 300px;
+    max-width: 80vw;
+    height: 100vh;
+    background: $cpg-bg-white;
+    z-index: 1020;
     display: flex;
-}
+    flex-direction: column;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+    transition: left 0.3s ease;
+    overflow-y: auto;
 
-// ── Responsive header ──
-@media (max-width: 1000px) {
-    .header-inner {
-        flex-wrap: wrap;
-        gap: $gap-md;
-        padding: $gap-sm $gap-md;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        border-bottom: 2px solid $cpg-red;
+
+        .site-title {
+            font-family: $font-heading;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: $cpg-red;
+            letter-spacing: -0.03em;
+            margin: 0;
+        }
     }
 
-    .header-nav {
-        order: 3;
-        width: 100%;
+    .mobile-menu-close {
+        background: transparent;
+        border: none;
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+        color: $cpg-text;
+    }
 
-        ul.menu {
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            gap: $gap-sm $gap-md;
+    &__nav {
+        padding: 1.5rem;
+        flex: 1;
+        border-bottom: 1px solid $cpg-border;
+
+        ul.menu, ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        li, .menu-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li a, .menu-item a {
+            color: $cpg-text;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: block;
+
+            &:hover {
+                color: $cpg-red;
+            }
+        }
+    }
+
+    &__actions {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+// State classes for open menu
+body.mobile-menu-open {
+    overflow: hidden; // Prevent scrolling
+    
+    .mobile-menu-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-flyout {
+        left: 0;
+    }
+}
+
+
+// ── Responsive header logic ──
+@media (max-width: 1000px) {
+    .header-nav {
+        display: none; // Hide desktop nav
+    }
+    
+    .mobile-menu-toggle {
+        display: block; // Show hamburger
+    }
+    
+    .header-inner {
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .header-branding {
+        flex: 1;
+    }
+
+    .header-actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+
+        .search-form {
+            display: none; // Hide search on smaller screens directly in header, it's in the drawer
         }
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .header-actions {
-        width: 100%;
-        align-items: stretch;
+        .cpg-subscribe-btn {
+            display: none; // Hide subscribe btn on tiny mobile, it's in the drawer
+        }
     }
-
-    .cpg-subscribe-btn {
-        text-align: center;
+    
+    .header-branding .site-title {
+        font-size: 1.8rem;
     }
 }

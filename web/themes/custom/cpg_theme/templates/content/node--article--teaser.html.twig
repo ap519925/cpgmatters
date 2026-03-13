@@ -12,6 +12,7 @@
 {% set classes = [
   'cpg-article-teaser',
   is_featured ? 'cpg-article-teaser--featured' : '',
+  not is_featured ? category_class : ''
 ] %}
 
 <article{{ attributes.addClass(classes) }} style="{% if not is_featured %}border: none; border-radius: 8px; overflow: hidden; margin-bottom: 2rem;{% endif %}">

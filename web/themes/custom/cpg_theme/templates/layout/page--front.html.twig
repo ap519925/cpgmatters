@@ -2,45 +2,71 @@
 /**
  * @file
  * Theme override for the front page.
- * Hardcoded elements to match the exact mockup design perfectly.
  */
 #}
 <div class="cpg-layout cpg-front-page">
 
   {# ===== HEADER ===== #}
   <header class="cpg-layout__header" role="banner">
-    <div class="cpg-container header-inner" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem;">
+    <div class="cpg-container header-inner">
       
+      {# Mobile Menu Toggle #}
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
       {# Branding #}
-      <div class="header-branding" style="flex: 0 0 auto;">
-        <a href="/" style="text-decoration: none; display: block;">
-          <h1 style="color: #C41E3A; font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; margin: 0; line-height: 1; display:flex; align-items:center;">
-            <img src="/core/misc/icons/787878/cog.svg" alt="" style="height: 24px; margin-right: 8px; filter: invert(20%) sepia(87%) saturate(3015%) hue-rotate(339deg) brightness(85%) contrast(97%); display: none;">
-            CPG Matters
-          </h1>
-          <div style="font-size: 0.55rem; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; font-weight: 700;">
-            A brand marketing magazine for the 21st century
-          </div>
+      <div class="header-branding">
+        <a href="/" class="site-branding-link">
+          {% if site_logo %}
+            <img src="{{ site_logo }}" alt="CPG Matters" class="site-logo-img" style="max-height: 40px; width: auto; display: block; margin-bottom: 4px;" />
+          {% else %}
+            <h1 class="site-title">CPG Matters</h1>
+          {% endif %}
+          <div class="site-slogan">A brand marketing magazine for the 21st century</div>
         </a>
       </div>
 
       {# Navigation #}
-      <div class="header-nav" style="flex: 1 1 auto; text-align: center;">
+      <div class="header-nav">
         {{ page.primary_menu }}
       </div>
 
       {# Actions (Subscribe + Search) #}
-      <div class="header-actions" style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-        <a href="/user/register" style="background: #C41E3A; color: #fff; padding: 0.4rem 1.2rem; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none; border-radius: 4px; letter-spacing: 0.05em; line-height: 1;">Subscribe</a>
-        
-        <form action="/search/node" method="get" style="display: flex; align-items: center;">
-          <input type="search" name="keys" placeholder="Search articles..." style="border: 1px solid #E5E7EB; border-right: none; padding: 0.4rem 0.75rem; font-size: 0.8rem; border-radius: 4px 0 0 4px; outline: none; width: 180px;">
-          <button type="submit" style="background: #111827; color: #fff; border: 1px solid #111827; padding: 0.4rem 0.85rem; font-size: 0.8rem; font-weight: 700; border-radius: 0 4px 4px 0; cursor: pointer;">Search</button>
+      <div class="header-actions">
+        <a href="/user/register" class="cpg-subscribe-btn">Subscribe</a>
+        <form action="/search/node" method="get" class="search-form">
+          <input type="search" name="keys" placeholder="Search articles..." class="form-search" required>
+          <button type="submit" class="form-submit">Search</button>
         </form>
       </div>
 
     </div>
   </header>
+
+  {# Mobile Flyout Menu Overlay #}
+  <div class="mobile-menu-overlay"></div>
+  <div class="mobile-flyout">
+    <div class="mobile-flyout__header">
+      {% if site_logo %}
+        <img src="{{ site_logo }}" alt="CPG Matters" class="site-logo-img" style="max-height: 30px; width: auto; display: block;" />
+      {% else %}
+        <div class="site-title">CPG Matters</div>
+      {% endif %}
+      <button class="mobile-menu-close" aria-label="Close mobile menu">&times;</button>
+    </div>
+    <div class="mobile-flyout__nav">
+      {{ page.primary_menu }}
+    </div>
+    <div class="mobile-flyout__actions">
+      <a href="/user/register" class="cpg-subscribe-btn" style="width: 100%; text-align: center; margin-bottom: 1rem;">Subscribe</a>
+      <form action="/search/node" method="get" class="search-form" style="width: 100%;">
+        <input type="search" name="keys" placeholder="Search..." class="form-search" style="width: 100%;" required>
+      </form>
+    </div>
+  </div>
 
   {# ===== TOP BANNER AD ===== #}
   <div class="cpg-top-banner cpg-container" style="padding: 2rem 0; text-align: center;">
@@ -51,20 +77,31 @@
   <main role="main" class="cpg-layout__main cpg-container">
     {{ page.breadcrumb }}
 
-    <div class="cpg-columns" style="display: grid; grid-template-columns: 220px 1fr 320px; gap: 0;">
+    {% set layout_class = 'cpg-columns' %}
+    {% if page.sidebar_first and page.sidebar_second %}
+      {% set layout_class = layout_class ~ ' has-both-sidebars' %}
+    {% elseif page.sidebar_first %}
+      {% set layout_class = layout_class ~ ' has-sidebar-first' %}
+    {% elseif page.sidebar_second %}
+      {% set layout_class = layout_class ~ ' has-sidebar-second' %}
+    {% else %}
+      {% set layout_class = layout_class ~ ' no-sidebars' %}
+    {% endif %}
+
+    <div class="{{ layout_class }}">
       
       {# Left sidebar #}
-      <aside class="cpg-sidebar cpg-sidebar--first" role="complementary" style="border-right: 2px solid #C41E3A; padding-right: 1.5rem; padding-top: 1rem;">
+      <aside class="cpg-sidebar cpg-sidebar--first" role="complementary">
         {{ page.sidebar_first }}
       </aside>
 
       {# Center content #}
-      <div class="cpg-content-main" style="padding: 0 2rem;">
+      <div class="cpg-content-main">
         {{ page.content }}
       </div>
 
       {# Right sidebar #}
-      <aside class="cpg-sidebar cpg-sidebar--second" role="complementary" style="border-left: 2px solid #C41E3A; padding-left: 1.5rem; padding-top: 1rem;">
+      <aside class="cpg-sidebar cpg-sidebar--second" role="complementary">
         {{ page.sidebar_second }}
       </aside>
       
@@ -72,14 +109,14 @@
   </main>
 
   {# ===== FOOTER ===== #}
-  <footer class="cpg-layout__footer" role="contentinfo" style="background: #1A1A1A; color: #fff; padding-top: 3rem; margin-top: 4rem;">
-    <div class="cpg-container footer-columns" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
+  <footer class="cpg-layout__footer" role="contentinfo">
+    <div class="cpg-container footer-columns">
       <div class="footer-col">{{ page.footer_first }}</div>
       <div class="footer-col">{{ page.footer_second }}</div>
       <div class="footer-col">{{ page.footer_third }}</div>
       <div class="footer-col">{{ page.footer_fourth }}</div>
     </div>
-    <div class="footer-bottom" style="margin-top: 3rem; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9CA3AF; font-size: 0.85rem;">
+    <div class="footer-bottom">
       <div class="cpg-container">
         {{ page.footer_bottom }}
       </div>

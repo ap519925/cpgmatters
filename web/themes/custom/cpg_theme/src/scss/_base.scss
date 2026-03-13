@@ -69,4 +69,26 @@ ul {
 
 p {
     margin: 0 0 $gap-md;
+    line-height: 1.8;
+}
+
+// ── Typography for Basic Pages and Articles ──
+.cpg-content-main {
+    font-size: 1.05rem;
+
+    h2, h3 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    // Limit text line-length for readability on basic pages (not the homepage grid)
+    .block-system-main-block {
+        max-width: 800px;
+        margin: 0 auto;
+        
+        // Let's add more spacious padding on desktop
+        @media (min-width: 768px) {
+            padding: 2rem;
+        }
+    }
 }

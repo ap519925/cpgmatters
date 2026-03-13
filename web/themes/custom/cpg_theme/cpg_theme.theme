@@ -40,9 +40,11 @@ function cpg_theme_preprocess_node(array &$variables) {
   // Make the node view mode available.
   $variables['view_mode'] = $variables['elements']['#view_mode'];
 
-  // For article teasers, map the category tag to an icon emoji.
-  if ($variables['node']->getType() === 'article' && $variables['view_mode'] === 'teaser') {
+  // For article teasers and full pages, map the category tag to an icon emoji.
+  $icon_view_modes = ['teaser', 'full', 'default'];
+  if ($variables['node']->getType() === 'article' && in_array($variables['view_mode'], $icon_view_modes)) {
     $category_icon = '📈'; // Default icon.
+    $category_class = 'cpg-cat-default'; // Default class.
 
     // Try to get the category name from field_tags.
     if ($variables['node']->hasField('field_tags') && !$variables['node']->get('field_tags')->isEmpty()) {
@@ -50,26 +52,33 @@ function cpg_theme_preprocess_node(array &$variables) {
       if ($term) {
         $term_name = strtolower($term->getName());
         $icon_map = [
-          'industry trends' => '📈',
-          'sustainability' => '🌿',
-          'e-commerce' => '💻',
-          'market analysis' => '📊',
+          'sustainability' => '🌱',
+          'e-commerce' => '🛒',
           'innovation' => '💡',
-          'm&a' => '🤝',
-          'analytics' => '📋',
-          'strategy' => '📐',
+          'supply chain' => '📦',
+          'marketing' => '📱',
           'finance' => '💰',
-          'design' => '🎨',
-          'tech' => '💻',
-          'leadership' => '🎯',
-          'marketing' => '📢',
-          'research' => '🔬',
-          'events' => '📅',
+          'technology' => '🔧',
+          'leadership' => '👔',
+          'retail' => '🏪',
+          'manufacturing' => '🏭',
         ];
         $category_icon = $icon_map[$term_name] ?? '📈';
+        
+        // Generate a valid CSS class name from the term name
+        $safe_name = preg_replace('/[^a-z0-9\-]/', '-', $term_name);
+        $safe_name = trim(preg_replace('/-+/', '-', $safe_name), '-');
+        $category_class = 'cpg-cat-' . $safe_name;
       }
     }
     $variables['category_icon'] = $category_icon;
+    $variables['category_class'] = $category_class;
+  }
+
+  // Provide plain text title and URL for social share links.
+  if ($variables['node']->getType() === 'article') {
+    $variables['plain_title'] = $variables['node']->getTitle();
+    $variables['article_url'] = $variables['node']->toUrl('canonical', ['absolute' => TRUE])->toString();
   }
 }
 
@@ -110,11 +119,25 @@ function cpg_theme_preprocess_field(array &$variables) {
 /**
  * Implements hook_preprocess_html().
  *
- * Adds body classes for front page detection.
+ * Adds body classes for front page detection and node types.
  */
 function cpg_theme_preprocess_html(array &$variables) {
   // Add front page class.
   if (\Drupal::service('path.matcher')->isFrontPage()) {
     $variables['attributes']['class'][] = 'is-front';
   }
+
+  // Add node type class for targeted CSS (e.g. hiding page title on articles).
+  $route_match = \Drupal::routeMatch();
+  $node = $route_match->getParameter('node');
+  if ($node && is_object($node)) {
+    $variables['attributes']['class'][] = 'node-type-' . $node->getType();
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function cpg_theme_preprocess_page(&$variables) {
+  $variables['site_logo'] = theme_get_setting('logo.url');
 }

@@ -9,10 +9,28 @@
 
 .cpg-columns {
     display: grid;
-    grid-template-columns: 280px 1fr 280px;
     gap: 0;
     margin: 0;
     align-items: start;
+
+    &.has-both-sidebars {
+        grid-template-columns: 280px 1fr 280px;
+    }
+
+    &.has-sidebar-first {
+        grid-template-columns: 280px 1fr;
+    }
+
+    &.has-sidebar-second {
+        grid-template-columns: 1fr 280px;
+    }
+
+    &.no-sidebars {
+        display: block; // Fallback to a readable centered column for basic pages
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
 }
 
 // ── Red vertical dividers between columns ──
@@ -37,12 +55,12 @@
 
 // ── Responsive columns ──
 @media (max-width: 1200px) {
-    .cpg-columns {
+    .cpg-columns.has-both-sidebars {
         grid-template-columns: 1fr 300px;
     }
 
     .cpg-sidebar--first {
-        display: none;
+        display: none; // Wait, maybe we want it visible below? Since we are doing responsive, better to just place it above content
     }
 
     .cpg-sidebar--second {
@@ -52,10 +70,27 @@
 
 @media (max-width: 768px) {
     .cpg-columns {
-        grid-template-columns: 1fr;
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    .cpg-sidebar--first {
+        display: block; // Show it on mobile, placed above main content
+        order: -1;
+        border-right: none;
+        border-bottom: 3px solid $cpg-red;
+        padding: $gap-lg 0;
+        min-height: auto;
+    }
+
+    .cpg-content-main {
+        padding: $gap-xl 0;
     }
 
     .cpg-sidebar--second {
-        display: none;
+        display: block; // Show it on mobile, below main content
+        border-left: none;
+        border-top: 3px solid $cpg-red;
+        padding: $gap-lg 0;
     }
 }

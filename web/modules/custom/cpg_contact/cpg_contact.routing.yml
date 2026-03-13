@@ -1,0 +1,7 @@
+cpg_contact.contact_page:
+  path: '/contact'
+  defaults:
+    _title: 'Get in Touch'
+    _form: '\Drupal\cpg_contact\Form\CpgContactForm'
+  requirements:
+    _access: 'TRUE'

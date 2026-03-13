@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * CPG Contact module hooks.
+ */
+
+/**
+ * Implements hook_mail().
+ */
+function cpg_contact_mail($key, &$message, $params) {
+  if ($key === 'contact_form') {
+    $message['subject'] = $params['subject'];
+    $message['body'][] = $params['body'];
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cpg_contact_theme() {
+  return [
+    'cpg_contact_form' => [
+      'render element' => 'form',
+      'template' => 'cpg-contact-form',
+      'path' => \Drupal::service('extension.list.module')->getPath('cpg_contact') . '/templates',
+    ],
+  ];
+}

@@ -4,15 +4,17 @@
 // ================================================================
 @use 'variables' as *;
 
-// ── Category pastel background map for nth-child cycling ──
-$category-colors: (
-    1: $cat-purple,
-    2: $cat-pink,
-    3: $cat-blue,
-    4: $cat-orange,
-    5: $cat-green,
-    6: $cat-yellow,
-);
+// ── Category pastel background colors ──
+$cpg-cat-sustainability: #d4ffd4;
+$cpg-cat-ecommerce: #d4e8ff;
+$cpg-cat-innovation: #ffe8cc;
+$cpg-cat-supplychain: #e6d4ff;
+$cpg-cat-marketing: #ffd4e8;
+$cpg-cat-finance: #ffe8d4;
+$cpg-cat-technology: #d4fff0;
+$cpg-cat-leadership: #ffe4d4;
+$cpg-cat-retail: #f0d4ff;
+$cpg-cat-manufacturing: #fff4d4;
 
 .cpg-article-teaser {
     background: $cpg-bg-white;
@@ -27,14 +29,20 @@ $category-colors: (
         transform: translateY(-2px);
     }
 
-    // ── Pastel backgrounds for NON-featured teasers ──
+    // ── Pastel backgrounds for NON-featured teasers based on category ──
     &:not(.cpg-article-teaser--featured) {
-        @each $i, $color in $category-colors {
-            &:nth-child(6n+#{$i}) {
-                background: $color;
-                border-color: transparent;
-            }
-        }
+        border-color: transparent;
+
+        &.cpg-cat-sustainability { background: $cpg-cat-sustainability; }
+        &.cpg-cat-e-commerce { background: $cpg-cat-ecommerce; }
+        &.cpg-cat-innovation { background: $cpg-cat-innovation; }
+        &.cpg-cat-supply-chain { background: $cpg-cat-supplychain; }
+        &.cpg-cat-marketing { background: $cpg-cat-marketing; }
+        &.cpg-cat-finance { background: $cpg-cat-finance; }
+        &.cpg-cat-technology { background: $cpg-cat-technology; }
+        &.cpg-cat-leadership { background: $cpg-cat-leadership; }
+        &.cpg-cat-retail { background: $cpg-cat-retail; }
+        &.cpg-cat-manufacturing { background: $cpg-cat-manufacturing; }
     }
 
     // ── Image ──
