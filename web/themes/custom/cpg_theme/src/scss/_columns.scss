@@ -75,20 +75,22 @@
     }
 
     .cpg-sidebar--first {
-        display: block; // Show it on mobile, placed above main content
-        order: -1;
+        display: block;
+        order: 1;
         border-right: none;
-        border-bottom: 3px solid $cpg-red;
+        border-top: 3px solid $cpg-red;
         padding: $gap-lg 0;
         min-height: auto;
     }
 
     .cpg-content-main {
+        order: -1;
         padding: $gap-xl 0;
     }
 
     .cpg-sidebar--second {
-        display: block; // Show it on mobile, below main content
+        display: block;
+        order: 2;
         border-left: none;
         border-top: 3px solid $cpg-red;
         padding: $gap-lg 0;
