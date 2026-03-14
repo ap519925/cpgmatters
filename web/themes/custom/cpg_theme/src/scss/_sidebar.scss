@@ -50,6 +50,17 @@
     .cpg-ad-banner {
         margin: 0 auto $gap-xl;
     }
+
+    @media (max-width: 768px) {
+        .cpg-ad-banner {
+            max-height: 250px !important;
+
+            // Reduce text size for the placeholder when it scales down
+            span {
+                font-size: 0.55rem !important;
+            }
+        }
+    }
 }
 
 // ── Ad banner placeholders ──
