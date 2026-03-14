@@ -54,6 +54,7 @@
     @media (max-width: 768px) {
         .cpg-ad-banner {
             max-height: 250px !important;
+            width: auto !important;
 
             // Reduce text size for the placeholder when it scales down
             span {
@@ -80,10 +81,13 @@
     margin: 0 auto;
     overflow: hidden;
 
+    .field--name-field-ad-image, // Drupal wrapper
+    .field__item,
     img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
+        display: block;
     }
 }
 
