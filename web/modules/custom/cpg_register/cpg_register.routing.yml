@@ -1,0 +1,23 @@
+cpg_register.step1:
+  path: '/register-step1'
+  defaults:
+    _form: '\Drupal\cpg_register\Form\RegisterStep1Form'
+    _title: 'Join CPG Matters - Step 1'
+  requirements:
+    _access: 'TRUE'
+
+cpg_register.step2:
+  path: '/register-step2'
+  defaults:
+    _form: '\Drupal\cpg_register\Form\RegisterStep2Form'
+    _title: 'Join CPG Matters - Step 2'
+  requirements:
+    _access: 'TRUE'
+
+cpg_register.complete:
+  path: '/registration-complete'
+  defaults:
+    _controller: '\Drupal\cpg_register\Controller\RegistrationCompleteController::content'
+    _title: 'Check Your Email - CPG Matters'
+  requirements:
+    _access: 'TRUE'

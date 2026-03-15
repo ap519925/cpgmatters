@@ -8,6 +8,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'src/js/main.js'),
+                'search-results': resolve(__dirname, 'src/js/search-results.js'),
             },
             output: {
                 entryFileNames: 'js/[name].js',

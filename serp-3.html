@@ -1,0 +1,2899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results: AI Supply Chain - CPG Matters</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+/**
+ * @file
+ * CPG Matters Theme Styles
+ * Main stylesheet for the CPG Matters news publication theme
+ */
+
+:root {
+    --primary-dark: #1a1a1a;
+    --primary-gray: #4a4a4a;
+    --border-color: #d4d4d4;
+    --hover-bg: #f8f8f8;
+    --accent-red: #c4203b;
+    
+    /* Category colors */
+    --cat-breaking: #c4203b;
+    --cat-tech: #2563eb;
+    --cat-sustainability: #059669;
+    --cat-finance: #d97706;
+    --cat-innovation: #7c3aed;
+    --cat-default: #c4203b;
+    
+    /* Pastel colors for article cards */
+    --pastel-1: #ffd4d4;
+    --pastel-2: #d4e8ff;
+    --pastel-3: #ffe8cc;
+    --pastel-4: #e6d4ff;
+    --pastel-5: #d4ffd4;
+    --pastel-6: #ffd4e8;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--primary-dark);
+    line-height: 1.6;
+    background: #ffffff;
+}
+
+/* Left Flyout Menu */
+.left-flyout {
+    position: fixed;
+    left: 0;
+    top: 120px;
+    width: 60px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transition: width 0.3s ease;
+    z-index: 90;
+    overflow: hidden;
+}
+
+.left-flyout.expanded {
+    width: 250px;
+}
+
+.flyout-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    background: white;
+    transition: background 0.3s ease;
+}
+
+.flyout-toggle:hover {
+    background: var(--hover-bg);
+}
+
+.flyout-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.flyout-icon span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-dark);
+    transition: all 0.3s ease;
+}
+
+.left-flyout.expanded .flyout-icon span:nth-child(1) {
+    transform: rotate(45deg) translateY(10px);
+}
+
+.left-flyout.expanded .flyout-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.left-flyout.expanded .flyout-icon span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-10px);
+}
+
+.flyout-menu {
+    padding: 0;
+}
+
+.flyout-menu-title {
+    padding: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.left-flyout.expanded .flyout-menu-title {
+    opacity: 1;
+}
+
+.flyout-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flyout-menu li {
+    border-bottom: 1px solid #eee;
+}
+
+.flyout-menu a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.flyout-menu a:hover {
+    background: var(--hover-bg);
+    color: var(--accent-red);
+    padding-left: 25px;
+}
+
+.flyout-category-icon {
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px;
+    max-height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    flex-shrink: 0;
+    display: block;
+}
+
+.flyout-category-text {
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+}
+
+.left-flyout.expanded .flyout-category-text {
+    opacity: 1;
+}
+
+/* Adjust main layout when flyout is present */
+@media (min-width: 769px) {
+    body {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .left-flyout {
+        display: none;
+    }
+}
+
+/* Header & Navigation */
+.header-main {
+    border-bottom: 3px solid var(--primary-dark);
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.header-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 40px;
+    align-items: center;
+}
+
+.header-logo-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-decoration: none;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.logo .logo-cpg {
+    color: var(--accent-red);
+}
+
+.logo .logo-matters {
+    color: var(--primary-dark);
+}
+
+.logo-subtitle {
+    font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 9px;
+    color: var(--primary-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.subscribe-button {
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.subscribe-button:hover {
+    background: #a01828;
+}
+
+.header-search {
+    display: flex;
+    gap: 5px;
+}
+
+.header-search input[type="search"],
+.header-search input[type="text"] {
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    font-size: 13px;
+    width: 200px;
+    border-radius: 3px;
+}
+
+.header-search button,
+.header-search input[type="submit"] {
+    padding: 6px 15px;
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.header-search button:hover,
+.header-search input[type="submit"]:hover {
+    background: var(--accent-red);
+}
+
+.nav-main {
+    display: flex;
+    align-items: center;
+}
+
+.nav-main ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-main a {
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-main a:hover,
+.nav-main a.is-active {
+    color: var(--accent-red);
+    border-bottom-color: var(--accent-red);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1000;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--primary-dark);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.is-active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.mobile-menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.is-active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Banner Ad Slots */
+.banner-horizontal,
+.block-ad-horizontal {
+    background: linear-gradient(135deg, #e8eaed 0%, #d1d5db 100%);
+    border: 2px solid #9ca3af;
+    width: 728px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 20px auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border-radius: 8px;
+}
+
+.banner-skyscraper,
+.block-ad-skyscraper {
+    background: linear-gradient(135deg, #e8eaed 0%, #d1d5db 100%);
+    border: 2px solid #9ca3af;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #374151;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border-radius: 8px;
+}
+
+.banner-rectangle,
+.block-ad-rectangle {
+    background: linear-gradient(135deg, #e8eaed 0%, #d1d5db 100%);
+    border: 2px solid #9ca3af;
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #374151;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 20px 0;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border-radius: 8px;
+}
+
+/* Hide ads on mobile */
+@media (max-width: 768px) {
+    .ad-desktop-only,
+    .block-ad-skyscraper {
+        display: none !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .ad-mobile-only {
+        display: none !important;
+    }
+}
+
+/* Main Layout */
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-layout,
+.layout-three-column {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.left-sidebar,
+.region-sidebar-left {
+    grid-column: 1;
+    border-right: 3px solid var(--accent-red);
+    padding-right: 20px;
+}
+
+.main-content,
+.region-content {
+    grid-column: 2;
+    padding: 0 30px;
+}
+
+.right-sidebar,
+.region-sidebar-right {
+    grid-column: 3;
+    border-left: 3px solid var(--accent-red);
+    padding-left: 20px;
+}
+
+/* Featured Article */
+.featured-article,
+.node--view-mode-featured {
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 40px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.featured-article img,
+.node--view-mode-featured .field--name-field-image img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.featured-category,
+.node--view-mode-featured .field--name-field-category {
+    color: var(--accent-red);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.featured-article h1,
+.node--view-mode-featured h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Headline link styles - no color change on visited */
+.featured-article h1 a,
+.node--view-mode-featured h2 a {
+    text-decoration: none;
+    color: var(--primary-dark);
+}
+
+.featured-article h1 a:visited,
+.node--view-mode-featured h2 a:visited {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.featured-article h1 a:hover,
+.node--view-mode-featured h2 a:hover {
+    color: var(--accent-red);
+}
+
+.featured-article .excerpt,
+.node--view-mode-featured .field--name-field-excerpt {
+    font-size: 18px;
+    color: var(--primary-gray);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    max-width: 90%;
+}
+
+.article-meta,
+.node__meta {
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Article Grid */
+.articles-grid,
+.view-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.article-card,
+.node--view-mode-article-card {
+    background: white;
+    padding: 25px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.6s ease;
+    border-radius: 8px;
+}
+
+/* Pastel backgrounds - applied via Drupal preprocess */
+.article-card:nth-child(1),
+.views-row:nth-child(1) .node--view-mode-article-card { background: var(--pastel-1); }
+.article-card:nth-child(2),
+.views-row:nth-child(2) .node--view-mode-article-card { background: var(--pastel-2); }
+.article-card:nth-child(3),
+.views-row:nth-child(3) .node--view-mode-article-card { background: var(--pastel-3); }
+.article-card:nth-child(4),
+.views-row:nth-child(4) .node--view-mode-article-card { background: var(--pastel-4); }
+.article-card:nth-child(5),
+.views-row:nth-child(5) .node--view-mode-article-card { background: var(--pastel-5); }
+.article-card:nth-child(6),
+.views-row:nth-child(6) .node--view-mode-article-card { background: var(--pastel-6); }
+
+.article-card:hover,
+.node--view-mode-article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.article-card img,
+.node--view-mode-article-card .field--name-field-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.article-card .category,
+.node--view-mode-article-card .field--name-field-category {
+    color: var(--accent-red);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.article-card .category::before,
+.node--view-mode-article-card .field--name-field-category::before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+/* Category-specific icons */
+.category[data-category="sustainability"]::before,
+.category[style*="#059669"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23059669"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66c.67-2.08 2-3.34 3.29-3.34s2.62 1.26 3.29 3.34l1.89-.66C13.27 20 13 19 13 18c0-1.66 1.34-3 3-3s3 1.34 3 3c0 1-.27 2-1.18 3.34l1.89.66C19.1 16.17 17 10 8 8c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7z"/></svg>');
+}
+
+.category[data-category="e-commerce"]::before,
+.category[data-category="technology"]::before,
+.category[data-category="tech"]::before,
+.category[data-category="analytics"]::before,
+.category[data-category="research"]::before,
+.category[style*="#2563eb"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232563eb"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>');
+}
+
+.category[data-category="innovation"]::before,
+.category[data-category="leadership"]::before,
+.category[data-category="design"]::before,
+.category[style*="#7c3aed"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237c3aed"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/></svg>');
+}
+
+.category[data-category="finance"]::before,
+.category[data-category="market analysis"]::before,
+.category[style*="#d97706"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d97706"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>');
+}
+
+.category[data-category="industry trends"]::before,
+.category[data-category="marketing"]::before,
+.category[data-category="m&a"]::before,
+.category[data-category="strategy"]::before,
+.category[data-category="events"]::before,
+.category[style*="#c41e3a"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23c41e3a"><path d="M3.5 18.5l6-6 4 4L22 6.92 20.59 5.5l-7.09 8-4-4L2 17l1.5 1.5z"/></svg>');
+}
+
+.article-card h3,
+.node--view-mode-article-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.article-card h3 a,
+.node--view-mode-article-card h2 a {
+    text-decoration: none;
+    color: var(--primary-dark);
+}
+
+.article-card h3 a:visited,
+.node--view-mode-article-card h2 a:visited {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.article-card h3 a:hover,
+.node--view-mode-article-card h2 a:hover {
+    color: var(--accent-red);
+}
+
+.article-card p,
+.node--view-mode-article-card .field--name-field-excerpt {
+    font-size: 14px;
+    color: var(--primary-gray);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Sidebar Teasers */
+.teaser-card,
+.node--view-mode-teaser {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.6s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    border-radius: 8px;
+}
+
+.teaser-card:nth-child(1) { background: var(--pastel-1); }
+.teaser-card:nth-child(2) { background: var(--pastel-2); }
+.teaser-card:nth-child(3) { background: var(--pastel-3); }
+.teaser-card:nth-child(4) { background: var(--pastel-4); }
+.teaser-card:nth-child(5) { background: var(--pastel-5); }
+.teaser-card:nth-child(6) { background: var(--pastel-6); }
+
+.teaser-card:hover,
+.node--view-mode-teaser:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.teaser-card img,
+.node--view-mode-teaser .field--name-field-image img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+.teaser-card .category,
+.node--view-mode-teaser .field--name-field-category {
+    color: var(--accent-red);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.teaser-card .category::before,
+.node--view-mode-teaser .field--name-field-category::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+/* Inherit icon styles from article-card */
+.teaser-card .category[style*="#059669"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23059669"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66c.67-2.08 2-3.34 3.29-3.34s2.62 1.26 3.29 3.34l1.89-.66C13.27 20 13 19 13 18c0-1.66 1.34-3 3-3s3 1.34 3 3c0 1-.27 2-1.18 3.34l1.89.66C19.1 16.17 17 10 8 8c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7z"/></svg>');
+}
+
+.teaser-card .category[style*="#2563eb"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232563eb"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>');
+}
+
+.teaser-card .category[style*="#7c3aed"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237c3aed"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/></svg>');
+}
+
+.teaser-card .category[style*="#d97706"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d97706"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>');
+}
+
+.teaser-card .category[style*="#c41e3a"]::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23c41e3a"><path d="M3.5 18.5l6-6 4 4L22 6.92 20.59 5.5l-7.09 8-4-4L2 17l1.5 1.5z"/></svg>');
+}
+
+.featured-category,
+.node--view-mode-featured .field--name-field-category {
+    color: var(--accent-red);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.featured-category::before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23c41e3a"><path d="M3.5 18.5l6-6 4 4L22 6.92 20.59 5.5l-7.09 8-4-4L2 17l1.5 1.5z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.teaser-card h4,
+.node--view-mode-teaser h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.teaser-card h4 a,
+.node--view-mode-teaser h2 a {
+    text-decoration: none;
+    color: var(--primary-dark);
+}
+
+.teaser-card h4 a:visited,
+.node--view-mode-teaser h2 a:visited {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.teaser-card h4 a:hover,
+.node--view-mode-teaser h2 a:hover {
+    color: var(--accent-red);
+}
+
+.teaser-card p,
+.node--view-mode-teaser .field--name-field-excerpt {
+    font-size: 12px;
+    color: var(--primary-gray);
+    line-height: 1.5;
+}
+
+/* Section Headers */
+.section-header,
+.view-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 40px 0 25px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary-dark);
+}
+
+/* Read More Links */
+.read-more,
+a.node-readmore {
+    display: inline-block;
+    color: var(--accent-red);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.read-more:hover,
+a.node-readmore:hover {
+    color: var(--primary-dark);
+    transform: translateX(3px);
+}
+
+.read-more::after,
+a.node-readmore::after {
+    content: " →";
+}
+
+/* Social Sharing */
+.social-share,
+.sharethis-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.social-share a,
+.sharethis-wrapper a {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f5f5f5;
+    color: var(--primary-gray);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.social-share a:hover,
+.sharethis-wrapper a:hover {
+    background: var(--accent-red);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Newsletter Signup */
+.newsletter-signup,
+.block-webform {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.newsletter-signup h4,
+.block-webform h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.newsletter-signup p,
+.block-webform .webform-description {
+    font-size: 13px;
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+.newsletter-signup input,
+.block-webform input[type="email"],
+.block-webform input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #444;
+    background: #2d2d2d;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.newsletter-signup button,
+.block-webform input[type="submit"],
+.block-webform button {
+    width: 100%;
+    padding: 10px;
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.newsletter-signup button:hover,
+.block-webform input[type="submit"]:hover,
+.block-webform button:hover {
+    background: #a01828;
+}
+
+/* Author Info */
+.author-info,
+.field--name-uid {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.author-avatar,
+.user-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c41e3a, #8b1528);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.user-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Footer */
+.footer,
+.region-footer {
+    background: var(--primary-dark);
+    color: white;
+    padding: 50px 0 30px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h4,
+.region-footer .block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-section ul,
+.region-footer .menu {
+    list-style: none;
+}
+
+.footer-section a,
+.region-footer a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover,
+.region-footer a:hover {
+    color: var(--accent-red);
+}
+
+.footer-bottom {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+    border-top: 1px solid #444;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-layout,
+    .layout-three-column {
+        grid-template-columns: 1fr;
+    }
+    
+    .left-sidebar, .right-sidebar,
+    .region-sidebar-left, .region-sidebar-right {
+        display: none;
+        border: none;
+        padding: 0;
+    }
+    
+    .main-content,
+    .region-content {
+        padding: 0;
+    }
+    
+    .articles-grid,
+    .view-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .header-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .nav-main ul {
+        gap: 20px;
+    }
+    
+    .header-right {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .articles-grid,
+    .view-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo {
+        font-size: 28px;
+    }
+    
+    .logo-subtitle {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .featured-article h1,
+    .node--view-mode-featured h2 {
+        font-size: 32px;
+    }
+    
+    .header-content {
+        padding: 10px 20px;
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+    }
+    
+    /* Header is not sticky on mobile */
+    .header-main {
+        position: static;
+    }
+    
+    /* Show hamburger menu */
+    .mobile-menu-toggle {
+        display: block;
+        order: -1;
+    }
+    
+    /* Hide navigation by default on mobile */
+    .nav-main {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        transition: left 0.3s ease;
+        z-index: 999;
+        padding: 80px 20px 20px;
+        overflow-y: auto;
+    }
+    
+    .nav-main.is-open {
+        left: 0;
+    }
+    
+    .nav-main ul {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .nav-main li {
+        border-bottom: 1px solid #eee;
+    }
+    
+    .nav-main a {
+        display: block;
+        padding: 15px 0;
+        border-bottom: none;
+    }
+    
+    .header-logo-wrapper {
+        order: 0;
+    }
+    
+    .header-right {
+        order: 1;
+        align-items: flex-end;
+    }
+    
+    .header-search input[type="search"],
+    .header-search input[type="text"] {
+        width: 120px;
+    }
+    
+    /* Mobile overlay when menu is open */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 998;
+    }
+    
+    body.menu-open::before {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Center and make banner responsive on mobile */
+    .banner-horizontal,
+    .block-ad-horizontal {
+        max-width: 100%;
+        width: calc(100% - 40px);
+        height: auto;
+        min-height: 90px;
+        padding: 20px;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-content {
+        grid-template-columns: auto 1fr;
+        gap: 10px;
+    }
+    
+    .header-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .header-actions {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .subscribe-button {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .header-search {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .header-search input[type="search"],
+    .header-search input[type="text"] {
+        flex: 1;
+        width: auto;
+    }
+}
+
+        
+        /* SERP/Archive Page Specific Styles */
+        .serp-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .serp-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .serp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .serp-meta {
+            font-size: 14px;
+            color: var(--primary-gray);
+        }
+        
+        .serp-meta strong {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+        
+        .serp-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        /* Faceted Filters - Horizontal Layout */
+        .filters-sidebar {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            width: 100%;
+        }
+        
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .filters-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .clear-filters {
+            font-size: 12px;
+            color: var(--accent-red);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .clear-filters:hover {
+            text-decoration: underline;
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-group-title {
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+        }
+        
+        .filter-options-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-red);
+        }
+        
+        /* Category multi-select - single line collapsed, expands on focus */
+        #categorySelect {
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        #categorySelect:focus,
+        #categorySelect:active {
+            height: auto;
+            min-height: 150px;
+        }
+        
+        .custom-date-trigger {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+            color: var(--primary-gray);
+        }
+        
+        .custom-date-trigger:hover {
+            border-color: var(--accent-red);
+            color: var(--primary-dark);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--primary-gray);
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .modal-close:hover {
+            color: var(--accent-red);
+        }
+        
+        .modal-body {
+            margin-bottom: 25px;
+        }
+        
+        .modal-field {
+            margin-bottom: 20px;
+        }
+        
+        .modal-label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+        
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--accent-red);
+        }
+        
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .modal-btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-btn-primary {
+            background: var(--accent-red);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            background: #a01828;
+        }
+        
+        .modal-btn-secondary {
+            background: white;
+            color: var(--primary-gray);
+            border: 1px solid var(--border-color);
+        }
+        
+        .modal-btn-secondary:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-option input[type="checkbox"],
+        .filter-option input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .filter-option label {
+            font-size: 13px;
+            color: var(--primary-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+        }
+        
+        .filter-count {
+            font-size: 11px;
+            color: #999;
+            margin-left: 5px;
+        }
+        
+        .filter-option:hover label {
+            color: var(--primary-dark);
+        }
+        
+        .date-range-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .date-range-inputs input[type="date"] {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .keyword-search {
+            position: relative;
+        }
+        
+        .keyword-search input {
+            width: 100%;
+            padding: 10px 35px 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .keyword-search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--primary-gray);
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        
+        .keyword-search button:hover {
+            color: var(--accent-red);
+        }
+        
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .apply-filters-btn,
+        .reset-filters-btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .apply-filters-btn {
+            background: var(--accent-red);
+            color: white;
+        }
+        
+        .apply-filters-btn:hover {
+            background: #a01828;
+        }
+        
+        .reset-filters-btn {
+            background: white;
+            color: var(--primary-gray);
+            border: 1px solid var(--border-color);
+        }
+        
+        .reset-filters-btn:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+        
+        /* Results Area */
+        .results-area {
+            background: white;
+        }
+        
+        .results-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .view-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-gray);
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .view-btn {
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn.active {
+            background: var(--accent-red);
+            color: white;
+            border-color: var(--accent-red);
+        }
+        
+        .view-btn:hover:not(.active) {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sort-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-gray);
+        }
+        
+        .sort-select {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            background: white;
+        }
+        
+        /* Active Filters Display */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .active-filter-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: var(--accent-red);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .remove-filter {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            padding: 0;
+        }
+        
+        .remove-filter:hover {
+            opacity: 0.8;
+        }
+        
+        /* Results Table View */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .results-table thead {
+            background: #f9f9f9;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .results-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary-dark);
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .results-table th:hover {
+            background: #f0f0f0;
+            color: var(--accent-red);
+        }
+        
+        .sort-icon {
+            margin-left: 5px;
+            font-size: 10px;
+            opacity: 0.5;
+        }
+        
+        .results-table th.sorted-asc .sort-icon::after {
+            content: '▲';
+            opacity: 1;
+        }
+        
+        .results-table th.sorted-desc .sort-icon::after {
+            content: '▼';
+            opacity: 1;
+        }
+        
+        .results-table th:not(.sorted-asc):not(.sorted-desc) .sort-icon::after {
+            content: '⇅';
+        }
+        
+        .results-table td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        .results-table tbody tr:hover {
+            background: #fafafa;
+        }
+        
+        .result-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .result-title a {
+            text-decoration: none;
+            color: var(--primary-dark);
+        }
+        
+        .result-title a:visited {
+            color: var(--primary-dark);
+        }
+        
+        .result-title a:hover {
+            color: var(--accent-red);
+        }
+        
+        .result-excerpt {
+            font-size: 14px;
+            color: var(--primary-gray);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .result-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .result-category {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #f0f0f0;
+            color: var(--primary-dark);
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .result-date {
+            font-size: 13px;
+            color: #888;
+            white-space: nowrap;
+        }
+        
+        .result-author {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        /* Grid View */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .result-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .result-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .result-card-content {
+            padding: 20px;
+        }
+        
+        .result-card-category {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-red);
+            margin-bottom: 10px;
+        }
+        
+        .result-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        
+        .result-card-title a {
+            text-decoration: none;
+            color: var(--primary-dark);
+        }
+        
+        .result-card-title a:visited {
+            color: var(--primary-dark);
+        }
+        
+        .result-card-title a:hover {
+            color: var(--accent-red);
+        }
+        
+        .result-card-excerpt {
+            font-size: 14px;
+            color: var(--primary-gray);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .result-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            padding: 30px 0;
+        }
+        
+        .pagination-btn,
+        .pagination-page {
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .pagination-btn:hover,
+        .pagination-page:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+        
+        .pagination-page.active {
+            background: var(--accent-red);
+            color: white;
+            border-color: var(--accent-red);
+        }
+        
+        .pagination-btn.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .pagination-ellipsis {
+            padding: 10px 5px;
+            color: #888;
+        }
+        
+        .pagination-info {
+            font-size: 14px;
+            color: var(--primary-gray);
+            margin-left: 20px;
+        }
+        
+        /* List View */
+        .results-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .result-list-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .result-list-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .result-list-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .no-results-icon {
+            font-size: 60px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .no-results h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .no-results p {
+            font-size: 16px;
+            color: var(--primary-gray);
+            margin-bottom: 20px;
+        }
+        
+        .no-results-suggestions {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .no-results-suggestions h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .no-results-suggestions ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+        
+        .no-results-suggestions li {
+            margin-bottom: 8px;
+            color: var(--primary-gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .filters-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .serp-title {
+                font-size: 28px;
+            }
+            
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-actions {
+                flex-direction: column;
+            }
+            
+            .apply-filters-btn,
+            .reset-filters-btn {
+                width: 100%;
+            }
+            
+            .results-controls {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-list-item {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+            
+            .pagination-info {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+        
+        /* Hidden class for view switching */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="header-content">
+            <!-- Mobile Menu Toggle (Hamburger) -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="header-logo-wrapper">
+                <a href="home.html" class="logo">
+                    <span class="logo-cpg">CPG</span><span class="logo-matters">Matters</span>
+                </a>
+                <div class="logo-subtitle">A Brand Marketing Magazine for the 21st Century</div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="nav-main">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="#register">Register</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#archive">Archive</a></li>
+                    <li><a href="#about">About the Change</a></li>
+                    <li><a href="#conference">Lead Conference</a></li>
+                    <li><a href="#banners">Banners</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="#" class="subscribe-button">Subscribe</a>
+                </div>
+                <div class="header-search">
+                    <input type="search" placeholder="Search articles...">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SERP Container -->
+    <div class="serp-container">
+        <!-- Page Header -->
+        <div class="serp-header">
+            <h1 class="serp-title">Search Results: AI Supply Chain</h1>
+            <div class="serp-meta">
+                Showing <strong>1-20</strong> of <strong>487</strong> results
+            </div>
+        </div>
+
+        <!-- Active Filters -->
+        <div class="active-filters">
+            <div class="active-filter-tag">
+                Category: Technology
+                <button class="remove-filter" aria-label="Remove filter">×</button>
+            </div>
+            <div class="active-filter-tag">
+                Date: Last 6 months
+                <button class="remove-filter" aria-label="Remove filter">×</button>
+            </div>
+        </div>
+
+        <!-- Main Layout: Filters + Results -->
+        <div class="serp-layout">
+            <!-- Faceted Filters - Horizontal -->
+            <div class="filters-sidebar">
+                <div class="filters-header">
+                    <h2 class="filters-title">Filters</h2>
+                    <a href="#" class="clear-filters">Clear All</a>
+                </div>
+
+                <div class="filters-grid">
+                    <!-- Keyword Filter - Far Left -->
+                    <div class="filter-group">
+                        <div class="filter-group-title">Keywords</div>
+                        <div class="keyword-search">
+                            <input type="text" placeholder="Enter keywords...">
+                            <button aria-label="Add keyword">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter - Single Line Expanding Multi-select -->
+                    <div class="filter-group">
+                        <div class="filter-group-title">Category</div>
+                        <select class="filter-select" id="categorySelect" multiple>
+                            <option value="sustainability" selected>Sustainability (143)</option>
+                            <option value="technology" selected>Technology (276)</option>
+                            <option value="ecommerce">E-Commerce (198)</option>
+                            <option value="innovation">Innovation (165)</option>
+                            <option value="finance">Finance (124)</option>
+                            <option value="marketing">Marketing (201)</option>
+                        </select>
+                    </div>
+
+                    <!-- Date Range Filter - Dropdown -->
+                    <div class="filter-group">
+                        <div class="filter-group-title">Date Range</div>
+                        <select class="filter-select" id="dateRangeSelect">
+                            <option value="anytime">Any time</option>
+                            <option value="week">Past week</option>
+                            <option value="month">Past month</option>
+                            <option value="6months" selected>Past 6 months</option>
+                            <option value="year">Past year</option>
+                        </select>
+                        <!-- Custom Date Range - Under Date Range -->
+                        <button class="custom-date-trigger" id="customDateTrigger" style="margin-top: 10px;">
+                            Select custom dates...
+                        </button>
+                    </div>
+
+                    <!-- Author Filter - Single Select Dropdown -->
+                    <div class="filter-group">
+                        <div class="filter-group-title">Author</div>
+                        <select class="filter-select" id="authorSelect">
+                            <option value="">All Authors</option>
+                            <option value="sarah">Sarah Mitchell (34)</option>
+                            <option value="michael">Michael Chen (28)</option>
+                            <option value="emily">Emily Rodriguez (22)</option>
+                            <option value="david">David Park (19)</option>
+                            <option value="jennifer">Jennifer Lee (15)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="reset-filters-btn">Reset</button>
+                    <button class="apply-filters-btn">Apply Filters</button>
+                </div>
+            </div>
+
+            <!-- Results Area -->
+            <div class="results-area">
+                <!-- Results Controls -->
+                <div class="results-controls">
+                    <div class="view-options">
+                        <span class="view-label">View:</span>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="table">Table</button>
+                            <button class="view-btn" data-view="grid">Grid</button>
+                            <button class="view-btn" data-view="list">List</button>
+                        </div>
+                    </div>
+
+                    <div class="sort-options">
+                        <label for="sort-select" class="sort-label">Sort by:</label>
+                        <select id="sort-select" class="sort-select">
+                            <option value="relevance">Relevance</option>
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="title-asc">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                            <option value="author-asc">Author A-Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Table View (Default) -->
+                <table class="results-table" id="tableView">
+                    <thead>
+                        <tr>
+                            <th class="sorted-desc" data-sort="title">
+                                Title
+                                <span class="sort-icon"></span>
+                            </th>
+                            <th data-sort="category">
+                                Category
+                                <span class="sort-icon"></span>
+                            </th>
+                            <th data-sort="author">
+                                Author
+                                <span class="sort-icon"></span>
+                            </th>
+                            <th data-sort="date">
+                                Date
+                                <span class="sort-icon"></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="result-title">
+                                    <a href="article.html">AI-Powered Supply Chain Optimization Reduces Costs by 25%</a>
+                                </div>
+                                <div class="result-excerpt">
+                                    Major CPG companies report significant cost savings and efficiency gains through implementation of machine learning algorithms in logistics and inventory management.
+                                </div>
+                            </td>
+                            <td>
+                                <span class="result-category" style="background: #e3f2fd; color: #2563eb;">Technology</span>
+                            </td>
+                            <td>
+                                <div class="result-author">Sarah Mitchell</div>
+                            </td>
+                            <td>
+                                <div class="result-date">Feb 18, 2026</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="result-title">
+                                    <a href="article.html">Machine Learning Predicts Consumer Demand with 95% Accuracy</a>
+                                </div>
+                                <div class="result-excerpt">
+                                    Advanced predictive analytics help retailers optimize stock levels and reduce waste through more accurate forecasting models.
+                                </div>
+                            </td>
+                            <td>
+                                <span class="result-category" style="background: #e3f2fd; color: #2563eb;">Technology</span>
+                            </td>
+                            <td>
+                                <div class="result-author">Michael Chen</div>
+                            </td>
+                            <td>
+                                <div class="result-date">Feb 15, 2026</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="result-title">
+                                    <a href="article.html">Automated Warehouses Transform Distribution Networks</a>
+                                </div>
+                                <div class="result-excerpt">
+                                    Robotics and AI enable 24/7 operations with minimal human intervention, dramatically improving throughput and accuracy.
+                                </div>
+                            </td>
+                            <td>
+                                <span class="result-category" style="background: #f3e5f5; color: #7c3aed;">Innovation</span>
+                            </td>
+                            <td>
+                                <div class="result-author">Emily Rodriguez</div>
+                            </td>
+                            <td>
+                                <div class="result-date">Feb 12, 2026</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="result-title">
+                                    <a href="article.html">Blockchain Technology Enhances Supply Chain Transparency</a>
+                                </div>
+                                <div class="result-excerpt">
+                                    End-to-end tracking solutions provide unprecedented visibility into product journeys from manufacturer to consumer.
+                                </div>
+                            </td>
+                            <td>
+                                <span class="result-category" style="background: #e3f2fd; color: #2563eb;">Technology</span>
+                            </td>
+                            <td>
+                                <div class="result-author">David Park</div>
+                            </td>
+                            <td>
+                                <div class="result-date">Feb 10, 2026</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="result-title">
+                                    <a href="article.html">Smart Sensors Monitor Product Quality Throughout Transit</a>
+                                </div>
+                                <div class="result-excerpt">
+                                    IoT devices track temperature, humidity, and handling conditions to ensure product integrity and reduce spoilage.
+                                </div>
+                            </td>
+                            <td>
+                                <span class="result-category" style="background: #e8f5e9; color: #059669;">Sustainability</span>
+                            </td>
+                            <td>
+                                <div class="result-author">Jennifer Lee</div>
+                            </td>
+                            <td>
+                                <div class="result-date">Feb 8, 2026</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Grid View (Hidden by default) -->
+                <div class="results-grid hidden" id="gridView">
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop" class="result-card-image" alt="AI Supply Chain">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Technology</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">AI-Powered Supply Chain Optimization Reduces Costs by 25%</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Major CPG companies report significant cost savings and efficiency gains through implementation of machine learning algorithms.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Sarah Mitchell</span>
+                                <span>Feb 18, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" class="result-card-image" alt="Predictive Analytics">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Technology</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Machine Learning Predicts Consumer Demand with 95% Accuracy</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Advanced predictive analytics help retailers optimize stock levels and reduce waste through more accurate forecasting models.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Michael Chen</span>
+                                <span>Feb 15, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1553531384-cc64ac80f931?w=600&h=400&fit=crop" class="result-card-image" alt="Automated Warehouse">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Innovation</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Automated Warehouses Transform Distribution Networks</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Robotics and AI enable 24/7 operations with minimal human intervention, dramatically improving throughput and accuracy.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Emily Rodriguez</span>
+                                <span>Feb 12, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop" class="result-card-image" alt="Blockchain">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Technology</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Blockchain Technology Enhances Supply Chain Transparency</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                End-to-end tracking solutions provide unprecedented visibility into product journeys from manufacturer to consumer.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>David Park</span>
+                                <span>Feb 10, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&h=400&fit=crop" class="result-card-image" alt="Smart Sensors">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Sustainability</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Smart Sensors Monitor Product Quality Throughout Transit</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                IoT devices track temperature, humidity, and handling conditions to ensure product integrity and reduce spoilage.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Jennifer Lee</span>
+                                <span>Feb 8, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" class="result-card-image" alt="Data Analytics">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Technology</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Real-Time Analytics Improve Inventory Turnover</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Data-driven insights enable retailers to make faster decisions about restocking and promotional strategies.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Sarah Mitchell</span>
+                                <span>Feb 6, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&h=400&fit=crop" class="result-card-image" alt="Sustainability">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Sustainability</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Green Logistics Initiatives Reduce Carbon Emissions</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Electric vehicles and optimized routing help companies meet sustainability goals while maintaining efficiency.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Michael Chen</span>
+                                <span>Feb 4, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?w=600&h=400&fit=crop" class="result-card-image" alt="Cloud Computing">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Technology</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Cloud-Based Systems Enable Global Collaboration</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Unified platforms allow teams worldwide to access real-time data and coordinate supply chain operations seamlessly.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Emily Rodriguez</span>
+                                <span>Feb 2, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop" class="result-card-image" alt="Digital Transformation">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Innovation</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Digital Twins Revolutionize Supply Chain Planning</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Virtual replicas of physical systems allow companies to test scenarios and optimize operations before implementation.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>David Park</span>
+                                <span>Jan 31, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop" class="result-card-image" alt="Customer Experience">
+                        <div class="result-card-content">
+                            <div class="result-card-category">E-Commerce</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Personalized Delivery Options Boost Customer Satisfaction</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Flexible scheduling and real-time tracking features meet evolving consumer expectations for convenience.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Jennifer Lee</span>
+                                <span>Jan 29, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop" class="result-card-image" alt="E-commerce Growth">
+                        <div class="result-card-content">
+                            <div class="result-card-category">E-Commerce</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Direct-to-Consumer Models Reshape Traditional Distribution</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Brands bypass intermediaries to establish direct relationships with customers and gain valuable data insights.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Sarah Mitchell</span>
+                                <span>Jan 27, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=600&h=400&fit=crop" class="result-card-image" alt="Warehouse Automation">
+                        <div class="result-card-content">
+                            <div class="result-card-category">Innovation</div>
+                            <h3 class="result-card-title">
+                                <a href="article.html">Robotic Process Automation Cuts Fulfillment Time in Half</a>
+                            </h3>
+                            <p class="result-card-excerpt">
+                                Automated picking and packing systems dramatically improve warehouse efficiency and reduce labor costs.
+                            </p>
+                            <div class="result-card-meta">
+                                <span>Michael Chen</span>
+                                <span>Jan 25, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List View (Hidden by default) -->
+                <div class="results-list hidden" id="listView">
+                    <div class="result-list-item">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop" class="result-list-image" alt="AI Supply Chain">
+                        <div>
+                            <div class="result-category" style="background: #e3f2fd; color: #2563eb; display: inline-block; margin-bottom: 10px;">Technology</div>
+                            <div class="result-title">
+                                <a href="article.html">AI-Powered Supply Chain Optimization Reduces Costs by 25%</a>
+                            </div>
+                            <div class="result-excerpt">
+                                Major CPG companies report significant cost savings and efficiency gains through implementation of machine learning algorithms in logistics and inventory management.
+                            </div>
+                            <div class="result-meta">
+                                <span class="result-author">By Sarah Mitchell</span>
+                                <span>•</span>
+                                <span class="result-date">February 18, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More list items would go here -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" class="pagination-btn disabled">« Previous</a>
+                    <a href="#" class="pagination-page active">1</a>
+                    <a href="#" class="pagination-page">2</a>
+                    <a href="#" class="pagination-page">3</a>
+                    <a href="#" class="pagination-page">4</a>
+                    <a href="#" class="pagination-page">5</a>
+                    <span class="pagination-ellipsis">...</span>
+                    <a href="#" class="pagination-page">25</a>
+                    <a href="#" class="pagination-btn">Next »</a>
+                    <span class="pagination-info">Page 1 of 25</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Date Range Modal -->
+    <div class="modal-overlay" id="customDateModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Select Custom Date Range</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-field">
+                    <label class="modal-label" for="modal-date-from">From Date</label>
+                    <input type="date" class="modal-input" id="modal-date-from">
+                </div>
+                <div class="modal-field">
+                    <label class="modal-label" for="modal-date-to">To Date</label>
+                    <input type="date" class="modal-input" id="modal-date-to">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="modalCancel">Cancel</button>
+                <button class="modal-btn modal-btn-primary" id="modalApply">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CPG Matters</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Archive</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Lead Conference</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Topics</h4>
+                <ul>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">E-Commerce</a></li>
+                    <li><a href="#">Innovation</a></li>
+                    <li><a href="#">Market Analysis</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CPG Matters. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('.nav-main');
+            const body = document.body;
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    this.classList.toggle('is-active');
+                    nav.classList.toggle('is-open');
+                    body.classList.toggle('menu-open');
+                });
+                
+                document.addEventListener('click', function(event) {
+                    if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                        menuToggle.classList.remove('is-active');
+                        nav.classList.remove('is-open');
+                        body.classList.remove('menu-open');
+                    }
+                });
+            }
+
+            // View switching
+            const viewBtns = document.querySelectorAll('.view-btn');
+            const tableView = document.getElementById('tableView');
+            const gridView = document.getElementById('gridView');
+            const listView = document.getElementById('listView');
+
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const view = this.getAttribute('data-view');
+                    
+                    // Update button states
+                    viewBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide views
+                    tableView.classList.add('hidden');
+                    gridView.classList.add('hidden');
+                    listView.classList.add('hidden');
+                    
+                    if (view === 'table') {
+                        tableView.classList.remove('hidden');
+                    } else if (view === 'grid') {
+                        gridView.classList.remove('hidden');
+                    } else if (view === 'list') {
+                        listView.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Column sorting
+            const sortHeaders = document.querySelectorAll('.results-table th[data-sort]');
+            
+            sortHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const sortBy = this.getAttribute('data-sort');
+                    
+                    // Toggle sort direction
+                    if (this.classList.contains('sorted-asc')) {
+                        this.classList.remove('sorted-asc');
+                        this.classList.add('sorted-desc');
+                    } else {
+                        // Remove all sorting classes
+                        sortHeaders.forEach(h => {
+                            h.classList.remove('sorted-asc', 'sorted-desc');
+                        });
+                        this.classList.add('sorted-asc');
+                    }
+                    
+                    // Here you would implement actual sorting logic
+                    console.log('Sorting by:', sortBy, this.classList.contains('sorted-asc') ? 'ASC' : 'DESC');
+                });
+            });
+
+            // Remove filter tags
+            const removeFilterBtns = document.querySelectorAll('.remove-filter');
+            removeFilterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.active-filter-tag').remove();
+                });
+            });
+
+            // Custom Date Modal
+            const customDateTrigger = document.getElementById('customDateTrigger');
+            const customDateModal = document.getElementById('customDateModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalCancel = document.getElementById('modalCancel');
+            const modalApply = document.getElementById('modalApply');
+            
+            // Open modal
+            if (customDateTrigger) {
+                customDateTrigger.addEventListener('click', function() {
+                    customDateModal.classList.add('active');
+                });
+            }
+            
+            // Close modal
+            function closeModal() {
+                customDateModal.classList.remove('active');
+            }
+            
+            if (modalClose) {
+                modalClose.addEventListener('click', closeModal);
+            }
+            
+            if (modalCancel) {
+                modalCancel.addEventListener('click', closeModal);
+            }
+            
+            // Close on overlay click
+            if (customDateModal) {
+                customDateModal.addEventListener('click', function(e) {
+                    if (e.target === customDateModal) {
+                        closeModal();
+                    }
+                });
+            }
+            
+            // Apply custom dates
+            if (modalApply) {
+                modalApply.addEventListener('click', function() {
+                    const fromDate = document.getElementById('modal-date-from').value;
+                    const toDate = document.getElementById('modal-date-to').value;
+                    
+                    if (fromDate && toDate) {
+                        customDateTrigger.textContent = `${fromDate} to ${toDate}`;
+                        closeModal();
+                        // Here you would trigger the filter update
+                        console.log('Custom date range:', fromDate, 'to', toDate);
+                    } else {
+                        alert('Please select both dates');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

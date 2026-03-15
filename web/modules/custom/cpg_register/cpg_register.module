@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function cpg_register_theme($existing, $type, $theme, $path) {
+  return [
+    'cpg_registration_complete' => [
+      'variables' => [
+        'email' => NULL,
+      ],
+      'template' => 'cpg-registration-complete',
+    ],
+  ];
+}

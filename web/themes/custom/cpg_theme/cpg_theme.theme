@@ -30,7 +30,16 @@ function cpg_theme_theme_suggestions_block_alter(array &$suggestions, array $var
 function cpg_theme_theme_suggestions_node_alter(array &$suggestions, array $variables) {
   $node = $variables['elements']['#node'];
   $view_mode = $variables['elements']['#view_mode'];
-  // node--article--teaser is already suggested by core.
+
+  // For 'page' content type, add suggestions based on URL alias.
+  if ($node->getType() === 'page') {
+    $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id());
+    $alias = trim($alias, '/');
+    if ($alias) {
+      $safe_alias = str_replace(['-', '/'], '_', $alias);
+      $suggestions[] = 'node__page__' . $safe_alias;
+    }
+  }
 }
 
 /**
@@ -140,4 +149,77 @@ function cpg_theme_preprocess_html(array &$variables) {
  */
 function cpg_theme_preprocess_page(&$variables) {
   $variables['site_logo'] = theme_get_setting('logo.url');
+
+  // Attach search-results library on the SERP view page.
+  $route = \Drupal::routeMatch()->getRouteName();
+  if ($route === 'view.search_results.page_1') {
+    $variables['#attached']['library'][] = 'cpg_theme/search-results';
+  }
 }
+
+/**
+ * Implements hook_theme_suggestions_html_alter().
+ */
+function cpg_theme_theme_suggestions_html_alter(array &$suggestions, array $variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (in_array($route_name, ['cpg_register.step1', 'cpg_register.step2', 'cpg_register.complete'])) {
+    $suggestions[] = 'html__register';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ *
+ * Adds page template suggestions based on URL path alias.
+ * e.g. /about-us → page--about-us.html.twig
+ */
+function cpg_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (in_array($route_name, ['cpg_register.step1', 'cpg_register.step2', 'cpg_register.complete'])) {
+    $suggestions[] = 'page__register';
+  }
+
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  $alias = trim($alias, '/');
+
+  // Add page template suggestion based on path alias.
+  if ($alias) {
+    $alias_parts = explode('/', $alias);
+    $suggestion = 'page__' . str_replace('-', '_', implode('__', $alias_parts));
+    $suggestions[] = $suggestion;
+  }
+}
+
+
+
+/**
+ * Implements hook_theme_suggestions_views_view_alter().
+ *
+ * Adds template suggestions based on view ID so we can use
+ * views-view--search-results.html.twig and views-view--directory.html.twig.
+ */
+function cpg_theme_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  if (isset($variables['view'])) {
+    $suggestions[] = 'views_view__' . $variables['view']->id();
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_unformatted_alter().
+ */
+function cpg_theme_theme_suggestions_views_view_unformatted_alter(array &$suggestions, array $variables) {
+  if (isset($variables['view'])) {
+    $suggestions[] = 'views_view_unformatted__' . $variables['view']->id();
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_fields_alter().
+ */
+function cpg_theme_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
+  if (isset($variables['view'])) {
+    $suggestions[] = 'views_view_fields__' . $variables['view']->id();
+  }
+}
+

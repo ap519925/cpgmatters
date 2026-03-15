@@ -1,0 +1,103 @@
+{#
+/**
+ * @file
+ * Page template for the Directory page — no sidebars.
+ *
+ * This overrides page.html.twig specifically for the /directory path
+ * to render a full-width layout matching the directory mockup.
+ */
+#}
+<div class="cpg-layout">
+
+  {# ===== HEADER ===== #}
+  {% if page.header or page.header_search or page.primary_menu %}
+    <header class="cpg-layout__header" role="banner">
+      <div class="cpg-container header-inner">
+
+        {# Mobile Menu Toggle #}
+        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+
+        {# Branding #}
+        <div class="header-branding">
+          <a href="/" class="site-branding-link">
+            {% if site_logo %}
+              <img src="{{ site_logo }}" alt="CPG Matters" class="site-logo-img" style="max-height: 40px; width: auto; display: block; margin-bottom: 4px;" />
+            {% else %}
+              <h1 class="site-title">CPG Matters</h1>
+            {% endif %}
+            <div class="site-slogan">A brand marketing magazine for the 21st century</div>
+          </a>
+        </div>
+
+        {# Navigation #}
+        <div class="header-nav">
+          {{ page.primary_menu }}
+        </div>
+
+        {# Actions (Subscribe + Search) #}
+        <div class="header-actions">
+          <a href="/register-step1" class="cpg-subscribe-btn">Subscribe</a>
+          <form action="/search/node" method="get" class="search-form">
+            <input type="search" name="keys" placeholder="Search articles..." class="form-search" required>
+            <button type="submit" class="form-submit">Search</button>
+          </form>
+        </div>
+
+      </div>
+    </header>
+
+    {# Mobile Flyout Menu Overlay #}
+    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-flyout">
+      <div class="mobile-flyout__header">
+        {% if site_logo %}
+          <img src="{{ site_logo }}" alt="CPG Matters" class="site-logo-img" style="max-height: 30px; width: auto; display: block;" />
+        {% else %}
+          <div class="site-title">CPG Matters</div>
+        {% endif %}
+        <button class="mobile-menu-close" aria-label="Close mobile menu">&times;</button>
+      </div>
+      <div class="mobile-flyout__nav">
+        {{ page.primary_menu }}
+      </div>
+      <div class="mobile-flyout__actions">
+        <a href="/register-step1" class="cpg-subscribe-btn" style="width: 100%; text-align: center; margin-bottom: 1rem;">Subscribe</a>
+        <form action="/search/node" method="get" class="search-form" style="width: 100%;">
+          <input type="search" name="keys" placeholder="Search..." class="form-search" style="width: 100%;" required>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+
+  {# ===== NO hero, NO top banner, NO sidebars ===== #}
+
+  <main role="main" class="cpg-layout__main">
+    {% if page.breadcrumb %}
+      {{ page.breadcrumb }}
+    {% endif %}
+
+    {# Full-width content — no column system #}
+    {{ page.content }}
+  </main>
+
+  <footer class="cpg-layout__footer" role="contentinfo">
+    <div class="cpg-container footer-columns">
+      <div class="footer-col">{{ page.footer_first }}</div>
+      <div class="footer-col">{{ page.footer_second }}</div>
+      <div class="footer-col">{{ page.footer_third }}</div>
+      <div class="footer-col">{{ page.footer_fourth }}</div>
+    </div>
+
+    {% if page.footer_bottom %}
+      <div class="footer-bottom">
+        <div class="cpg-container">
+          {{ page.footer_bottom }}
+        </div>
+      </div>
+    {% endif %}
+  </footer>
+</div>
