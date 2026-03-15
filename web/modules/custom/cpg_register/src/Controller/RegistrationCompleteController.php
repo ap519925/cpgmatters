@@ -25,9 +25,15 @@ class RegistrationCompleteController extends ControllerBase {
     $step1_data = $session->get('cpg_register_step1_data', []);
     $email = $step1_data['email'] ?? 'your.email@company.com';
 
+    $config = \Drupal::config('cpg_register.settings');
+    $title = $config->get('reg_complete_title') ?? 'Registration Complete!';
+    $subtitle = $config->get('reg_complete_subtitle') ?? 'Thank you for setting up your account. We\'re thrilled to have you as part of our community. We are sending a confirmation email to your inbox now with details on how to get started.';
+
     $build = [
       '#theme' => 'cpg_registration_complete',
       '#email' => $email,
+      '#title' => $title,
+      '#subtitle' => $subtitle,
       '#attached' => [
         'library' => ['cpg_theme/global-styling'],
       ],

@@ -30,10 +30,10 @@ cpg_register.dictionary:
   requirements:
     _access: 'TRUE'
 
-cpg_register.sitemap:
-  path: '/sitemap'
+cpg_register.settings:
+  path: '/admin/config/cpg-pages'
   defaults:
-    _controller: '\Drupal\cpg_register\Controller\SitemapController::content'
-    _title: 'Site Map'
+    _form: '\Drupal\cpg_register\Form\CpgPagesSettingsForm'
+    _title: 'CPG Pages Settings'
   requirements:
-    _access: 'TRUE'
+    _permission: 'administer site configuration'

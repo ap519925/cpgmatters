@@ -8,6 +8,8 @@ function cpg_register_theme($existing, $type, $theme, $path) {
     'cpg_registration_complete' => [
       'variables' => [
         'email' => NULL,
+        'title' => NULL,
+        'subtitle' => NULL,
       ],
       'template' => 'cpg-registration-complete',
     ],
@@ -17,12 +19,10 @@ function cpg_register_theme($existing, $type, $theme, $path) {
         'available_letters' => [],
         'categories' => [],
         'total_count' => 0,
+        'title' => NULL,
+        'subtitle' => NULL,
       ],
       'template' => 'cpg-dictionary-page',
-    ],
-    'cpg_sitemap_page' => [
-      'variables' => [],
-      'template' => 'cpg-sitemap-page',
     ],
   ];
 }

@@ -72,12 +72,18 @@ class DictionaryController extends ControllerBase {
     }
     sort($categories);
 
+    $config = \Drupal::config('cpg_register.settings');
+    $title = $config->get('dict_title') ?? 'CPG Industry Dictionary';
+    $subtitle = $config->get('dict_subtitle') ?? 'Your comprehensive guide to consumer packaged goods terminology. From basic concepts to advanced industry jargon, we\'ve got you covered.';
+
     $build = [
       '#theme' => 'cpg_dictionary_page',
       '#grouped_terms' => $grouped_terms,
       '#available_letters' => $available_letters,
       '#categories' => $categories,
       '#total_count' => count($nids),
+      '#title' => $title,
+      '#subtitle' => $subtitle,
       '#attached' => [
         'library' => ['cpg_theme/global-styling'],
       ],

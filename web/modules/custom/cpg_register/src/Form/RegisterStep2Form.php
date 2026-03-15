@@ -18,6 +18,10 @@ class RegisterStep2Form extends FormBase {
     $form['#prefix'] = '<div class="cpg-register-wrapper"><div class="registration-container">';
     $form['#suffix'] = '</div></div>';
 
+    $config = \Drupal::config('cpg_register.settings');
+    $title = $config->get('reg2_title') ?? 'Great! Now tell us about your background.';
+    $subtitle = $config->get('reg2_subtitle') ?? 'Help us curate the perfect content tailored for your specific role within the CPG industry.';
+
     $form['header'] = [
       '#markup' => '
       <div class="reg-header">
@@ -27,8 +31,8 @@ class RegisterStep2Form extends FormBase {
       <div class="progress-bar"><div class="progress-fill step-2"></div></div>
       <div class="reg-content">
         <div class="welcome-message">
-          <h1 class="welcome-title">Tell us about yourself</h1>
-          <p class="welcome-text">Help us personalize your experience by sharing a bit about your professional background.</p>
+          <h1 class="welcome-title">' . htmlspecialchars($title) . '</h1>
+          <p class="welcome-text">' . htmlspecialchars($subtitle) . '</p>
         </div>
       ',
     ];
