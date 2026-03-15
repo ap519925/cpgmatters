@@ -179,6 +179,14 @@ function cpg_theme_theme_suggestions_page_alter(array &$suggestions, array $vari
     $suggestions[] = 'page__register';
   }
 
+  // Dictionary and sitemap get their own full-width page templates
+  if ($route_name === 'cpg_register.dictionary') {
+    $suggestions[] = 'page__dictionary';
+  }
+  if ($route_name === 'cpg_register.sitemap') {
+    $suggestions[] = 'page__sitemap';
+  }
+
   $current_path = \Drupal::service('path.current')->getPath();
   $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
   $alias = trim($alias, '/');

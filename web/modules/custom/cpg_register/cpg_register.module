@@ -11,5 +11,18 @@ function cpg_register_theme($existing, $type, $theme, $path) {
       ],
       'template' => 'cpg-registration-complete',
     ],
+    'cpg_dictionary_page' => [
+      'variables' => [
+        'grouped_terms' => [],
+        'available_letters' => [],
+        'categories' => [],
+        'total_count' => 0,
+      ],
+      'template' => 'cpg-dictionary-page',
+    ],
+    'cpg_sitemap_page' => [
+      'variables' => [],
+      'template' => 'cpg-sitemap-page',
+    ],
   ];
 }

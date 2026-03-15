@@ -21,3 +21,19 @@ cpg_register.complete:
     _title: 'Check Your Email - CPG Matters'
   requirements:
     _access: 'TRUE'
+
+cpg_register.dictionary:
+  path: '/dictionary'
+  defaults:
+    _controller: '\Drupal\cpg_register\Controller\DictionaryController::content'
+    _title: 'CPG Industry Dictionary'
+  requirements:
+    _access: 'TRUE'
+
+cpg_register.sitemap:
+  path: '/sitemap'
+  defaults:
+    _controller: '\Drupal\cpg_register\Controller\SitemapController::content'
+    _title: 'Site Map'
+  requirements:
+    _access: 'TRUE'
