@@ -40,11 +40,7 @@
 
         {# Actions (Subscribe + Search) #}
         <div class="header-actions">
-          <a href="/register-step1" class="cpg-subscribe-btn">Subscribe</a>
-          <form action="/search/node" method="get" class="search-form">
-            <input type="search" name="keys" placeholder="Search articles..." class="form-search" required>
-            <button type="submit" class="form-submit">Search</button>
-          </form>
+          {% if page.header_actions %}{{ page.header_actions }}{% endif %}
         </div>
 
       </div>
@@ -58,49 +54,7 @@
         <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
       </div>
       <div class="mobile-flyout__nav">
-        <div class="topic-grid">
-            <a href="/articles?category=sustainability" class="topic-card">
-              <span class="topic-icon">🌱</span>
-              <span class="topic-name">Sustainability</span>
-              <span class="topic-count">23 white papers</span>
-            </a>
-            <a href="/articles?category=e-commerce" class="topic-card">
-              <span class="topic-icon">🛒</span>
-              <span class="topic-name">E-Commerce</span>
-              <span class="topic-count">18 white papers</span>
-            </a>
-            <a href="/articles?category=supply-chain" class="topic-card">
-              <span class="topic-icon">🚚</span>
-              <span class="topic-name">Supply Chain</span>
-              <span class="topic-count">31 white papers</span>
-            </a>
-            <a href="/articles?category=digital-marketing" class="topic-card">
-              <span class="topic-icon">📱</span>
-              <span class="topic-name">Digital Marketing</span>
-              <span class="topic-count">26 white papers</span>
-            </a>
-            <a href="/articles?category=innovation" class="topic-card">
-              <span class="topic-icon">💡</span>
-              <span class="topic-name">Innovation</span>
-              <span class="topic-count">19 white papers</span>
-            </a>
-            <a href="/articles?category=market-research" class="topic-card">
-              <span class="topic-icon">📊</span>
-              <span class="topic-name">Market Research</span>
-              <span class="topic-count">28 white papers</span>
-            </a>
-            <a href="/articles?category=consumer-insights" class="topic-card">
-              <span class="topic-icon">🎯</span>
-              <span class="topic-name">Consumer Insights</span>
-              <span class="topic-count">22 white papers</span>
-            </a>
-            <a href="/articles?category=ai-technology" class="topic-card">
-              <span class="topic-icon">🤖</span>
-              <span class="topic-name">AI & Technology</span>
-              <span class="topic-count">15 white papers</span>
-            </a>
-        </div>
-      </div>
+        {% if page.mobile_topics %}{{ page.mobile_topics }}{% endif %}</div>
     </div>
   {% endif %}
 
@@ -132,3 +86,4 @@
     {% endif %}
   </footer>
 </div>
+
