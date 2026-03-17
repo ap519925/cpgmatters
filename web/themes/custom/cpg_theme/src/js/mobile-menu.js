@@ -1,49 +1,10 @@
 /**
  * Mobile Menu System
  * 
- * Two independent menu systems:
- * 1. LEFT-SIDE TOPICS FLYOUT — triggered by the floating .mobile-menu-toggle
- * 2. MOBILE NAV DRAWER — triggered by .mobile-nav-hamburger in the header
+ * MOBILE NAV DRAWER — triggered by .mobile-nav-hamburger in the header
  */
 
-// ── 1. Original Left-Side Topics Flyout ──
-function initTopicsFlyout() {
-    const toggleBtn = document.querySelector('.mobile-menu-toggle');
-    const closeBtn = document.querySelector('.mobile-menu-close');
-    const overlay = document.querySelector('.mobile-menu-overlay');
-
-    if (!toggleBtn || !closeBtn || !overlay) {
-        return;
-    }
-
-    const openMenu = () => {
-        document.body.classList.add('mobile-menu-open');
-        toggleBtn.setAttribute('aria-expanded', 'true');
-    };
-
-    const closeMenu = () => {
-        document.body.classList.remove('mobile-menu-open');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-    };
-
-    toggleBtn.addEventListener('click', () => {
-        if (document.body.classList.contains('mobile-menu-open')) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-    });
-    closeBtn.addEventListener('click', closeMenu);
-    overlay.addEventListener('click', closeMenu);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.body.classList.contains('mobile-menu-open')) {
-            closeMenu();
-        }
-    });
-}
-
-// ── 2. New Mobile Nav Drawer ──
+// ── Mobile Nav Drawer ──
 function initMobileNavDrawer() {
     const hamburger = document.querySelector('.mobile-nav-hamburger');
     const closeBtn = document.querySelector('.mobile-nav-drawer__close');
@@ -119,8 +80,28 @@ function initMobileNavDrawer() {
     });
 }
 
+// ── Topic Sidebar: staggered entrance animation ──
+function initTopicSidebar() {
+    const sidebar = document.querySelector('.topic-sidebar');
+    if (!sidebar) return;
+
+    const icons = sidebar.querySelectorAll('.topic-sidebar__icon');
+    
+    // Stagger the icons appearing on page load
+    icons.forEach((icon, i) => {
+        icon.style.opacity = '0';
+        icon.style.transform = 'translateX(-12px)';
+        
+        setTimeout(() => {
+            icon.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            icon.style.opacity = '1';
+            icon.style.transform = 'translateX(0)';
+        }, 200 + (i * 50));
+    });
+}
+
 // ── Export combined init ──
 export function initMobileMenu() {
-    initTopicsFlyout();
     initMobileNavDrawer();
+    initTopicSidebar();
 }

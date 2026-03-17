@@ -1,0 +1,128 @@
+﻿diff --git a/web/themes/custom/cpg_theme/templates/layout/page.html.twig b/web/themes/custom/cpg_theme/templates/layout/page.html.twig
+index 2b553555..64321100 100644
+--- a/web/themes/custom/cpg_theme/templates/layout/page.html.twig
++++ b/web/themes/custom/cpg_theme/templates/layout/page.html.twig
+@@ -11,22 +11,17 @@
+     <header class="cpg-layout__header" role="banner">
+       <div class="cpg-container header-inner">
+         
+-        {# Mobile Menu Toggle #}
+-        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+-          <span class="hamburger-box">
+-            <span class="hamburger-inner"></span>
+-          </span>
+-        </button>
+-
+         {# Branding #}
+         <div class="header-branding">
+           <a href="/" class="site-branding-link">
+             {% if site_logo %}
+               <img src="{{ site_logo }}" alt="CPG Matters" class="site-logo-img" style="max-height: 40px; width: auto; display: block; margin-bottom: 4px;" />
+             {% else %}
+-              <h1 class="site-title">CPG Matters</h1>
++              <h1 class="site-title">{{ site_name|default('CPG Matters') }}</h1>
+             {% endif %}
+-            <div class="site-slogan">A brand marketing magazine for the 21st century</div>
++            {% if site_slogan %}
++            <div class="site-slogan">{{ site_slogan }}</div>
++          {% endif %}
+           </a>
+         </div>
+ 
+@@ -35,70 +30,39 @@
+           {{ page.primary_menu }}
+         </div>
+ 
+-        {# Actions (Subscribe + Search) #}
++        {# Actions (Subscribe + Search + Mobile Hamburger) #}
+         <div class="header-actions">
+-          <a href="/register-step1" class="cpg-subscribe-btn">Subscribe</a>
+-          <form action="/search/node" method="get" class="search-form">
+-            <input type="search" name="keys" placeholder="Search articles..." class="form-search" required>
+-            <button type="submit" class="form-submit">Search</button>
+-          </form>
++          {# Mobile-only hamburger for main nav #}
++          <button class="mobile-nav-hamburger" aria-label="Open navigation" aria-expanded="false">
++            <span class="mobile-nav-hamburger__bar"></span>
++            <span class="mobile-nav-hamburger__bar"></span>
++            <span class="mobile-nav-hamburger__bar"></span>
++          </button>
++          {% if page.header_actions %}
++            {{ page.header_actions }}
++          {% endif %}
+         </div>
+ 
+       </div>
+     </header>
+ 
+-    {# Floating Topics Menu Overlay #}
+-    <div class="mobile-menu-overlay"></div>
+-    <div class="mobile-flyout">
+-      <div class="mobile-flyout__header">
+-        <h2 class="mobile-flyout__title">Browse by Topic</h2>
+-        <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
+-      </div>
+-      <div class="mobile-flyout__nav">
+-        <div class="topic-grid">
+-            <a href="/articles?category=sustainability" class="topic-card">
+-              <span class="topic-icon">≡ƒî▒</span>
+-              <span class="topic-name">Sustainability</span>
+-              <span class="topic-count">23 white papers</span>
+-            </a>
+-            <a href="/articles?category=e-commerce" class="topic-card">
+-              <span class="topic-icon">≡ƒ¢Æ</span>
+-              <span class="topic-name">E-Commerce</span>
+-              <span class="topic-count">18 white papers</span>
+-            </a>
+-            <a href="/articles?category=supply-chain" class="topic-card">
+-              <span class="topic-icon">≡ƒÜÜ</span>
+-              <span class="topic-name">Supply Chain</span>
+-              <span class="topic-count">31 white papers</span>
+-            </a>
+-            <a href="/articles?category=digital-marketing" class="topic-card">
+-              <span class="topic-icon">≡ƒô▒</span>
+-              <span class="topic-name">Digital Marketing</span>
+-              <span class="topic-count">26 white papers</span>
+-            </a>
+-            <a href="/articles?category=innovation" class="topic-card">
+-              <span class="topic-icon">≡ƒÆí</span>
+-              <span class="topic-name">Innovation</span>
+-              <span class="topic-count">19 white papers</span>
+-            </a>
+-            <a href="/articles?category=market-research" class="topic-card">
+-              <span class="topic-icon">≡ƒôè</span>
+-              <span class="topic-name">Market Research</span>
+-              <span class="topic-count">28 white papers</span>
+-            </a>
+-            <a href="/articles?category=consumer-insights" class="topic-card">
+-              <span class="topic-icon">≡ƒÄ»</span>
+-              <span class="topic-name">Consumer Insights</span>
+-              <span class="topic-count">22 white papers</span>
+-            </a>
+-            <a href="/articles?category=ai-technology" class="topic-card">
+-              <span class="topic-icon">≡ƒñû</span>
+-              <span class="topic-name">AI & Technology</span>
+-              <span class="topic-count">15 white papers</span>
+-            </a>
+-        </div>
++    {# ===== FLOATING TOPIC ICON SIDEBAR (Dynamically rendered from block) ===== #}
++    {% if page.mobile_topics %}
++      {{ page.mobile_topics }}
++    {% endif %}
++
++    {# ===== MOBILE NAV DRAWER (separate from topics flyout) ===== #}
++    <div class="mobile-nav-overlay"></div>
++    <nav class="mobile-nav-drawer" aria-label="Mobile navigation">
++      <div class="mobile-nav-drawer__header">
++        <span class="mobile-nav-drawer__title">Navigation</span>
++        <button class="mobile-nav-drawer__close" aria-label="Close navigation">&times;</button>
+       </div>
+-    </div>
++
++      {% if page.mobile_nav %}
++        {{ page.mobile_nav }}
++      {% endif %}
++    </nav>
+   {% endif %}
+ 
+   {% if page.hero %}

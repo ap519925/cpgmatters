@@ -149,6 +149,10 @@ function cpg_theme_preprocess_html(array &$variables) {
  */
 function cpg_theme_preprocess_page(&$variables) {
   $variables['site_logo'] = theme_get_setting('logo.url');
+  
+  $site_config = \Drupal::config('system.site');
+  $variables['site_name'] = $site_config->get('name');
+  $variables['site_slogan'] = $site_config->get('slogan');
 
   // Attach search-results library on the SERP view page.
   $route = \Drupal::routeMatch()->getRouteName();

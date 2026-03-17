@@ -14,7 +14,12 @@
     {% endif %}
   </h3>
   <div class="cpg-newsletter-block__desc">
-    <p>Get the latest CPG news delivered to your inbox</p>
+    {% set body = content.body|render|trim %}
+    {% if body %}
+      {{ content.body }}
+    {% else %}
+      <p>Get the latest CPG news delivered to your inbox</p>
+    {% endif %}
   </div>
   <form action="#" class="cpg-newsletter-block__form">
     <input type="email" placeholder="Your email address" class="cpg-newsletter-block__input" required>
