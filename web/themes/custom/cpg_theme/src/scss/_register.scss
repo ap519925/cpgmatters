@@ -368,14 +368,15 @@
   }
 
   /* Buttons */
-  .button-group {
+  .form-actions {
     display: flex;
+    flex-direction: column;
     gap: 15px;
     margin-top: 30px;
   }
 
   .back-btn {
-    flex: 1;
+    width: 100%;
     padding: 16px;
     background: white;
     color: $cpg-text;
@@ -387,6 +388,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
+    text-align: center;
     transition: all 0.3s ease;
 
     &:hover {
@@ -396,7 +398,6 @@
   }
 
   .continue-btn {
-    flex: 2;
     width: 100%;
     padding: 16px;
     background: linear-gradient(135deg, $cpg-red 0%, darken($cpg-red, 15%) 100%);

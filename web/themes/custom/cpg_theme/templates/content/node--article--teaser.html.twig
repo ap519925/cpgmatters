@@ -27,17 +27,17 @@
   <div class="cpg-article-teaser__content" style="padding: 1.5rem 1.5rem 2rem; {% if is_featured %}padding: 2rem 0;{% endif %}">
 
     {# ── Category Tag ── #}
-    {% if content.field_tags|render|trim %}
+    {% if category_name_raw %}
       <div class="cpg-article-teaser__category" style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
         <span class="cpg-category-icon" aria-hidden="true" style="font-size: 0.85rem;">{{ category_icon|default('📈') }}</span>
         <span style="color: #C41E3A; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">
-          {{ content.field_tags|render|striptags }}
+          {{ category_name_raw }}
         </span>
       </div>
     {% endif %}
 
     {# ── Title ── #}
-    <h2 class="cpg-article-teaser__title" style="{% if is_featured %}font-size: 2.8rem; line-height: 1.15; margin-bottom: 1rem;{% else %}font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.5rem;{% endif %}; font-family: 'Outfit', sans-serif; font-weight: 700;">
+    <h2 class="cpg-article-teaser__title" style="{% if is_featured %}font-size: 2.8rem; line-height: 1.15; margin-bottom: 1rem;{% else %}font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.6em;{% endif %}; font-family: 'Outfit', sans-serif; font-weight: 700;">
       <a href="{{ url }}" rel="bookmark" style="text-decoration: none; {% if is_featured %}color: #2563EB; text-decoration: underline; text-underline-offset: 4px;{% else %}color: #1A1A1A;{% endif %}">
         {{ label }}
       </a>
