@@ -23,7 +23,13 @@ class RegistrationCompleteController extends ControllerBase {
   public function content() {
     $session = $this->requestStack->getCurrentRequest()->getSession();
     $step1_data = $session->get('cpg_register_step1_data', []);
-    $email = $step1_data['email'] ?? 'your.email@company.com';
+    
+    $user = \Drupal::currentUser();
+    if ($user->isAuthenticated()) {
+      $email = $user->getEmail();
+    } else {
+      $email = $step1_data['email'] ?? 'your.email@company.com';
+    }
 
     $config = \Drupal::config('cpg_register.settings');
     $title = $config->get('reg_complete_title') ?? 'Registration Complete!';

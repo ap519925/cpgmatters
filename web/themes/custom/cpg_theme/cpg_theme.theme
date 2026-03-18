@@ -88,6 +88,30 @@ function cpg_theme_preprocess_node(array &$variables) {
   if ($variables['node']->getType() === 'article') {
     $variables['plain_title'] = $variables['node']->getTitle();
     $variables['article_url'] = $variables['node']->toUrl('canonical', ['absolute' => TRUE])->toString();
+    
+    // Custom Teaser Logic
+    if ($variables['view_mode'] === 'teaser') {
+      $custom_teaser = '';
+      if ($variables['node']->hasField('field_summary') && !$variables['node']->get('field_summary')->isEmpty()) {
+        $custom_teaser = strip_tags($variables['node']->get('field_summary')->value);
+      } else {
+        $body = '';
+        if ($variables['node']->hasField('body') && !$variables['node']->get('body')->isEmpty()) {
+          $body = $variables['node']->get('body')->value;
+        }
+        $body_text = preg_replace('/<[^>]+>/', ' ', $body);
+        $body_text = html_entity_decode($body_text, ENT_QUOTES, 'UTF-8');
+        $body_text = trim(preg_replace('/\s+/', ' ', $body_text));
+        
+        $words = explode(' ', $body_text);
+        if (count($words) > 25) {
+          $custom_teaser = implode(' ', array_slice($words, 0, 25)) . '...';
+        } else {
+          $custom_teaser = implode(' ', $words);
+        }
+      }
+      $variables['custom_teaser'] = $custom_teaser;
+    }
   }
 }
 

@@ -44,6 +44,77 @@
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-left: none;
     box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.08);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &__icons-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        overflow: visible;
+        clip-path: inset(-5px -300px -5px 0);
+        max-height: 600px;
+        opacity: 1;
+        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.3s ease,
+                    padding 0.3s ease;
+        padding: 0;
+    }
+
+    // ── Toggle button (minimize / maximize) ──
+    &__toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 30px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        color: $cpg-text-secondary;
+        font-size: 1rem;
+        transition: all 0.25s ease;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        margin-top: 2px;
+
+        &:hover {
+            color: $cpg-red;
+            background: rgba($cpg-red, 0.06);
+        }
+
+        .topic-sidebar__toggle-icon {
+            display: inline-block;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+    }
+
+    // ── Collapsed state ──
+    &--collapsed {
+        .topic-sidebar__icons-wrapper {
+            max-height: 0;
+            opacity: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .topic-sidebar__toggle {
+            border-top: none;
+            margin-top: 0;
+            border-radius: 0 10px 10px 0;
+            height: 40px;
+            width: 36px;
+
+            .topic-sidebar__toggle-icon {
+                transform: rotate(180deg);
+            }
+        }
+
+        // Tighten the sidebar chrome when collapsed
+        padding: 4px 0;
+        border-radius: 0 12px 12px 0;
+    }
 
     &__icon {
         position: relative;
@@ -141,6 +212,17 @@
         &__tooltip {
             display: none;
         }
+
+        &__toggle {
+            width: 36px;
+            height: 26px;
+            font-size: 0.85rem;
+        }
+
+        &--collapsed .topic-sidebar__toggle {
+            width: 30px;
+            height: 34px;
+        }
     }
 }
 .header-branding {
@@ -168,6 +250,26 @@
         letter-spacing: 0.14em;
         font-weight: 700;
         margin-top: 4px;
+        display: block;
+    }
+}
+
+// ── Header phone number ──
+.header-phone {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: $cpg-red;
+    white-space: nowrap;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $cpg-red-dark;
+        }
     }
 }
 
@@ -481,6 +583,31 @@
         padding: 1.25rem 1.75rem 0.5rem;
     }
 
+    // ── Phone number inside drawer (mobile/tablet) ──
+    &__phone {
+        padding: 1rem 1.75rem;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        
+        .header-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1rem;
+            color: $cpg-red;
+            font-weight: 700;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            &::before {
+                content: '📞';
+                font-size: 1.15rem;
+            }
+        }
+    }
+
     // ── Subscribe CTA ──
     &__cta {
         padding: 0.75rem 1.75rem 1.5rem;
@@ -669,6 +796,11 @@
 
         .search-form {
             display: none; // Hide search on smaller screens directly in header, it's in the drawer
+        }
+
+        // Hide the phone number in header on mobile/tablet — it moves to the drawer
+        .header-phone {
+            display: none;
         }
     }
 }

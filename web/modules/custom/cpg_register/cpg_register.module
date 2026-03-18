@@ -26,3 +26,4 @@ function cpg_register_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+

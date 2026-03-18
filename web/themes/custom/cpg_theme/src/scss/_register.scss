@@ -444,6 +444,21 @@
     font-weight: 600;
 
     &:hover { text-decoration: underline; }
+
+    &--home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: $cpg-text-secondary;
+      font-weight: 500;
+      font-size: 13px;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $cpg-red;
+        text-decoration: none;
+      }
+    }
   }
 
   /* Responsive */

@@ -298,6 +298,43 @@ $cpg-cat-manufacturing: #fff4d4;
             height: 16px;
         }
     }
+
+    &__send-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 36px;
+        padding: 0 16px 0 12px;
+        border-radius: 999px;
+        border: 1px solid $cpg-red;
+        background: $cpg-bg-white;
+        color: $cpg-red;
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+
+        svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+
+        &:hover {
+            background: $cpg-red;
+            color: $cpg-text-light;
+            border-color: $cpg-red;
+            box-shadow: 0 2px 8px rgba(181, 19, 26, 0.25);
+
+            svg {
+                transform: translateX(2px);
+            }
+        }
+    }
 }
 
 // ================================================================

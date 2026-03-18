@@ -44,9 +44,9 @@
     </h2>
 
     {# ── Body Teaser ── #}
-    {% if content.body|render|trim %}
+    {% if custom_teaser %}
       <div class="cpg-article-teaser__body" style="font-family: 'Inter', sans-serif; {% if is_featured %}font-size: 1.1rem; color: #374151; line-height: 1.6;{% else %}font-size: 0.95rem; color: #4B5563; line-height: 1.5; height: 4.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;{% endif %} margin-bottom: 1rem;">
-        {{ content.body|render|striptags|trim }}
+        {{ custom_teaser }}
       </div>
     {% endif %}
 

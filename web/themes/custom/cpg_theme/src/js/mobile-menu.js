@@ -2,6 +2,8 @@
  * Mobile Menu System
  * 
  * MOBILE NAV DRAWER — triggered by .mobile-nav-hamburger in the header
+ * TOPIC SIDEBAR — toggle minimize/maximize + entrance animation
+ * PHONE NUMBER — responsive relocation to mobile nav drawer
  */
 
 // ── Mobile Nav Drawer ──
@@ -16,7 +18,7 @@ function initMobileNavDrawer() {
     }
 
     // Gather all animated items inside the drawer for staggered entrance
-    const getAnimItems = () => drawer.querySelectorAll('.mobile-nav-list__item, .mobile-nav-drawer__search, .mobile-nav-drawer__cta');
+    const getAnimItems = () => drawer.querySelectorAll('.mobile-nav-list__item, .mobile-nav-drawer__search, .mobile-nav-drawer__phone, .mobile-nav-drawer__cta');
 
     const openDrawer = () => {
         document.body.classList.add('mobile-nav-open');
@@ -80,12 +82,34 @@ function initMobileNavDrawer() {
     });
 }
 
-// ── Topic Sidebar: staggered entrance animation ──
+// ── Topic Sidebar: toggle + staggered entrance animation ──
 function initTopicSidebar() {
     const sidebar = document.querySelector('.topic-sidebar');
     if (!sidebar) return;
 
     const icons = sidebar.querySelectorAll('.topic-sidebar__icon');
+
+    // ── Dynamically wrap icons and add toggle button ──
+    // Since sidebar HTML comes from a Drupal block, we inject the structure via JS
+    if (!sidebar.querySelector('.topic-sidebar__icons-wrapper')) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'topic-sidebar__icons-wrapper';
+        
+        // Move all icon children into the wrapper
+        const iconElements = Array.from(sidebar.querySelectorAll('.topic-sidebar__icon'));
+        iconElements.forEach(icon => wrapper.appendChild(icon));
+        
+        // Insert wrapper at the beginning of sidebar
+        sidebar.insertBefore(wrapper, sidebar.firstChild);
+    }
+
+    if (!sidebar.querySelector('.topic-sidebar__toggle')) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'topic-sidebar__toggle';
+        toggleBtn.setAttribute('aria-label', 'Toggle topic sidebar');
+        toggleBtn.innerHTML = '<span class="topic-sidebar__toggle-icon">◀</span>';
+        sidebar.appendChild(toggleBtn);
+    }
     
     // Stagger the icons appearing on page load
     icons.forEach((icon, i) => {
@@ -98,10 +122,57 @@ function initTopicSidebar() {
             icon.style.transform = 'translateX(0)';
         }, 200 + (i * 50));
     });
+
+    // ── Min/Max toggle button ──
+    const toggle = sidebar.querySelector('.topic-sidebar__toggle');
+    if (!toggle) return;
+
+    // Restore collapsed state from localStorage
+    const savedState = localStorage.getItem('cpg-topic-sidebar-collapsed');
+    if (savedState === 'true') {
+        sidebar.classList.add('topic-sidebar--collapsed');
+    }
+
+    toggle.addEventListener('click', () => {
+        const isCollapsed = sidebar.classList.toggle('topic-sidebar--collapsed');
+        localStorage.setItem('cpg-topic-sidebar-collapsed', isCollapsed);
+    });
+}
+
+// ── Phone Number: move to mobile nav drawer on mobile/tablet ──
+function initPhoneRelocation() {
+    const drawer = document.querySelector('.mobile-nav-drawer');
+    if (!drawer) return;
+
+    // Find the phone number in the header actions area
+    const headerPhone = document.querySelector('.header-actions .header-phone');
+    if (!headerPhone) return;
+
+    // Check if a phone placeholder already exists in the drawer
+    let phoneContainer = drawer.querySelector('.mobile-nav-drawer__phone');
+    if (!phoneContainer) {
+        // Create the phone slot in the drawer (after the header, before the nav list)
+        phoneContainer = document.createElement('div');
+        phoneContainer.className = 'mobile-nav-drawer__phone';
+
+        // Insert after drawer header
+        const drawerHeader = drawer.querySelector('.mobile-nav-drawer__header');
+        if (drawerHeader && drawerHeader.nextSibling) {
+            drawer.insertBefore(phoneContainer, drawerHeader.nextSibling);
+        } else {
+            drawer.appendChild(phoneContainer);
+        }
+    }
+
+    // Clone the phone content into the drawer
+    const phoneClone = headerPhone.cloneNode(true);
+    phoneContainer.innerHTML = '';
+    phoneContainer.appendChild(phoneClone);
 }
 
 // ── Export combined init ──
 export function initMobileMenu() {
     initMobileNavDrawer();
     initTopicSidebar();
+    initPhoneRelocation();
 }

@@ -75,15 +75,26 @@ class RegisterStep1Form extends FormBase {
     ];
 
     $form['actions']['#type'] = 'actions';
+    
+    $form['actions']['submit_now'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Create Account & Finish Later'),
+      '#submit' => ['::submitFinishLater'],
+      '#button_type' => 'secondary',
+      '#attributes' => ['class' => ['back-btn']],
+      '#weight' => 0,
+    ];
+
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Continue to Next Step →'),
       '#button_type' => 'primary',
       '#attributes' => ['class' => ['continue-btn']],
+      '#weight' => 1,
     ];
     
     $form['footer'] = [
-      '#markup' => '</div><div class="reg-footer"><p class="footer-text">Already have an account? <a href="/user/login" class="footer-link">Sign in here</a></p></div>',
+      '#markup' => '</div><div class="reg-footer"><p class="footer-text">Already have an account? <a href="/user/login" class="footer-link">Sign in here</a></p><p class="footer-text"><a href="/" class="footer-link footer-link--home">← Back to Homepage</a></p></div>',
     ];
 
     // Disable caching for this form
@@ -98,12 +109,60 @@ class RegisterStep1Form extends FormBase {
     }
   }
 
+  public function submitFinishLater(array &$form, FormStateInterface $form_state) {
+    $username = $form_state->getValue('username');
+    $email = $form_state->getValue('email');
+    $display_name = $form_state->getValue('display_name');
+
+    if (user_load_by_name($username)) {
+      $this->messenger()->addError($this->t('The username %name is already taken.', ['%name' => $username]));
+      return;
+    }
+    if (user_load_by_mail($email)) {
+      $this->messenger()->addError($this->t('The email %email is already registered.', ['%email' => $email]));
+      return;
+    }
+
+    try {
+      $user = \Drupal\user\Entity\User::create();
+      $user->setUsername($username);
+      $user->setEmail($email);
+      $user->setPassword($form_state->getValue('password'));
+      if ($user->hasField('field_display_name')) {
+        $user->set('field_display_name', $display_name);
+      }
+      $user->activate();
+      $user->enforceIsNew();
+      $user->save();
+
+      // Log the action.
+      \Drupal::logger('cpg_register')->notice('New user registered (Finished early): @username (@email)', [
+        '@username' => $username,
+        '@email' => $email,
+      ]);
+
+      // Send standard Drupal confirmation email
+      _user_mail_notify('register_no_approval_required', $user);
+
+      // Give them a session so they're logged in
+      user_login_finalize($user);
+
+      $this->messenger()->addStatus($this->t('Account created! Please check your email for a link to continue filling out your business information.'));
+      $form_state->setRedirect('cpg_register.complete');
+
+    }
+    catch (\Exception $e) {
+      $this->messenger()->addError($this->t('An error occurred. Please try again.'));
+    }
+  }
+
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Store data in session to use in step 2.
     $session = \Drupal::request()->getSession();
     $session->set('cpg_register_step1_data', [
       'username' => $form_state->getValue('username'),
       'email' => $form_state->getValue('email'),
+      'password' => $form_state->getValue('password'),
       'display_name' => $form_state->getValue('display_name'),
     ]);
 
