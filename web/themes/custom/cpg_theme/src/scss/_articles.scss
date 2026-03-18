@@ -43,6 +43,23 @@ $cpg-cat-manufacturing: #fff4d4;
         &.cpg-cat-leadership { background: $cpg-cat-leadership; }
         &.cpg-cat-retail { background: $cpg-cat-retail; }
         &.cpg-cat-manufacturing { background: $cpg-cat-manufacturing; }
+
+        // Fallback rotating pastel backgrounds for any other unmapped categories to ensure vibrance
+        &:nth-of-type(6n+1):not([class*="cpg-cat-"]) { background: #e6d4ff; } // purple
+        &:nth-of-type(6n+2):not([class*="cpg-cat-"]) { background: #d4ffd4; } // green
+        &:nth-of-type(6n+3):not([class*="cpg-cat-"]) { background: #ffe8cc; } // orange
+        &:nth-of-type(6n+4):not([class*="cpg-cat-"]) { background: #d4e8ff; } // blue
+        &:nth-of-type(6n+5):not([class*="cpg-cat-"]) { background: #ffd4e8; } // pink
+        &:nth-of-type(6n+6):not([class*="cpg-cat-"]) { background: #d4fff0; } // teal
+        
+        // Also force fallback for the generic default class
+        &.cpg-cat-default:nth-of-type(6n+1) { background: #e6d4ff; }
+        &.cpg-cat-default:nth-of-type(6n+2) { background: #d4ffd4; }
+        &.cpg-cat-default:nth-of-type(6n+3) { background: #ffe8cc; }
+        &.cpg-cat-default:nth-of-type(6n+4) { background: #d4e8ff; }
+        &.cpg-cat-default:nth-of-type(6n+5) { background: #ffd4e8; }
+        &.cpg-cat-default:nth-of-type(6n+6) { background: #d4fff0; }
+
     }
 
     // ── Image ──

@@ -345,10 +345,17 @@
             transition: all $transition;
 
             &:hover {
-                background: $cpg-red;
-                color: $cpg-text-light;
+                filter: brightness(0.95);
             }
         }
+        
+        // Distribute pastel colors across the pill tags dynamically
+        &:nth-child(6n+1) a { background: #d4fff0; color: #005c3c; } // mint
+        &:nth-child(6n+2) a { background: #d4e8ff; color: #003e82; } // light blue
+        &:nth-child(6n+3) a { background: #ffe8cc; color: #8a4e00; } // orange
+        &:nth-child(6n+4) a { background: #e6d4ff; color: #4300a8; } // purple
+        &:nth-child(6n+5) a { background: #ffd4e8; color: #a80053; } // pink
+        &:nth-child(6n+6) a { background: #d4ffd4; color: #006600; } // light green
     }
 }
 
