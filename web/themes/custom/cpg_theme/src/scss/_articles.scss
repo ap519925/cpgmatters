@@ -29,7 +29,22 @@ $cpg-cat-manufacturing: #fff4d4;
         transform: translateY(-2px);
     }
 
-    // Pastel backgrounds removed to match clean white card style
+    // ── Pastel backgrounds for NON-featured teasers based on category ──
+    &:not(.cpg-article-teaser--featured) {
+        border-color: transparent;
+
+        &.cpg-cat-sustainability { background: $cpg-cat-sustainability; }
+        &.cpg-cat-e-commerce { background: $cpg-cat-ecommerce; }
+        &.cpg-cat-innovation { background: $cpg-cat-innovation; }
+        &.cpg-cat-supply-chain { background: $cpg-cat-supplychain; }
+        &.cpg-cat-marketing { background: $cpg-cat-marketing; }
+        &.cpg-cat-finance { background: $cpg-cat-finance; }
+        &.cpg-cat-technology { background: $cpg-cat-technology; }
+        &.cpg-cat-leadership { background: $cpg-cat-leadership; }
+        &.cpg-cat-retail { background: $cpg-cat-retail; }
+        &.cpg-cat-manufacturing { background: $cpg-cat-manufacturing; }
+    }
+
     // ── Image ──
     &__image {
         aspect-ratio: 16 / 9;
