@@ -15,7 +15,7 @@
         <div class="header-branding">
           <a href="/" class="site-branding-link">
             {% if site_logo %}
-              <img src="{{ site_logo }}" alt="CPG Matters" class="site-logo-img" style="max-height: 40px; width: auto; display: block; margin-bottom: 4px;" />
+              <img src="{{ site_logo }}" alt="{{ site_name }}" class="site-logo-img" style="max-height: 40px; width: auto; display: block; margin-bottom: 4px;" />
             {% else %}
               <h1 class="site-title">{{ site_name|default('CPG Matters') }}</h1>
             {% endif %}
@@ -55,7 +55,7 @@
     <div class="mobile-nav-overlay"></div>
     <nav class="mobile-nav-drawer" aria-label="Mobile navigation">
       <div class="mobile-nav-drawer__header">
-        <span class="mobile-nav-drawer__title">Navigation</span>
+        <span class="mobile-nav-drawer__title">{{ 'Navigation'|t }}</span>
         <button class="mobile-nav-drawer__close" aria-label="Close navigation">&times;</button>
       </div>
 

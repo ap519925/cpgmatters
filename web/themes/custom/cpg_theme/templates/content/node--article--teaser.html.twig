@@ -59,7 +59,10 @@
         <div class="cpg-author-info" style="display: flex; flex-direction: column; gap: 2px;">
           <span style="font-size: 0.85rem; color: #6B7280; font-family: 'Inter', sans-serif;">By <span style="font-weight: 600; color: #111827;">{{ author_name }}</span></span>
           <span style="font-size: 0.8rem; color: #6B7280; font-family: 'Inter', sans-serif;">
-            {{ date }} &middot; 5 min read
+            {{ date }}
+            {% if content.field_read_time|render|striptags|trim %}
+              &middot; {{ content.field_read_time|render|striptags|trim }}
+            {% endif %}
           </span>
         </div>
       </div>
@@ -76,7 +79,7 @@
     {# ── Standard Card Footer (Non-Featured) ── #}
     {% if not is_featured %}
       <div class="cpg-article-teaser__footer" style="margin-top: 1rem;">
-        <a href="{{ url }}" style="color: #C41E3A; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-block;">Read more &rarr;</a>
+        <a href="{{ url }}" style="color: #C41E3A; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-block;">{{ 'Read more'|t }} &rarr;</a>
         {% if date %}
           <div style="font-size: 0.75rem; color: #9CA3AF; margin-top: 6px;">{{ date }}</div>
         {% endif %}

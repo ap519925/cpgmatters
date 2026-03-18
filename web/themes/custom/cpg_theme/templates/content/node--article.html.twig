@@ -78,9 +78,9 @@
         <a href="mailto:?subject={{ plain_title|default('')|url_encode }}&body=Check out this article: {{ article_url|default(url) }}" class="cpg-social-share__btn" title="Share via Email">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
         </a>
-        <a href="mailto:?subject=I thought you'd find this interesting: {{ plain_title|default('')|url_encode }}&body=Hi,%0D%0A%0D%0AI wanted to share this article with you from CPG Matters:%0D%0A%0D%0A{{ plain_title|default('') }}%0D%0A{{ article_url|default(url) }}%0D%0A%0D%0ABest regards" class="cpg-social-share__send-btn" title="Send to Colleague">
+        <a href="mailto:?subject=I thought you'd find this interesting: {{ plain_title|default('')|url_encode }}&body=Hi,%0D%0A%0D%0AI wanted to share this article with you from {{ site_name|default('CPG Matters') }}:%0D%0A%0D%0A{{ plain_title|default('') }}%0D%0A{{ article_url|default(url) }}%0D%0A%0D%0ABest regards" class="cpg-social-share__send-btn" title="{{ 'Send to Colleague'|t }}">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M15.0007 3.11066C15.4908 2.85621 16.0923 3.03513 16.3468 3.5253L21.3468 13.0253C21.4618 13.2462 21.4618 13.5079 21.3468 13.7288L16.3468 23.2288C16.0923 23.7189 15.4908 23.8979 15.0007 23.6434C14.5106 23.389 14.3316 22.7875 14.5861 22.2974L19.0542 13.377L14.5861 4.45672C14.3316 3.96661 14.5106 3.36512 15.0007 3.11066Z"/><path d="M2.3999 13.377C2.3999 12.8247 2.84762 12.377 3.3999 12.377H19.3999C19.9522 12.377 20.3999 12.8247 20.3999 13.377C20.3999 13.9293 19.9522 14.377 19.3999 14.377H3.3999C2.84762 14.377 2.3999 13.9293 2.3999 13.377Z"/></svg>
-          <span>Send to Colleague</span>
+          <span>{{ 'Send to Colleague'|t }}</span>
         </a>
       </div>
     </div>
@@ -106,7 +106,7 @@
   {# ── Related Topics Tags ── #}
   {% if content.field_tags|render|trim %}
     <div class="cpg-article-full__topics">
-      <span class="cpg-article-full__topics-label">RELATED TOPICS</span>
+      <span class="cpg-article-full__topics-label">{{ 'Related Topics'|t|upper }}</span>
       <div class="cpg-article-full__topics-list">
         {{ content.field_tags }}
       </div>

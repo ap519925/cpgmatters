@@ -49,6 +49,9 @@ function cpg_theme_preprocess_node(array &$variables) {
   // Make the node view mode available.
   $variables['view_mode'] = $variables['elements']['#view_mode'];
 
+  // Make site name available to all node templates (for share links, etc).
+  $variables['site_name'] = \Drupal::config('system.site')->get('name');
+
   // For article teasers and full pages, map the category tag to an icon emoji.
   $icon_view_modes = ['teaser', 'full', 'default'];
   if ($variables['node']->getType() === 'article' && in_array($variables['view_mode'], $icon_view_modes)) {
@@ -153,6 +156,7 @@ function cpg_theme_preprocess_field(array &$variables) {
  * Implements hook_preprocess_html().
  *
  * Adds body classes for front page detection and node types.
+ * Injects CSS custom properties from theme settings for admin-editable design.
  */
 function cpg_theme_preprocess_html(array &$variables) {
   // Add front page class.
@@ -166,6 +170,29 @@ function cpg_theme_preprocess_html(array &$variables) {
   if ($node && is_object($node)) {
     $variables['attributes']['class'][] = 'node-type-' . $node->getType();
   }
+
+  // Inject CSS custom properties from theme settings.
+  // These allow admins to change brand colors from Appearance → Settings.
+  $brand_color = theme_get_setting('cpg_brand_color') ?: '#C41E3A';
+  $brand_dark  = theme_get_setting('cpg_brand_color_dark') ?: '#9B1730';
+  $text_color  = theme_get_setting('cpg_text_color') ?: '#1A1A1A';
+  $footer_bg   = theme_get_setting('cpg_footer_bg') ?: '#1A1A1A';
+  $header_bw   = theme_get_setting('cpg_header_border_width') ?: '4';
+  $dir_card_bg = theme_get_setting('cpg_directory_card_bg') ?: '#E8F1FC';
+  $wp_card_bg  = theme_get_setting('cpg_whitepapers_card_bg') ?: '#FFFFFF';
+
+  $css_vars = implode('; ', [
+    "--cpg-brand: {$brand_color}",
+    "--cpg-brand-dark: {$brand_dark}",
+    "--cpg-text: {$text_color}",
+    "--cpg-footer-bg: {$footer_bg}",
+    "--cpg-header-border-width: {$header_bw}px",
+    "--cpg-directory-card-bg: {$dir_card_bg}",
+    "--cpg-wp-card-bg: {$wp_card_bg}",
+  ]);
+
+  // Attach as inline style on the html element.
+  $variables['html_attributes']['style'] = $css_vars;
 }
 
 /**
