@@ -3,11 +3,26 @@
  * @file
  * Custom node template for the "White Papers & Research" page.
  *
- * This template renders the structured Whitepapers page content from the node's body,
- * wrapped in the custom design components (hero, topics, featured, list, etc.).
+ * Renders page content from Paragraphs via field_cpg_paragraphs.
+ * All sections (hero, text, CTA) are CMS-managed Paragraph entities.
  */
 #}
 
 <article{{ attributes.addClass('cpg-whitepapers') }}>
-  {{ content }}
+  {# Render paragraphs-based sections if available #}
+  {% if content.field_cpg_paragraphs|render|trim %}
+    {{ content.field_cpg_paragraphs }}
+  {% endif %}
+
+  {# Fallback: render body field if no paragraphs exist yet #}
+  {% if content.body|render|trim and not content.field_cpg_paragraphs|render|trim %}
+    <div class="cpg-whitepapers__body-fallback">
+      {{ content.body }}
+    </div>
+  {% endif %}
+
+  {# Render any remaining fields not explicitly handled #}
+  <div class="hidden">
+    {{ content|without('field_cpg_paragraphs', 'body') }}
+  </div>
 </article>

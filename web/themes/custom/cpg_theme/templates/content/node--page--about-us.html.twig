@@ -3,15 +3,27 @@
  * @file
  * Custom node template for the "About Us" page (page content type).
  *
- * This template renders structured About page content from the node's body
- * field, wrapped in the About page design components.
- * 
- * The body field content is rendered normally. The structured sections
- * (values, stats, team, CTA) are hardcoded in the template but can be
- * made editable via custom fields or Paragraphs module later.
+ * This template renders structured About page content from Paragraphs
+ * via the field_cpg_paragraphs field. All content sections (hero, stats,
+ * values, CTA) are managed through the Drupal dashboard as Paragraph entities.
  */
 #}
 
 <article{{ attributes.addClass('cpg-about') }}>
-  {{ content }}
+  {# Render paragraphs-based sections if available #}
+  {% if content.field_cpg_paragraphs|render|trim %}
+    {{ content.field_cpg_paragraphs }}
+  {% endif %}
+
+  {# Fallback: render body field if no paragraphs exist yet #}
+  {% if content.body|render|trim and not content.field_cpg_paragraphs|render|trim %}
+    <div class="cpg-about__body-fallback">
+      {{ content.body }}
+    </div>
+  {% endif %}
+
+  {# Render any remaining fields not explicitly handled #}
+  <div class="hidden">
+    {{ content|without('field_cpg_paragraphs', 'body') }}
+  </div>
 </article>
