@@ -22,11 +22,18 @@ class RegisterStep2Form extends FormBase {
     $title = $config->get('reg2_title') ?? 'Great! Now tell us about your background.';
     $subtitle = $config->get('reg2_subtitle') ?? 'Help us curate the perfect content tailored for your specific role within the CPG industry.';
 
+    $site_config = \Drupal::config('system.site');
+    $site_name = $site_config->get('name') ?: 'CPG Matters';
+    $site_slogan = $site_config->get('slogan') ?: 'CONSUMER PACKAGED GOODS NEWS & INSIGHTS';
+    
+    $logo_url = theme_get_setting('logo.url');
+    $logo_markup = $logo_url ? '<img src="' . htmlspecialchars($logo_url) . '" alt="' . htmlspecialchars($site_name) . '" style="max-height: 40px; width: auto; display: block; margin: 0 auto;">' : '<span class="cpg">' . htmlspecialchars(strtoupper($site_name)) . '</span>';
+
     $form['header'] = [
       '#markup' => '
       <div class="reg-header">
-        <div class="reg-logo"><span class="cpg">CPG</span> <span class="matters">MATTERS</span></div>
-        <div class="reg-subtitle">CONSUMER PACKAGED GOODS NEWS & INSIGHTS</div>
+        <div class="reg-logo">' . $logo_markup . '</div>
+        <div class="reg-subtitle">' . htmlspecialchars($site_slogan) . '</div>
       </div>
       <div class="progress-bar"><div class="progress-fill step-2"></div></div>
       <div class="reg-content">
