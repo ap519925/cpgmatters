@@ -370,3 +370,45 @@
 body.node-type-article #block-cpg-page-title {
     display: none;
 }
+
+// ── Related Articles Grid ──
+.cpg-related-articles-heading {
+    font-family: var(--font-heading, "Outfit", sans-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cpg-text, #1a1a1a);
+    margin-bottom: 2rem;
+}
+
+.cpg-related-articles-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    // Strip bottom margin to let grid spacing work smoothly
+    article.cpg-article-teaser {
+        margin-bottom: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    article.cpg-article-teaser .cpg-article-teaser__content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    // Push the footer of the card to the bottom
+    article.cpg-article-teaser .cpg-article-teaser__footer {
+        margin-top: auto;
+    }
+}
+

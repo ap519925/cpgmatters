@@ -115,6 +115,53 @@ function cpg_theme_preprocess_node(array &$variables) {
       }
       $variables['custom_teaser'] = $custom_teaser;
     }
+
+    // Fetch related articles for full view mode
+    if ($variables['view_mode'] === 'full') {
+      $tids = [];
+      if ($variables['node']->hasField('field_tags') && !$variables['node']->get('field_tags')->isEmpty()) {
+        foreach ($variables['node']->get('field_tags') as $item) {
+          $tids[] = $item->target_id;
+        }
+      }
+
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'article')
+        ->condition('status', 1)
+        ->condition('nid', $variables['node']->id(), '<>')
+        ->sort('created', 'DESC')
+        ->range(0, 3)
+        ->accessCheck(TRUE);
+
+      if (!empty($tids)) {
+        $query->condition('field_tags', $tids, 'IN');
+      }
+
+      $nids = $query->execute();
+      
+      // If we don't have enough matching by tag, backfill with newest articles.
+      if (count($nids) < 3) {
+        $needed = 3 - count($nids);
+        $exclude_nids = array_merge([$variables['node']->id()], $nids);
+        
+        $backfill_query = \Drupal::entityQuery('node')
+          ->condition('type', 'article')
+          ->condition('status', 1)
+          ->condition('nid', $exclude_nids, 'NOT IN')
+          ->sort('created', 'DESC')
+          ->range(0, $needed)
+          ->accessCheck(TRUE);
+          
+        $backfill_nids = $backfill_query->execute();
+        $nids = array_merge($nids, $backfill_nids);
+      }
+
+      if (!empty($nids)) {
+        $related_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+        $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+        $variables['related_articles'] = $view_builder->viewMultiple($related_nodes, 'teaser');
+      }
+    }
   }
 }
 

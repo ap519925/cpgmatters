@@ -113,6 +113,17 @@
     </div>
   {% endif %}
 
+  {# ── Related Articles ── #}
+  {% if related_articles %}
+    <div class="cpg-related-articles-section">
+      <hr style="border:0; border-top:1px solid #E5E7EB; margin: 3rem 0;">
+      <h2 class="cpg-related-articles-heading">{{ 'Related Articles'|t }}</h2>
+      <div class="cpg-related-articles-grid">
+        {{ related_articles }}
+      </div>
+    </div>
+  {% endif %}
+
   {# ── Hide default node links ── #}
   <div class="hidden">
     {{ content|without('field_tags', 'field_summary', 'field_author_name', 'field_read_time', 'field_image', 'field_image_caption', 'body') }}
