@@ -3,6 +3,8 @@ type: theme
 description: 'A modern, future-proof custom theme for CPG Matters using Single Directory Components (SDC) and Vite.'
 core_version_requirement: ^10 || ^11
 base theme: stark
+version: '1.0.0'
+package: 'Custom'
 
 regions:
   header: 'Header'
