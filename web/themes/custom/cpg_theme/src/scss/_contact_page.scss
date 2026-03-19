@@ -1,0 +1,244 @@
+@use 'variables' as *;
+
+.cpg-contact-page {
+  padding: $gap-2xl 0;
+}
+
+.cpg-contact-page__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 450px;
+  gap: 4rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: $gap-2xl clamp(1rem, 5vw, 3rem);
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Form Left Side ──
+.cpg-contact-page__form-section {
+  .page-title {
+    font-family: $font-heading;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: $gap-md;
+    color: $cpg-text;
+  }
+  
+  .intro-text {
+    font-size: 1.05rem;
+    color: $cpg-text-secondary;
+    line-height: 1.6;
+    margin-bottom: $gap-xl;
+  }
+}
+
+.cpg-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-lg;
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $gap-lg;
+    
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-xs;
+    
+    label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $cpg-text;
+    }
+    
+    .required {
+      color: $cpg-red;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      padding: 0.9rem;
+      border: 1px solid #ddd;
+      border-radius: $radius;
+      background: #FAFAFA;
+      font-size: 1rem;
+      font-family: $font-body;
+      width: 100%;
+      transition: border-color $transition;
+      
+      &:focus {
+        outline: none;
+        border-color: $cpg-red;
+      }
+    }
+  }
+
+  .form-checkbox-group {
+    .custom-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: $cpg-text-secondary;
+      cursor: pointer;
+      
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+      }
+      
+      a {
+        color: $cpg-red;
+        text-decoration: none;
+        
+        &:hover { text-decoration: underline; }
+      }
+    }
+  }
+  
+  .required-note {
+    font-size: 0.85rem;
+    color: $cpg-text-secondary;
+    margin: $gap-xs 0;
+  }
+  
+  .btn--submit {
+    align-self: flex-start;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+}
+
+// ── Sidebar Right Side ──
+.contact-info-card {
+  background: #F8F9FA;
+  padding: $gap-2xl;
+  border-radius: $radius;
+  
+  h3 {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: $gap-xl;
+    color: $cpg-text;
+  }
+}
+
+.contact-info-item {
+  display: flex;
+  gap: $gap-md;
+  margin-bottom: $gap-xl;
+  
+  .icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $cpg-red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.5rem;
+  }
+  
+  strong {
+    display: block;
+    margin-bottom: $gap-xs;
+    font-weight: 700;
+    color: $cpg-text;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: $cpg-text-secondary;
+    line-height: 1.6;
+    
+    a {
+      color: $cpg-red;
+      text-decoration: none;
+      &:hover { text-decoration: underline; }
+    }
+  }
+  
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: $cpg-text-secondary;
+    margin-bottom: 0.3rem;
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: $gap-sm;
+  
+  .social-pill {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $cpg-text;
+    text-decoration: none;
+    transition: all $transition;
+    
+    &:hover {
+      background: $cpg-red;
+      color: white;
+      border-color: $cpg-red;
+    }
+  }
+}
+
+.contact-divider {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: $gap-xl 0;
+}
+
+.contact-quick-links {
+  strong {
+    display: block;
+    margin-bottom: $gap-md;
+    font-weight: 700;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: $gap-sm;
+      
+      a {
+        color: $cpg-red;
+        text-decoration: none;
+        font-size: 0.95rem;
+        
+        &:hover { text-decoration: underline; }
+      }
+    }
+  }
+}

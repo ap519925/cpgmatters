@@ -112,11 +112,12 @@
           {% if p.field_p_body.value %}
             <p class="cpg-about__cta-text">{{ p.field_p_body.value|striptags }}</p>
           {% endif %}
-          {% if p.field_p_link.0.url %}
-            <div class="cpg-about__cta-buttons">
+          <div class="cpg-about__cta-buttons">
+            {% if p.field_p_link.0.url %}
               <a href="{{ p.field_p_link.0.url }}" class="cpg-about__cta-btn cpg-about__cta-btn--primary">{{ p.field_p_link.0.title }}</a>
-            </div>
-          {% endif %}
+            {% endif %}
+            <a href="/contact" class="cpg-about__cta-btn cpg-about__cta-btn--secondary">CONTACT US</a>
+          </div>
         </section>
 
       {% elseif ptype == 'cpg_quote' %}
