@@ -1,7 +1,21 @@
 @use 'variables' as *;
 
+// Override default page layout bounds if page--contact.html.twig isn't fully prioritized
+.path-contact {
+  .cpg-layout__main {
+    background-color: #f4f6f8;
+    flex: 1;
+  }
+  
+  .cpg-columns.no-sidebars {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}
+
 .cpg-contact-page {
   padding: $gap-2xl 0;
+  background-color: #f4f6f8;
 }
 
 .cpg-contact-page__grid {

@@ -182,7 +182,7 @@ display:
       menu:
         type: normal
         title: Directory
-        weight: 5
+        weight: -45
         menu_name: main
     cache_metadata:
       max-age: -1

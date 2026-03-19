@@ -3,8 +3,8 @@ _core:
 langcode: en
 uuid: 9a79c332-1cc5-4f2d-afb4-83dc852c6281
 name: 'CPG Matters'
-mail: admin@example.com
-slogan: ''
+mail: noreply@cpgmatters.com
+slogan: 'A Brand Marketing Magazine for the 21st Century'
 page:
   403: ''
   404: ''
