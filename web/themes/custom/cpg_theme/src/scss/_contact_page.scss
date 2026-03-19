@@ -49,25 +49,27 @@
   }
 }
 
-.cpg-contact-form {
+.webform-submission-form {
   display: flex;
   flex-direction: column;
   gap: $gap-lg;
   
-  .form-row {
+  .webform-flexbox {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $gap-lg;
+    margin: 0;
     
     @media (max-width: 600px) {
       grid-template-columns: 1fr;
     }
   }
 
-  .form-group {
+  .form-item {
     display: flex;
     flex-direction: column;
     gap: $gap-xs;
+    margin-bottom: $gap-sm;
     
     label {
       font-size: 0.95rem;
@@ -75,8 +77,10 @@
       color: $cpg-text;
     }
     
-    .required {
+    .form-required::after {
+      content: '*';
       color: $cpg-red;
+      margin-left: 0.3em;
     }
     
     input[type="text"],
@@ -99,26 +103,30 @@
     }
   }
 
-  .form-checkbox-group {
-    .custom-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+  .form-type-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: $cpg-text-secondary;
+    cursor: pointer;
+    flex-direction: row;
+    
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+    }
+    
+    label {
+      font-weight: normal;
       font-size: 0.9rem;
-      color: $cpg-text-secondary;
-      cursor: pointer;
-      
-      input[type="checkbox"] {
-        width: 16px;
-        height: 16px;
-      }
-      
-      a {
-        color: $cpg-red;
-        text-decoration: none;
-        
-        &:hover { text-decoration: underline; }
-      }
+    }
+    
+    a {
+      color: $cpg-red;
+      text-decoration: none;
+      &:hover { text-decoration: underline; }
     }
   }
   
@@ -128,13 +136,26 @@
     margin: $gap-xs 0;
   }
   
-  .btn--submit {
-    align-self: flex-start;
-    padding: 1rem 2.5rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 700;
+  .form-actions {
+    margin-top: $gap-md;
+    .webform-button--submit {
+      align-self: flex-start;
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      background: $cpg-red;
+      color: white;
+      border: none;
+      border-radius: $radius;
+      cursor: pointer;
+      transition: background-color $transition;
+      
+      &:hover {
+        background-color: darken($cpg-red, 10%);
+      }
+    }
   }
 }
 

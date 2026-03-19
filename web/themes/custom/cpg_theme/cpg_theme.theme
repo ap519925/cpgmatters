@@ -52,6 +52,14 @@ function cpg_theme_preprocess_node(array &$variables) {
   // Make site name available to all node templates (for share links, etc).
   $variables['site_name'] = \Drupal::config('system.site')->get('name');
 
+  // For 'page' content type, check if we need to embed a webform (e.g., contact).
+  if ($variables['node']->getType() === 'page') {
+    $variables['contact_webform'] = [
+      '#type' => 'webform',
+      '#webform' => 'contact_us',
+    ];
+  }
+
   // For article teasers and full pages, map the category tag to an icon emoji.
   if ($variables['node']->getType() === 'article') {
     $category_icon = '📈'; // Default icon.

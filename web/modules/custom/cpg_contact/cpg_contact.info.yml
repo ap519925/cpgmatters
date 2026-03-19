@@ -1,6 +1,0 @@
-name: 'CPG Contact Form'
-type: module
-description: 'Provides the CPG Matters contact form page with Drupal Forms API.'
-core_version_requirement: ^10 || ^11
-package: Custom
-version: '1.0.0'
