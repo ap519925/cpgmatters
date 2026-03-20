@@ -8,6 +8,8 @@ dependencies:
     - comment
     - filter
     - media
+    - paragraphs
+    - paragraphs_type_permissions
     - search
     - system
 _core:
@@ -22,3 +24,26 @@ permissions:
   - 'search content'
   - 'use text format restricted_html'
   - 'view media'
+  - 'view paragraph content cpg_accordion'
+  - 'view paragraph content cpg_accordion_item'
+  - 'view paragraph content cpg_card'
+  - 'view paragraph content cpg_card_grid'
+  - 'view paragraph content cpg_column'
+  - 'view paragraph content cpg_columns'
+  - 'view paragraph content cpg_company_card'
+  - 'view paragraph content cpg_cta'
+  - 'view paragraph content cpg_directory_grid'
+  - 'view paragraph content cpg_divider'
+  - 'view paragraph content cpg_feature_item'
+  - 'view paragraph content cpg_features'
+  - 'view paragraph content cpg_hero'
+  - 'view paragraph content cpg_image'
+  - 'view paragraph content cpg_media_text'
+  - 'view paragraph content cpg_quote'
+  - 'view paragraph content cpg_stat_item'
+  - 'view paragraph content cpg_stats_bar'
+  - 'view paragraph content cpg_team_grid'
+  - 'view paragraph content cpg_team_member'
+  - 'view paragraph content cpg_text'
+  - 'view paragraph content cpg_video'
+  - 'view unpublished paragraphs'
