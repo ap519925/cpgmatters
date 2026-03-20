@@ -1,12 +1,10 @@
 @use 'variables' as *;
 
 // Override default page layout bounds for contact page
-.path-contact {
-  .cpg-layout__main {
-    background-color: #f4f6f8;
-    flex: 1;
-  }
-  
+.page-contact {
+  background-color: #f4f6f8;
+  flex: 1;
+
   .cpg-columns.no-sidebars {
     max-width: 100% !important;
     padding: 0 !important;
@@ -23,6 +21,7 @@
   }
 }
 
+
 .cpg-contact-page {
   padding: $gap-2xl 0;
   background-color: #f4f6f8;
@@ -30,7 +29,7 @@
 
 .cpg-contact-page__grid {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr 700px;
   gap: 4rem;
   max-width: 1400px;
   margin: 0 auto;
@@ -69,7 +68,7 @@
   display: flex;
   flex-direction: column;
   gap: $gap-lg;
-  
+
   // Name row - two fields side by side via webform_flexbox
   .webform-flexbox {
     display: grid !important;
@@ -83,7 +82,7 @@
       max-width: 100% !important;
       margin: 0 !important;
     }
-    
+
     @media (max-width: 600px) {
       grid-template-columns: 1fr;
     }
@@ -97,19 +96,19 @@
     margin-bottom: 0;
     max-width: 100% !important;
     width: 100% !important;
-    
+
     label {
       font-family: $font-body;
       font-size: 0.95rem;
       font-weight: 600;
       color: $cpg-text;
     }
-    
+
     .form-required::after {
       content: ' *';
       color: $cpg-red;
     }
-    
+
     input[type="text"],
     input[type="email"],
     select,
@@ -124,7 +123,7 @@
       width: 100%;
       box-sizing: border-box;
       transition: border-color $transition, box-shadow $transition;
-      
+
       &:focus {
         outline: none;
         border-color: $cpg-red;
@@ -156,7 +155,7 @@
     color: $cpg-text-secondary;
     cursor: pointer;
     flex-direction: row;
-    
+
     input[type="checkbox"] {
       width: 16px;
       height: 16px;
@@ -164,20 +163,23 @@
       accent-color: $cpg-red;
       flex-shrink: 0;
     }
-    
+
     label {
       font-weight: 400;
       font-size: 0.9rem;
       color: $cpg-text-secondary;
     }
-    
+
     a {
       color: $cpg-red;
       text-decoration: none;
-      &:hover { text-decoration: underline; }
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
-  
+
   // Required fields note
   .required-note {
     font-size: 0.85rem;
@@ -185,11 +187,11 @@
     color: $cpg-text-secondary;
     margin: 0;
   }
-  
+
   // Submit button
   .form-actions {
     margin-top: $gap-sm;
-    
+
     .webform-button--submit {
       display: inline-block;
       padding: 1rem 2.5rem;
@@ -204,7 +206,7 @@
       border-radius: $radius;
       cursor: pointer;
       transition: background-color $transition, transform $transition;
-      
+
       &:hover {
         background-color: darken($cpg-red, 10%);
         transform: translateY(-1px);
@@ -218,7 +220,10 @@
 
   // Error states
   .form-item--error {
-    input, select, textarea {
+
+    input,
+    select,
+    textarea {
       border-color: $cpg-red;
     }
   }
@@ -239,7 +244,7 @@
   background: #F8F9FA;
   padding: $gap-2xl;
   border-radius: $radius;
-  
+
   h3 {
     font-family: $font-heading;
     font-size: 1.5rem;
@@ -253,7 +258,7 @@
   display: flex;
   gap: $gap-md;
   margin-bottom: $gap-xl;
-  
+
   .icon {
     font-size: 1rem;
     flex-shrink: 0;
@@ -271,7 +276,7 @@
     flex: 1;
     min-width: 0;
   }
-  
+
   strong {
     display: block;
     margin-bottom: $gap-xs;
@@ -279,27 +284,30 @@
     font-size: 1rem;
     color: $cpg-text;
   }
-  
+
   p {
     margin: 0;
     font-size: 0.92rem;
     color: $cpg-text-secondary;
     line-height: 1.7;
-    
+
     a {
       color: $cpg-red;
       text-decoration: none;
-      &:hover { text-decoration: underline; }
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
-  
+
   .hours-row {
     display: flex;
     justify-content: space-between;
     font-size: 0.92rem;
     color: $cpg-text-secondary;
     margin-bottom: 0.3rem;
-    
+
     span:first-child {
       font-weight: 600;
       color: $cpg-text;
@@ -312,7 +320,7 @@
   display: flex;
   gap: $gap-sm;
   margin-top: $gap-sm;
-  
+
   .social-pill {
     width: 36px;
     height: 36px;
@@ -325,7 +333,7 @@
     font-size: 0.85rem;
     text-decoration: none;
     transition: all $transition;
-    
+
     &:hover {
       background: $cpg-red;
       color: white;
@@ -351,21 +359,23 @@
     margin-bottom: $gap-md;
     color: $cpg-text;
   }
-  
+
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    
+
     li {
       margin-bottom: $gap-sm;
-      
+
       a {
         color: $cpg-red;
         text-decoration: none;
         font-size: 0.92rem;
-        
-        &:hover { text-decoration: underline; }
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
