@@ -135,8 +135,8 @@ settings:
   ajax_effect: ''
   ajax_speed: null
   page: true
-  page_submit_path: register
-  page_confirm_path: register/complete
+  page_submit_path: /register
+  page_confirm_path: /register/complete
   page_theme_name: ''
   form_title: both
   form_submit_once: false
