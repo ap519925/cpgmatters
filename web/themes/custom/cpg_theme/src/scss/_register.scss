@@ -397,7 +397,9 @@
     }
   }
 
-  .continue-btn {
+  .continue-btn,
+  .webform-button--next,
+  .webform-button--submit {
     width: 100%;
     padding: 16px;
     background: linear-gradient(135deg, $cpg-red 0%, darken($cpg-red, 15%) 100%);
