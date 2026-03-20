@@ -69,6 +69,20 @@ elements: |
       '#wrapper_attributes':
         class:
           - form-group
+    finish_later:
+      '#type': submit
+      '#value': 'Create Account & Finish Later'
+      '#limit_validation_errors':
+        - - username
+        - - email
+        - - password
+        - - display_name
+      '#attributes':
+        class:
+          - back-btn
+          - FinishLater
+        formnovalidate: formnovalidate
+        style: 'margin-bottom: 20px;'
     reg_footer_s1:
       '#type': webform_markup
       '#markup': '</div><div class="reg-footer"><p class="footer-text">Already have an account? <a href="/user/login" class="footer-link">Sign in here</a></p><p class="footer-text"><a href="/" class="footer-link footer-link--home">← Back to Homepage</a></p></div>'
