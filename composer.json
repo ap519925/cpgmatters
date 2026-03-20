@@ -28,6 +28,7 @@
         "drupal/paragraphs": "^1.20",
         "drupal/pathauto": "^1.14",
         "drupal/smtp": "^1.4",
+        "drupal/views_infinite_scroll": "^2.0",
         "drupal/webform": "^6.3@beta",
         "drush/drush": "^13.7"
     },

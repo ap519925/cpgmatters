@@ -27,18 +27,15 @@ display:
       title: ''
       fields: {  }
       pager:
-        type: full
+        type: infinite_scroll
         options:
           offset: 0
-          pagination_heading_level: h4
-          items_per_page: 10
-          total_pages: 0
+          items_per_page: 6
+          total_pages: null
           id: 0
           tags:
-            next: 'Next ›'
+            next: 'View more articles'
             previous: '‹ Previous'
-            first: '« First'
-            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -47,7 +44,9 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          quantity: 9
+          views_infinite_scroll:
+            button_text: 'View more articles'
+            invoke_when_in_view: false
       exposed_form:
         type: basic
         options:
@@ -249,6 +248,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      use_ajax: true
       header: {  }
       footer: {  }
       display_extenders: {  }

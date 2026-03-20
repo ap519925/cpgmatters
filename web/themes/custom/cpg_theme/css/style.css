@@ -3931,7 +3931,9 @@ body.node-type-article #block-cpg-page-title {
   border-color: #1A1A1A;
   background: #F0F2F5;
 }
-.cpg-register-wrapper .continue-btn {
+.cpg-register-wrapper .continue-btn,
+.cpg-register-wrapper .webform-button--next,
+.cpg-register-wrapper .webform-button--submit {
   width: 100%;
   padding: 16px;
   background: linear-gradient(135deg, #C41E3A 0%, rgb(129.6548672566, 19.8451327434, 38.3672566372) 100%);
@@ -3946,11 +3948,15 @@ body.node-type-article #block-cpg-page-title {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.cpg-register-wrapper .continue-btn:hover {
+.cpg-register-wrapper .continue-btn:hover,
+.cpg-register-wrapper .webform-button--next:hover,
+.cpg-register-wrapper .webform-button--submit:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3);
 }
-.cpg-register-wrapper .continue-btn:disabled {
+.cpg-register-wrapper .continue-btn:disabled,
+.cpg-register-wrapper .webform-button--next:disabled,
+.cpg-register-wrapper .webform-button--submit:disabled {
   background: #ccc;
   cursor: not-allowed;
   transform: none;
@@ -5818,19 +5824,19 @@ body {
   color: var(--cpg-text, #1A1A1A);
 }
 
-.path-contact .cpg-layout__main {
+.page-contact {
   background-color: #f4f6f8;
   flex: 1;
 }
-.path-contact .cpg-columns.no-sidebars {
+.page-contact .cpg-columns.no-sidebars {
   max-width: 100% !important;
   padding: 0 !important;
 }
-.path-contact .block-system-main-block {
+.page-contact .block-system-main-block {
   max-width: unset !important;
   padding: 0 !important;
 }
-.path-contact #block-cpg-page-title {
+.page-contact #block-cpg-page-title {
   display: none;
 }
 
@@ -5841,9 +5847,9 @@ body {
 
 .cpg-contact-page__grid {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr 700px;
   gap: 4rem;
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 3rem clamp(1.5rem, 5vw, 4rem);
 }
@@ -6009,7 +6015,9 @@ body {
 .cpg-contact-page__form-section .webform-submission-form .form-actions .webform-button--submit:active {
   transform: translateY(0);
 }
-.cpg-contact-page__form-section .webform-submission-form .form-item--error input, .cpg-contact-page__form-section .webform-submission-form .form-item--error select, .cpg-contact-page__form-section .webform-submission-form .form-item--error textarea {
+.cpg-contact-page__form-section .webform-submission-form .form-item--error input,
+.cpg-contact-page__form-section .webform-submission-form .form-item--error select,
+.cpg-contact-page__form-section .webform-submission-form .form-item--error textarea {
   border-color: #C41E3A;
 }
 .cpg-contact-page__form-section .webform-submission-form .form-item--error-message {
