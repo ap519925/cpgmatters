@@ -38,7 +38,7 @@
 
     {# ── Title ── #}
     <h2 class="cpg-article-teaser__title" style="{% if is_featured %}font-size: 2.8rem; line-height: 1.15; margin-bottom: 1rem;{% else %}font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.6em;{% endif %}; font-family: 'Outfit', sans-serif; font-weight: 700;">
-      <a href="{{ url }}" rel="bookmark" style="text-decoration: none; {% if is_featured %}color: #2563EB; text-decoration: underline; text-underline-offset: 4px;{% else %}color: #1A1A1A;{% endif %}">
+      <a href="{{ url }}" rel="bookmark" style="text-decoration: none; {% if is_featured %}color: #2563EB;{% else %}color: #1A1A1A;{% endif %}">
         {{ label }}
       </a>
     </h2>
