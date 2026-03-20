@@ -1,8 +1,6 @@
 _core:
   default_config_hash: 4GIX5Esnc_umpXUBj4IIocRX7Mt5fPhm4AgXfE3E56E
 module:
-  admin_toolbar: 0
-  admin_toolbar_tools: 0
   announcements_feed: 0
   automated_cron: 0
   basic_auth: 0
@@ -15,12 +13,13 @@ module:
   config: 0
   contact: 0
   contextual: 0
-  cpg_contact: 0
   cpg_register: 0
   cpg_setup: 0
   crop: 0
   ctools: 0
+  ctools_block: 0
   ctools_entity_mask: 0
+  ctools_views: 0
   datetime: 0
   datetime_range: 0
   dblog: 0
@@ -92,4 +91,5 @@ theme:
   claro: 0
   stark: 0
   cpg_theme: 0
+  gin: 0
 profile: standard
