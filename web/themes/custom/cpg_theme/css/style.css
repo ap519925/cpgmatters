@@ -1665,20 +1665,30 @@ body.node-type-article #block-cpg-page-title {
 .cpg-newsletter-block__desc p {
   margin: 0;
 }
-.cpg-newsletter-block__form {
+.cpg-newsletter-block__form,
+.cpg-newsletter-block .cpg-newsletter-form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-.cpg-newsletter-block__input {
+.cpg-newsletter-block__form .form-item, .cpg-newsletter-block__form .form-actions,
+.cpg-newsletter-block .cpg-newsletter-form .form-item,
+.cpg-newsletter-block .cpg-newsletter-form .form-actions {
+  margin: 0;
+  padding: 0;
+}
+.cpg-newsletter-block__input,
+.cpg-newsletter-block .cpg-newsletter-input {
   border: none;
   border-radius: 8px;
   padding: 0.6rem 0.75rem;
   font-size: 0.85rem;
   font-family: "Inter", -apple-system, system-ui, sans-serif;
   width: 100%;
+  box-sizing: border-box;
 }
-.cpg-newsletter-block__btn {
+.cpg-newsletter-block__btn,
+.cpg-newsletter-block .cpg-newsletter-btn {
   background: #FFFFFF;
   color: #C41E3A;
   border: none;
@@ -1690,8 +1700,11 @@ body.node-type-article #block-cpg-page-title {
   letter-spacing: 0.06em;
   cursor: pointer;
   transition: opacity 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
-.cpg-newsletter-block__btn:hover {
+.cpg-newsletter-block__btn:hover,
+.cpg-newsletter-block .cpg-newsletter-btn:hover {
   opacity: 0.85;
 }
 
@@ -3475,7 +3488,8 @@ body.node-type-article #block-cpg-page-title {
   margin: 0 auto 2rem;
   line-height: 1.5;
 }
-.cpg-whitepapers__newsletter .newsletter-form {
+.cpg-whitepapers__newsletter .newsletter-form,
+.cpg-whitepapers__newsletter .cpg-newsletter-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -3483,24 +3497,47 @@ body.node-type-article #block-cpg-page-title {
   margin: 0 auto;
 }
 @media (min-width: 600px) {
-  .cpg-whitepapers__newsletter .newsletter-form {
+  .cpg-whitepapers__newsletter .newsletter-form,
+  .cpg-whitepapers__newsletter .cpg-newsletter-form {
     flex-direction: row;
   }
 }
-.cpg-whitepapers__newsletter .newsletter-form input[type=email] {
+.cpg-whitepapers__newsletter .newsletter-form .form-item,
+.cpg-whitepapers__newsletter .cpg-newsletter-form .form-item {
   flex: 1;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.cpg-whitepapers__newsletter .newsletter-form .form-actions,
+.cpg-whitepapers__newsletter .cpg-newsletter-form .form-actions {
+  margin: 0;
+  padding: 0;
+}
+.cpg-whitepapers__newsletter .newsletter-form input[type=email],
+.cpg-whitepapers__newsletter .newsletter-form .cpg-newsletter-input,
+.cpg-whitepapers__newsletter .cpg-newsletter-form input[type=email],
+.cpg-whitepapers__newsletter .cpg-newsletter-form .cpg-newsletter-input {
+  width: 100%;
+  box-sizing: border-box;
   padding: 0.8rem 1.25rem;
   border: 1px solid #ced4da;
   border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
 }
-.cpg-whitepapers__newsletter .newsletter-form input[type=email]:focus {
+.cpg-whitepapers__newsletter .newsletter-form input[type=email]:focus,
+.cpg-whitepapers__newsletter .newsletter-form .cpg-newsletter-input:focus,
+.cpg-whitepapers__newsletter .cpg-newsletter-form input[type=email]:focus,
+.cpg-whitepapers__newsletter .cpg-newsletter-form .cpg-newsletter-input:focus {
   outline: none;
   border-color: #C41E3A;
   box-shadow: 0 0 0 2px rgba(181, 19, 26, 0.2);
 }
-.cpg-whitepapers__newsletter .newsletter-form .btn--red {
+.cpg-whitepapers__newsletter .newsletter-form .btn--red,
+.cpg-whitepapers__newsletter .newsletter-form .cpg-newsletter-btn,
+.cpg-whitepapers__newsletter .cpg-newsletter-form .btn--red,
+.cpg-whitepapers__newsletter .cpg-newsletter-form .cpg-newsletter-btn {
   background-color: #C41E3A;
   color: #fff;
   padding: 0.8rem 2rem;
@@ -3511,8 +3548,13 @@ body.node-type-article #block-cpg-page-title {
   font-family: inherit;
   font-size: 1rem;
   transition: background-color 0.2s;
+  width: 100%;
+  height: 100%;
 }
-.cpg-whitepapers__newsletter .newsletter-form .btn--red:hover {
+.cpg-whitepapers__newsletter .newsletter-form .btn--red:hover,
+.cpg-whitepapers__newsletter .newsletter-form .cpg-newsletter-btn:hover,
+.cpg-whitepapers__newsletter .cpg-newsletter-form .btn--red:hover,
+.cpg-whitepapers__newsletter .cpg-newsletter-form .cpg-newsletter-btn:hover {
   background-color: rgb(151.7699115044, 23.2300884956, 44.9115044248);
 }
 
@@ -5782,6 +5824,10 @@ body {
 }
 .path-contact .cpg-columns.no-sidebars {
   max-width: 100% !important;
+  padding: 0 !important;
+}
+.path-contact .block-system-main-block {
+  max-width: unset !important;
   padding: 0 !important;
 }
 .path-contact #block-cpg-page-title {

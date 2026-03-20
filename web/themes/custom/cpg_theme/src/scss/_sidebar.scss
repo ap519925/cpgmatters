@@ -128,22 +128,32 @@
         }
     }
 
-    &__form {
+    &__form,
+    .cpg-newsletter-form {
         display: flex;
         flex-direction: column;
         gap: $gap-sm;
+        
+        // Reset webform wrapper margins
+        .form-item, .form-actions {
+            margin: 0;
+            padding: 0;
+        }
     }
 
-    &__input {
+    &__input,
+    .cpg-newsletter-input {
         border: none;
         border-radius: $radius;
         padding: 0.6rem 0.75rem;
         font-size: 0.85rem;
         font-family: $font-body;
         width: 100%;
+        box-sizing: border-box;
     }
 
-    &__btn {
+    &__btn,
+    .cpg-newsletter-btn {
         background: $cpg-text-light;
         color: $cpg-red;
         border: none;
@@ -155,6 +165,8 @@
         letter-spacing: 0.06em;
         cursor: pointer;
         transition: opacity $transition;
+        width: 100%;
+        box-sizing: border-box;
 
         &:hover {
             opacity: 0.85;

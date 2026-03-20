@@ -12,6 +12,11 @@
     padding: 0 !important;
   }
 
+  .block-system-main-block {
+    max-width: unset !important;
+    padding: 0 !important;
+  }
+
   // Hide the default page title block
   #block-cpg-page-title {
     display: none;

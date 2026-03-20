@@ -58,6 +58,10 @@ function cpg_theme_preprocess_node(array &$variables) {
       '#type' => 'webform',
       '#webform' => 'contact_us',
     ];
+    $variables['newsletter_webform'] = [
+      '#type' => 'webform',
+      '#webform' => 'newsletter',
+    ];
   }
 
   // For article teasers and full pages, map the category tag to an icon emoji.
@@ -188,6 +192,13 @@ function cpg_theme_preprocess_block(array &$variables) {
     // Pass ad_size for ad_banner blocks.
     if ($block_content->bundle() === 'ad_banner' && $block_content->hasField('field_ad_size')) {
       $variables['ad_size'] = $block_content->get('field_ad_size')->value ?? '300x250';
+    }
+
+    if ($block_content->bundle() === 'newsletter') {
+      $variables['newsletter_webform'] = [
+        '#type' => 'webform',
+        '#webform' => 'newsletter',
+      ];
     }
   }
 }

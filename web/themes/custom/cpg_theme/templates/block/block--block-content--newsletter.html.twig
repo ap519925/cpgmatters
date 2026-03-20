@@ -21,8 +21,7 @@
       <p>{{ 'Get the latest CPG news delivered to your inbox'|t }}</p>
     {% endif %}
   </div>
-  <form action="#" class="cpg-newsletter-block__form">
-    <input type="email" placeholder="{{ 'Your email address'|t }}" class="cpg-newsletter-block__input" required>
-    <button type="submit" class="cpg-newsletter-block__btn">{{ 'Subscribe'|t }}</button>
-  </form>
+  {% if newsletter_webform %}
+    {{ newsletter_webform }}
+  {% endif %}
 </div>

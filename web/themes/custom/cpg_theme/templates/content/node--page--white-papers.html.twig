@@ -183,10 +183,9 @@
           {% if p.field_p_body.value %}
             <p>{{ p.field_p_body.value|striptags }}</p>
           {% endif %}
-          <form class="newsletter-form" action="#" method="post">
-            <input type="email" placeholder="Enter your email address" required />
-            <button type="submit" class="btn--red">Subscribe</button>
-          </form>
+          {% if newsletter_webform %}
+            {{ newsletter_webform }}
+          {% endif %}
         </section>
 
       {% else %}
