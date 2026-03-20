@@ -1,0 +1,169 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-quote.html.twig */
+class __TwigTemplate_ceb415c34a45783323d8d46953f96a1a extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, Template>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+            'paragraph' => [$this, 'block_paragraph'],
+        ];
+        $this->sandbox = $this->extensions[SandboxExtension::class];
+        $this->checkSecurity();
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 9
+        $context["classes"] = ["paragraph", ("paragraph--type--" . \Drupal\Component\Utility\Html::getClass(CoreExtension::getAttribute($this->env, $this->source,         // line 11
+($context["paragraph"] ?? null), "bundle", [], "any", false, false, true, 11))), "cpg-paragraph-quote"];
+        // line 15
+        yield from $this->unwrap()->yieldBlock('paragraph', $context, $blocks);
+        $this->env->getExtension('\Drupal\Core\Template\TwigExtension')
+            ->checkDeprecations($context, ["paragraph", "attributes", "content"]);        yield from [];
+    }
+
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_paragraph(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 16
+        yield "  <blockquote";
+        yield $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, CoreExtension::getAttribute($this->env, $this->source, ($context["attributes"] ?? null), "addClass", [($context["classes"] ?? null)], "method", false, false, true, 16), "html", null, true);
+        yield ">
+    <div class=\"cpg-paragraph-quote__mark\" aria-hidden=\"true\">&ldquo;</div>
+    ";
+        // line 18
+        if ((($tmp = Twig\Extension\CoreExtension::trim($this->extensions['Drupal\Core\Template\TwigExtension']->renderVar(CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_body", [], "any", false, false, true, 18)))) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 19
+            yield "      <div class=\"cpg-paragraph-quote__text\">";
+            yield $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_body", [], "any", false, false, true, 19), "html", null, true);
+            yield "</div>
+    ";
+        }
+        // line 21
+        yield "    <footer class=\"cpg-paragraph-quote__footer\">
+      ";
+        // line 22
+        if ((($tmp = Twig\Extension\CoreExtension::trim($this->extensions['Drupal\Core\Template\TwigExtension']->renderVar(CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_image", [], "any", false, false, true, 22)))) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 23
+            yield "        <div class=\"cpg-paragraph-quote__photo\">";
+            yield $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_image", [], "any", false, false, true, 23), "html", null, true);
+            yield "</div>
+      ";
+        }
+        // line 25
+        yield "      <div class=\"cpg-paragraph-quote__attribution\">
+        ";
+        // line 26
+        if ((($tmp = Twig\Extension\CoreExtension::trim(Twig\Extension\CoreExtension::striptags($this->extensions['Drupal\Core\Template\TwigExtension']->renderVar(CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_title", [], "any", false, false, true, 26))))) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 27
+            yield "          <cite class=\"cpg-paragraph-quote__name\">";
+            yield $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_title", [], "any", false, false, true, 27), "html", null, true);
+            yield "</cite>
+        ";
+        }
+        // line 29
+        yield "        ";
+        if ((($tmp = Twig\Extension\CoreExtension::trim(Twig\Extension\CoreExtension::striptags($this->extensions['Drupal\Core\Template\TwigExtension']->renderVar(CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_icon", [], "any", false, false, true, 29))))) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 30
+            yield "          <span class=\"cpg-paragraph-quote__role\">";
+            yield $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, CoreExtension::getAttribute($this->env, $this->source, ($context["content"] ?? null), "field_p_icon", [], "any", false, false, true, 30), "html", null, true);
+            yield "</span>
+        ";
+        }
+        // line 32
+        yield "      </div>
+    </footer>
+  </blockquote>
+";
+        yield from [];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-quote.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  105 => 32,  99 => 30,  96 => 29,  90 => 27,  88 => 26,  85 => 25,  79 => 23,  77 => 22,  74 => 21,  68 => 19,  66 => 18,  60 => 16,  48 => 15,  46 => 11,  45 => 9,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("", "themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-quote.html.twig", "/var/www/html/web/themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-quote.html.twig");
+    }
+    
+    public function checkSecurity()
+    {
+        static $tags = ["set" => 9, "block" => 15, "if" => 18];
+        static $filters = ["clean_class" => 11, "escape" => 16, "trim" => 18, "render" => 18, "striptags" => 26];
+        static $functions = [];
+
+        try {
+            $this->sandbox->checkSecurity(
+                ['set', 'block', 'if'],
+                ['clean_class', 'escape', 'trim', 'render', 'striptags'],
+                [],
+                $this->source
+            );
+        } catch (SecurityError $e) {
+            $e->setSourceContext($this->source);
+
+            if ($e instanceof SecurityNotAllowedTagError && isset($tags[$e->getTagName()])) {
+                $e->setTemplateLine($tags[$e->getTagName()]);
+            } elseif ($e instanceof SecurityNotAllowedFilterError && isset($filters[$e->getFilterName()])) {
+                $e->setTemplateLine($filters[$e->getFilterName()]);
+            } elseif ($e instanceof SecurityNotAllowedFunctionError && isset($functions[$e->getFunctionName()])) {
+                $e->setTemplateLine($functions[$e->getFunctionName()]);
+            }
+
+            throw $e;
+        }
+
+    }
+}

@@ -1,33 +1,80 @@
-# CPG Matters - Drupal 11 Future-Proof Theme & Setup Project
+# CPG Matters - Drupal 11 Project
 
-This directory contains a strictly modern, future-proof setup for the CPG Matters Drupal theme, meticulously structured utilizing bleeding-edge Drupal 11 capabilities. We have moved away from outdated pre-processors in favor of Single Directory Components (SDC), and away from heavy webpack setups in favor of incredibly fast Vite.
+Welcome to the **CPG Matters** project repository! This is a modern, component-driven Drupal 11 website built to deliver insights, analysis, and innovation stories for the Consumer Packaged Goods industry.
 
-## Theme Architecture (`web/themes/custom/cpg_theme`)
+## Technology Stack
+- **Core:** Drupal 11 (PHP 8.3)
+- **Local Development Environment:** DDEV
+- **Theme:** Custom `cpg_theme` (SCSS, Twig Component-Based Design)
+- **Database:** MariaDB
+- **Key Modules:** Paragraphs, Webforms, Views
 
-*   **Technology Stack**: Uses Vite for extremely fast compilation, hot module replacement, and modern CSS/JS bundling.
-*   **CSS Stack**: To ensure the codebase remains maintainable indefinitely, the theme utilizes **Vanilla CSS with PostCSS Preset Env**. This gives us CSS nesting (`&`), custom media queries, and standard native CSS features, avoiding long-term maintenance decay associated with SCSS or complex Tailwind configurations.
-*   **Structure**: Based on the `stark` core theme to ensure total control over markup without legacy Drupal override overhead.
-*   **Regions**: Mapped exactly to the CPG mockup (home-1.html), creating distinct editorial regions for Hero elements, Skyscrapers, Ads, Headers, content layouts, and 4-column Footers.
+## Getting Started
 
-### Build Instructions
+### Prerequisites
+- Docker Desktop or equivalent container runner.
+- DDEV installed (`ddev --version`).
 
-1.  Navigate into the theme directory: `cd web/themes/custom/cpg_theme`
-2.  Install dependencies: `npm install`
-3.  For development with hot reload: `npm run dev`
-4.  For production build: `npm run build` (The built assets are mapped in the `cpg_theme.libraries.yml` file)
+### Local Environment Setup
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd cpg_project
+   ```
 
-## Automation & Site Architecture (`recipes/cpg_site`)
+2. **Start the DDEV environment:**
+   ```bash
+   ddev start
+   ```
 
-A Drupal Recipe has been created to instantaneously set up your CPG Matters architecture without utilizing standard installation profiles.
+3. **Install dependencies (if not already managed):**
+   ```bash
+   ddev composer install
+   ```
 
-### Activating the setup
+4. **Import the Database:**
+   The project includes a recent database backup. Import it using:
+   ```bash
+   ddev import-db --file=cpg_project_backup.sql.gz
+   ```
 
-1.  To install all the standard required modules for CPG Matters (Layout Builder, Pathauto, Metatag, Media, Responsive Image, Views, Blocks), run the recipe.
-2.  Command: `php core/scripts/drupal recipe recipes/cpg_site`
+5. **Import Configuration:**
+   Sync the Drupal configuration to ensure all fields, blocks, and settings are up to date:
+   ```bash
+   ddev drush cim -y
+   ```
 
-## Using Single Directory Components (SDC)
+6. **Clear Caches:**
+   ```bash
+   ddev drush cr
+   ```
 
-To build future components like the `featured-article` (Article View Mode) or `category-label` (Taxonomy Tag):
-1.  Navigate to `cpg_theme/components`.
-2.  Create a folder `featured-article`.
-3.  Inside, place your `featured-article.component.yml`, `featured-article.twig`, and `featured-article.css`!
+You can now access your site locally at `http://cpg-project.ddev.site`. 
+
+*(Login credentials: `admin` / `admin`)*
+
+## Theme Development (`cpg_theme`)
+
+The site’s frontend is fully custom and built from the ground up to match the CPG Matters mockup designs. It primarily utilizes CSS Grid/Flexbox and BEM architecture.
+
+### SCSS Compilation
+Styles are constructed via SCSS inside `web/themes/custom/cpg_theme/src/scss/`. To compile the SCSS down to CSS, you can run the following command from the root of the project:
+
+```bash
+ddev exec "cd /var/www/html/web/themes/custom/cpg_theme && npx sass src/scss/main.scss css/style.css --no-source-map"
+```
+
+### Key Custom Components
+- **Dynamic Paragraphs:** Highly modular page construction using the Paragraphs module (e.g., `cpg_hero`, `cpg_column`, `cpg_card_grid`, `cpg_stats_bar`). These pieces are completely editable via the Drupal admin dashboard, making page building flexible for content editors.
+- **Webforms Integration:** The custom SCSS directly targets internal Drupal Webforms classes to maintain pixel-perfect styling for the **Contact Us** and **Newsletter Subscription** forms without relying on hardcoded third-party scripts.
+- **Responsive Layouts:** Implements specific breakpoint logic to cleanly reflow multi-column article grids, sidemenus, floating topics bars, and mobile off-canvas navigations.
+
+## Deploying Changes
+If you make configuration changes (like adding new fields, modifying views, or changing theme settings in the dashboard):
+1. **Export the Configuration:** `ddev drush cex -y`
+2. **Export the Database (as a backup snapshot):** `ddev export-db --file=cpg_project_backup.sql.gz`
+3. Commit everything to Git and Push!
+
+## Troubleshooting Windows Performance
+If you are developing this on Windows and the site loads incredibly slowly across clicks:
+This typically happens when DDEV mounts the project via standard NTFS Windows file sharing (Docker's 9P protocol). To dramatically speed up performance, ensure your project files reside exclusively within the WSL2 filesystem (`\\wsl$\Ubuntu\home\...`), and enable DDEV's Mutagen synchronization caching via `ddev config global --mutagen-enabled`.
