@@ -57,8 +57,9 @@ class TeaserFallbackFormatter extends FormatterBase {
       if ($entity->hasField('body') && !$entity->get('body')->isEmpty()) {
         $body_text = $entity->get('body')->value;
         
-        // Strip tags correctly
-        $text = preg_replace('/<[^>]+>/', ' ', $body_text);
+        // Strip tags correctly and securely (prevent word merging).
+        $text = str_replace('<', ' <', $body_text);
+        $text = strip_tags($text);
         $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
         $text = trim(preg_replace('/\s+/', ' ', $text));
         
