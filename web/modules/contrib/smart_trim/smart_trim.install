@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update and uninstall functions for smart_date module.
+ * Install, update and uninstall functions for smart_trim module.
  */
 
 declare(strict_types=1);
