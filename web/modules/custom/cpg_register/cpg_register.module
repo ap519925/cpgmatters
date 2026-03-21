@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
@@ -63,9 +65,9 @@ function cpg_register_webform_submission_form_alter(array &$form, FormStateInter
  * Dummy callback to satisfy webform's strict Ajax validation for custom buttons.
  */
 function cpg_register_dummy_ajax_callback(array &$form, FormStateInterface $form_state) {
-  $response = new \Drupal\Core\Ajax\AjaxResponse();
+  $response = new AjaxResponse();
   $url = Url::fromRoute('cpg_register.registration_complete');
-  $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand($url->toString()));
+  $response->addCommand(new RedirectCommand($url->toString()));
   return $response;
 }
 
