@@ -11,8 +11,8 @@ id: node.article.field_summary
 field_name: field_summary
 entity_type: node
 bundle: article
-label: 'Summary / Lead Text'
-description: 'A brief summary or lead paragraph shown before the main body text.'
+label: 'Teaser Text'
+description: 'A brief summary or teaser paragraph shown before the main body text.'
 required: false
 translatable: true
 default_value: {  }
