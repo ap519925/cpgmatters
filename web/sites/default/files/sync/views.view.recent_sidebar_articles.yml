@@ -251,7 +251,9 @@ display:
           wrapper_class: ''
           class: ''
       row:
-        type: fields
+        type: 'entity:node'
+        options:
+          view_mode: teaser
       query:
         type: views_query
         options:
