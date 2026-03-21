@@ -21,9 +21,14 @@ class RegistrationCompleteController extends ControllerBase {
   }
 
   public function content() {
-    $session = $this->requestStack->getCurrentRequest()->getSession();
-    $step1_data = $session->get('cpg_register_step1_data', []);
+    $tempstore = \Drupal::service('tempstore.private')->get('cpg_register');
+    $step1_data = $tempstore->get('step1_data') ?? [];
     
+    // Clear the temporary data as soon as it's read to prevent stale state.
+    try {
+      $tempstore->delete('step1_data');
+    } catch (\Exception $e) {}
+
     $user = \Drupal::currentUser();
     if ($user->isAuthenticated()) {
       $email = $user->getEmail();

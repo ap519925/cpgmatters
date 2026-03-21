@@ -80,8 +80,10 @@ function cpg_register_finish_later_submit(array &$form, FormStateInterface $form
     
     // We want the Entity to be saved via normal form submit, then redirect.
     // If it was already saved by ::submit, we can just alter the redirect.
-    $session = \Drupal::request()->getSession();
-    $session->set('cpg_register_step1_data', $webform_submission->getData());
+    $tempstore = \Drupal::service('tempstore.private')->get('cpg_register');
+    try {
+      $tempstore->set('step1_data', $webform_submission->getData());
+    } catch (\Exception $e) {}
     
     $url = Url::fromRoute('cpg_register.registration_complete');
     $form_state->setRedirectUrl($url);
