@@ -150,7 +150,7 @@ settings:
   ajax_speed: 500
   page: true
   page_submit_path: /register
-  page_confirm_path: /register/complete
+  page_confirm_path: ''
   page_theme_name: cpg_theme
   form_title: both
   form_submit_once: false
