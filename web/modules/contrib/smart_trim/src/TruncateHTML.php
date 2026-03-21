@@ -104,7 +104,10 @@ class TruncateHTML {
    *   Resulting text.
    */
   public function truncateChars(string $html, int $limit, string $ellipsis = '...'): string {
-    if ($limit <= 0 || $limit >= mb_strlen(strip_tags($html))) {
+    if ($limit <= 0) {
+      return '';
+    }
+    if ($limit >= mb_strlen(strip_tags($html))) {
       return $html;
     }
     $dom = $this->init($html, $limit, $ellipsis);
@@ -127,7 +130,10 @@ class TruncateHTML {
    *   Resulting text.
    */
   public function truncateWords(string $html, int $limit, string $ellipsis = '...'): string {
-    if ($limit <= 0 || $limit >= $this->countWords(strip_tags($html))) {
+    if ($limit <= 0) {
+      return '';
+    }
+    if ($limit >= $this->countWords(strip_tags($html))) {
       return $html;
     }
 
