@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.article.body
     - field.field.node.article.comment
+    - field.field.node.article.field_article_category
     - field.field.node.article.field_author_name
     - field.field.node.article.field_cpg_paragraphs
     - field.field.node.article.field_image
@@ -31,6 +32,14 @@ content:
     label: hidden
     settings:
       trim_length: 600
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_article_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
     third_party_settings: {  }
     weight: 0
     region: content

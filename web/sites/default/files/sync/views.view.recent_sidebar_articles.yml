@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_image
+    - field.storage.node.field_summary
     - image.style.medium
     - node.type.article
   module:
+    - cpg_setup
     - image
     - node
     - user
@@ -155,6 +157,30 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_summary:
+          id: field_summary
+          table: node__field_summary
+          field: field_summary
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          element_type: div
+          element_class: cpg-article-teaser__body
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          type: teaser_fallback
+          settings: {  }
       pager:
         type: some
         options:
@@ -244,6 +270,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_summary'
   block_1:
     id: block_1
     display_title: Block
@@ -260,3 +287,4 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_summary'
