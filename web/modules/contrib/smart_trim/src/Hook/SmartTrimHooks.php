@@ -51,24 +51,22 @@ class SmartTrimHooks {
    */
   #[Hook('theme_suggestions_smart_trim_alter')]
   public function themeSuggestionsSmartTrimAlter(array &$suggestions, array $variables) {
-    $values = [];
-    // Add all variables to array.
-    $values[] = $variables['entity_type'] ?? NULL;
-    $values[] = $variables['entity_bundle'] ?? NULL;
-    $values[] = $variables['field'] ?? NULL;
-    // Remove any missing values.
-    $values = array_filter($values);
-    $results = [[]];
-    // Loop through all values to form all combinations.
-    foreach ($values as $element) {
-      foreach ($results as $combination) {
-        array_push($results, array_merge($combination, [$element]));
+    $entity_type = $variables['entity_type'] ?? NULL;
+    $bundle = $variables['entity_bundle'] ?? NULL;
+    $field_name = $variables['field'] ?? NULL;
+
+    if ($entity_type) {
+      $suggestions[] = 'smart_trim__' . $entity_type;
+      if ($bundle) {
+        $suggestions[] = 'smart_trim__' . $entity_type . '__' . $bundle;
+        if ($field_name) {
+          $suggestions[] = 'smart_trim__' . $entity_type . '__' . $bundle . '__' . $field_name;
+        }
+      }
+      if ($field_name) {
+        $suggestions[] = 'smart_trim__' . $entity_type . '__' . $field_name;
       }
     }
-    // Sort by length so most specific suggestions come last.
-    usort($results, fn($a, $b) => count($a) - count($b));
-    // Add all discovered combinations to suggestions.
-    $suggestions += array_map(fn($array) => 'smart_trim__' . implode('__', $array), array_filter($results));
   }
 
 }
