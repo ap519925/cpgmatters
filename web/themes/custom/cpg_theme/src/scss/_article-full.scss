@@ -73,8 +73,10 @@
 // ── Author meta bar ──
 .cpg-article-full__meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     padding: $gap-lg 0;
     border-top: 1px solid $cpg-border;
     border-bottom: 1px solid $cpg-border;

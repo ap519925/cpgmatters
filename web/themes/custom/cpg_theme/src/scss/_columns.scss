@@ -72,6 +72,16 @@
     .cpg-columns {
         display: flex !important;
         flex-direction: column;
+        align-items: stretch;
+        min-width: 0;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .cpg-sidebar--first, .cpg-sidebar--second, .cpg-content-main {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
     }
 
     .cpg-sidebar--first {
