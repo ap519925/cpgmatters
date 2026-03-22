@@ -9,7 +9,7 @@
 .cpg-directory {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 clamp(2rem, 5vw, 5rem);
+    padding: 0 clamp(1rem, 5vw, 5rem);
 }
 
 // ── Hero Section ──
@@ -55,7 +55,9 @@
 .cpg-directory__filter-inner {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: $gap-md;
+    width: 100%;
 
     // Override the Views exposed form layout for inline display
     .views-exposed-form {
@@ -65,6 +67,7 @@
     .form--inline,
     form {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: $gap-md;
         margin: 0;
@@ -73,6 +76,7 @@
     .form-item {
         margin: 0;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: $gap-sm;
 
@@ -92,6 +96,7 @@
             cursor: pointer;
             background: $cpg-bg-white;
             min-width: 120px;
+            max-width: 100%;
         }
     }
 
@@ -119,6 +124,13 @@
 .cpg-directory__result-count {
     font-size: 0.85rem;
     color: $cpg-text-secondary;
+    width: 100%;
+    margin-top: 0.5rem;
+
+    @media (min-width: 768px) {
+        width: auto;
+        margin-top: 0;
+    }
 
     strong,
     b {
@@ -287,10 +299,13 @@
 .cpg-directory__pager {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin: $gap-xl 0 $gap-2xl;
 
     .pager {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: $gap-xs;
     }
