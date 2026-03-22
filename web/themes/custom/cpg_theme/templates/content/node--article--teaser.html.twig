@@ -60,8 +60,8 @@
           <span style="font-size: 0.85rem; color: #6B7280; font-family: 'Inter', sans-serif;">By <span style="font-weight: 600; color: #111827;">{{ author_name }}</span></span>
           <span style="font-size: 0.8rem; color: #6B7280; font-family: 'Inter', sans-serif;">
             {{ date }}
-            {% if content.field_read_time|render|striptags|trim %}
-              &middot; {{ content.field_read_time|render|striptags|trim }}
+            {% if content.field_estimated_read_time|render|striptags|trim %}
+              &middot; {{ content.field_estimated_read_time|render|striptags|trim }}
             {% endif %}
           </span>
         </div>

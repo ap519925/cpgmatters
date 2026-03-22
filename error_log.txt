@@ -1,0 +1,59 @@
+ ------ -------------- ---------------- ---------- --------------------------------------------------------------------------------------------------------------------------------------------- 
+  ID     Date           Type             Severity   Message                                                                                                                                      
+ ------ -------------- ---------------- ---------- --------------------------------------------------------------------------------------------------------------------------------------------- 
+  1033   21/Mar 00:29   webform          Notice     Registration: Submission #1 created.                                                                                                         
+  1032   21/Mar 00:24   page not found   Warning    /articles                                                                                                                                    
+  1031   21/Mar 00:23   page not found   Warning    /dictionary                                                                                                                                  
+  1030   20/Mar 22:12   cron             Info       Cron run completed.                                                                                                                          
+  1029   20/Mar 22:12   cron             Info       Execution of webform_scheduled_email_cron() took 13.38ms.                                                                                    
+  1028   20/Mar 22:12   webform          Notice     Cron task executed. (scheduled = 0; rescheduled = 0; unscheduled = 0; already scheduled = 0; ignored = 0; sent = 0; not sent = 0; skipped =  
+                                                    0)                                                                                                                                           
+  1027   20/Mar 22:12   cron             Info       Starting execution of webform_scheduled_email_cron(), execution of webform_cron() took 2.87ms.                                               
+  1026   20/Mar 22:12   cron             Info       Starting execution of webform_cron(), execution of update_cron() took 3152.29ms.                                                             
+  1025   20/Mar 22:12   cron             Info       Starting execution of update_cron(), execution of system_cron() took 560.43ms.                                                               
+  1024   20/Mar 22:12   cron             Info       Starting execution of system_cron(), execution of search_cron() took 20977.5ms.                                                              
+  1023   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1022   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1021   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1020   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1019   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1018   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1017   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1016   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1015   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1014   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1013   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1012   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1011   20/Mar 22:12   cron             Info       Starting execution of search_cron(), execution of node_cron() took 46.74ms.                                                                  
+  1010   20/Mar 22:12   cron             Info       Starting execution of node_cron(), execution of layout_builder_cron() took 49.96ms.                                                          
+  1009   20/Mar 22:12   cron             Info       Starting execution of layout_builder_cron(), execution of history_cron() took 0.37ms.                                                        
+  1008   20/Mar 22:12   cron             Info       Starting execution of history_cron(), execution of file_cron() took 99.31ms.                                                                 
+  1007   20/Mar 22:12   cron             Info       Starting execution of file_cron(), execution of field_cron() took 7.81ms.                                                                    
+  1006   20/Mar 22:12   cron             Info       Starting execution of field_cron(), execution of dblog_cron() took 2.53ms.                                                                   
+  1005   20/Mar 22:12   cron             Info       Starting execution of dblog_cron(), execution of comment_cron() took 8.34ms.                                                                 
+  1004   20/Mar 22:12   cron             Info       Starting execution of comment_cron(), execution of announcements_feed_cron() took 537.27ms.                                                  
+  1003   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1002   20/Mar 22:12   cron             Info       Starting execution of announcements_feed_cron().                                                                                             
+  1001   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  1000   20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  999    20/Mar 22:12   cron             Warning    Attempting to re-run cron while it is already running.                                                                                       
+  998    20/Mar 18:28   page not found   Warning    /dictionary                                                                                                                                  
+  997    20/Mar 18:24   page not found   Warning    /dictionary                                                                                                                                  
+  996    20/Mar 18:15   webform          Notice     'Create a secure password' is a 'Password' element, which has been disabled and will not be rendered.                                        
+  995    20/Mar 18:14   webform          Notice     'Create a secure password' is a 'Password' element, which has been disabled and will not be rendered.                                        
+  994    20/Mar 18:12   webform          Notice     'Create a secure password' is a 'Password' element, which has been disabled and will not be rendered.                                        
+  993    20/Mar 18:05   php              Error      Twig\Error\SyntaxError: Unexpected token "name" of value "if" ("end of statement block" expected) in                                         
+                                                    "themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-sitemap-section.html.twig"                                                      
+  992    20/Mar 18:05   php              Error      Twig\Error\SyntaxError: Unexpected token "name" of value "if" ("end of statement block" expected) in                                         
+                                                    "themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-sitemap-section.html.twig"                                                      
+  991    20/Mar 18:01   php              Error      Twig\Error\SyntaxError: Unexpected token "name" of value "if" ("end of statement block" expected) in                                         
+                                                    "themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-sitemap-popular.html.twig"                                                      
+  990    20/Mar 18:00   php              Error      Twig\Error\SyntaxError: Unexpected token "name" of value "if" ("end of statement block" expected) in                                         
+                                                    "themes/custom/cpg_theme/templates/paragraphs/paragraph--cpg-sitemap-popular.html.twig"                                                      
+  989    20/Mar 16:57   theme            Warning    Theme hook webform_handler_user_registration_summary not found.                                                                              
+  988    20/Mar 16:56   webform          Notice     'Create a secure password' is a 'Password' element, which has been disabled and will not be rendered.                                        
+  987    20/Mar 16:54   webform          Notice     'Create a secure password' is a 'Password' element, which has been disabled and will not be rendered.                                        
+  986    20/Mar 16:52   webform          Notice     'Create a secure password' is a 'Password' element, which has been disabled and will not be rendered.                                        
+  985    20/Mar 16:49   webform          Notice     'Create a secure password' is a 'Password' element, which has been disabled and will not be rendered.                                        
+  984    20/Mar 16:47   block_content    Info       basic: updated Mobile Drawer Navigation.                                                                                                     
+ ------ -------------- ---------------- ---------- --------------------------------------------------------------------------------------------------------------------------------------------- 
