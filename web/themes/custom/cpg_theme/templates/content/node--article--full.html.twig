@@ -17,12 +17,18 @@
 <article{{ attributes.addClass('cpg-article-full') }}>
 
   {# ── Category Tag ── #}
-  {% if content.field_tags|render|trim %}
+  {% if category_name_raw %}
     <div class="cpg-article-full__category">
+      {% if category_url %}
+        <a href="{{ category_url }}" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+      {% endif %}
       <span class="cpg-category-icon" aria-hidden="true">{{ category_icon|default('📈') }}</span>
       <span class="cpg-article-full__category-text">
-        {{ content.field_tags }}
+        {{ category_name_raw }}
       </span>
+      {% if category_url %}
+        </a>
+      {% endif %}
     </div>
   {% endif %}
 

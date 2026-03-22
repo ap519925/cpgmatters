@@ -28,12 +28,20 @@
 
     {# ── Category Tag ── #}
     {% if category_name_raw %}
-      <div class="cpg-article-teaser__category" style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
+      {% if category_url %}
+        <a href="{{ category_url }}" class="cpg-article-teaser__category" style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px; text-decoration: none;">
+      {% else %}
+        <div class="cpg-article-teaser__category" style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
+      {% endif %}
         <span class="cpg-category-icon" aria-hidden="true" style="font-size: 0.85rem;">{{ category_icon|default('📈') }}</span>
         <span style="color: #C41E3A; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">
           {{ category_name_raw }}
         </span>
-      </div>
+      {% if category_url %}
+        </a>
+      {% else %}
+        </div>
+      {% endif %}
     {% endif %}
 
     {# ── Title ── #}

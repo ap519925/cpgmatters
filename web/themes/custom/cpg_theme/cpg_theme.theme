@@ -69,6 +69,7 @@ function cpg_theme_preprocess_node(array &$variables) {
     $category_icon = '📈'; // Default icon.
     $category_class = 'cpg-cat-default'; // Default class.
     $category_name_raw = '';
+    $category_url = '';
 
     // Try to get the category name from field_tags.
     if ($variables['node']->hasField('field_tags') && !$variables['node']->get('field_tags')->isEmpty()) {
@@ -94,11 +95,18 @@ function cpg_theme_preprocess_node(array &$variables) {
         $safe_name = preg_replace('/[^a-z0-9\-]/', '-', $term_name);
         $safe_name = trim(preg_replace('/-+/', '-', $safe_name), '-');
         $category_class = 'cpg-cat-' . $safe_name;
+        
+        try {
+          $category_url = $term->toUrl()->toString();
+        } catch (\Exception $e) {
+          $category_url = '';
+        }
       }
     }
     $variables['category_icon'] = $category_icon;
     $variables['category_class'] = $category_class;
     $variables['category_name_raw'] = $category_name_raw;
+    $variables['category_url'] = $category_url;
   }
 
   // Provide plain text title and URL for social share links.
