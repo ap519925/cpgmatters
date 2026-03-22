@@ -245,21 +245,32 @@
         padding: 4px 0;
         gap: 1px;
 
-        &__icon {
-            width: 36px;
-            height: 34px;
+        &:not(.topic-sidebar--expanded) {
+            .topic-sidebar__icon {
+                width: 36px;
+                height: 34px;
+            }
+            
+            // Hide tooltips on mobile since there is no hover
+            .topic-sidebar__tooltip {
+                display: none;
+            }
+        }
+
+        &--expanded {
+            .topic-sidebar__icon {
+                height: 34px;
+            }
+            .topic-sidebar__tooltip {
+                display: block;
+            }
         }
 
         &__emoji {
             font-size: 1.1rem;
         }
-        
-        // Hide tooltips on mobile since there is no hover
-        &__tooltip {
-            display: none;
-        }
 
-        &__toggle {
+        &__toggle, &__expand {
             width: 36px;
             height: 26px;
             font-size: 0.85rem;
