@@ -1,0 +1,42 @@
+<nav class="topic-sidebar" aria-label="Browse by topic">
+  <a href="/search?topic=sustainability" class="topic-sidebar__icon" data-topic="sustainability" aria-label="Sustainability">
+    <span class="topic-sidebar__emoji">🌱</span>
+    <span class="topic-sidebar__tooltip">Sustainability</span>
+  </a>
+  <a href="/search?topic=e-commerce" class="topic-sidebar__icon" data-topic="e-commerce" aria-label="E-Commerce">
+    <span class="topic-sidebar__emoji">🛒</span>
+    <span class="topic-sidebar__tooltip">E-Commerce</span>
+  </a>
+  <a href="/search?topic=innovation" class="topic-sidebar__icon" data-topic="innovation" aria-label="Innovation">
+    <span class="topic-sidebar__emoji">💡</span>
+    <span class="topic-sidebar__tooltip">Innovation</span>
+  </a>
+  <a href="/search?topic=supply-chain" class="topic-sidebar__icon" data-topic="supply-chain" aria-label="Supply Chain">
+    <span class="topic-sidebar__emoji">📦</span>
+    <span class="topic-sidebar__tooltip">Supply Chain</span>
+  </a>
+  <a href="/search?topic=marketing" class="topic-sidebar__icon" data-topic="marketing" aria-label="Marketing">
+    <span class="topic-sidebar__emoji">📱</span>
+    <span class="topic-sidebar__tooltip">Marketing</span>
+  </a>
+  <a href="/search?topic=finance" class="topic-sidebar__icon" data-topic="finance" aria-label="Finance">
+    <span class="topic-sidebar__emoji">💰</span>
+    <span class="topic-sidebar__tooltip">Finance</span>
+  </a>
+  <a href="/search?topic=technology" class="topic-sidebar__icon" data-topic="technology" aria-label="Technology">
+    <span class="topic-sidebar__emoji">🔧</span>
+    <span class="topic-sidebar__tooltip">Technology</span>
+  </a>
+  <a href="/search?topic=leadership" class="topic-sidebar__icon" data-topic="leadership" aria-label="Leadership">
+    <span class="topic-sidebar__emoji">👔</span>
+    <span class="topic-sidebar__tooltip">Leadership</span>
+  </a>
+  <a href="/search?topic=retail" class="topic-sidebar__icon" data-topic="retail" aria-label="Retail">
+    <span class="topic-sidebar__emoji">🏪</span>
+    <span class="topic-sidebar__tooltip">Retail</span>
+  </a>
+  <a href="/search?topic=manufacturing" class="topic-sidebar__icon" data-topic="manufacturing" aria-label="Manufacturing">
+    <span class="topic-sidebar__emoji">🏭</span>
+    <span class="topic-sidebar__tooltip">Manufacturing</span>
+  </a>
+</nav>
