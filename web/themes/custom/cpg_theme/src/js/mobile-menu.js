@@ -99,14 +99,19 @@ function initTopicSidebar() {
         const iconElements = Array.from(sidebar.querySelectorAll('.topic-sidebar__icon'));
         iconElements.forEach(icon => wrapper.appendChild(icon));
         
-        // Insert wrapper at the beginning of sidebar
-        sidebar.insertBefore(wrapper, sidebar.firstChild);
+        // Insert wrapper and expand button
+        const expandBtn = document.createElement('button');
+        expandBtn.className = 'topic-sidebar__expand';
+        expandBtn.setAttribute('aria-label', 'Expand topic sidebar');
+        expandBtn.innerHTML = '<span class="topic-sidebar__expand-icon">▶</span>';
+        sidebar.insertBefore(expandBtn, sidebar.firstChild);
+        sidebar.insertBefore(wrapper, expandBtn.nextSibling);
     }
 
     if (!sidebar.querySelector('.topic-sidebar__toggle')) {
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'topic-sidebar__toggle';
-        toggleBtn.setAttribute('aria-label', 'Toggle topic sidebar');
+        toggleBtn.setAttribute('aria-label', 'Minimize topic sidebar');
         toggleBtn.innerHTML = '<span class="topic-sidebar__toggle-icon">◀</span>';
         sidebar.appendChild(toggleBtn);
     }
@@ -125,7 +130,8 @@ function initTopicSidebar() {
 
     // ── Min/Max toggle button ──
     const toggle = sidebar.querySelector('.topic-sidebar__toggle');
-    if (!toggle) return;
+    const expandBtn = sidebar.querySelector('.topic-sidebar__expand');
+    if (!toggle || !expandBtn) return;
 
     // Restore collapsed state from localStorage
     const savedState = localStorage.getItem('cpg-topic-sidebar-collapsed');
@@ -135,7 +141,22 @@ function initTopicSidebar() {
 
     toggle.addEventListener('click', () => {
         const isCollapsed = sidebar.classList.toggle('topic-sidebar--collapsed');
+        if (isCollapsed) {
+            sidebar.classList.remove('topic-sidebar--expanded');
+            expandBtn.innerHTML = '<span class="topic-sidebar__expand-icon">▶</span>';
+        }
         localStorage.setItem('cpg-topic-sidebar-collapsed', isCollapsed);
+    });
+
+    expandBtn.addEventListener('click', () => {
+        const isExpanded = sidebar.classList.toggle('topic-sidebar--expanded');
+        if (isExpanded) {
+            sidebar.classList.remove('topic-sidebar--collapsed');
+            localStorage.setItem('cpg-topic-sidebar-collapsed', 'false');
+            expandBtn.innerHTML = '<span class="topic-sidebar__expand-icon">◀</span>';
+        } else {
+            expandBtn.innerHTML = '<span class="topic-sidebar__expand-icon">▶</span>';
+        }
     });
 }
 

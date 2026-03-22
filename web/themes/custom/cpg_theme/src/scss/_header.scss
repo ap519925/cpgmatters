@@ -61,7 +61,7 @@
     }
 
     // ── Toggle button (minimize / maximize) ──
-    &__toggle {
+    &__toggle, &__expand {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -74,19 +74,56 @@
         color: $cpg-text-secondary;
         font-size: 1rem;
         transition: all 0.25s ease;
-        border-top: 1px solid rgba(0, 0, 0, 0.06);
-        margin-top: 2px;
-
+        
         &:hover {
             color: $cpg-red;
             background: rgba($cpg-red, 0.06);
         }
 
-        .topic-sidebar__toggle-icon {
+        .topic-sidebar__toggle-icon, .topic-sidebar__expand-icon {
             display: inline-block;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             font-size: 0.7rem;
             line-height: 1;
+        }
+    }
+
+    &__toggle {
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        margin-top: 2px;
+    }
+
+    &__expand {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        margin-bottom: 2px;
+        border-radius: 0 16px 0 0;
+    }
+
+    // ── Expanded state (Labels Visible) ──
+    &--expanded {
+        .topic-sidebar__icon {
+            width: auto;
+            padding: 0 16px 0 12px;
+            justify-content: flex-start;
+            gap: 12px;
+            border-radius: 0;
+        }
+
+        .topic-sidebar__tooltip {
+            position: relative;
+            transform: none !important;
+            left: 0;
+            opacity: 1;
+            visibility: visible;
+            box-shadow: none;
+            background: transparent;
+            color: $cpg-text;
+            padding: 0;
+            pointer-events: auto;
+
+            &::before {
+                display: none; // hide the little arrow
+            }
         }
     }
 
@@ -99,16 +136,25 @@
             overflow: hidden;
         }
 
-        .topic-sidebar__toggle {
+        .topic-sidebar__toggle, .topic-sidebar__expand {
             border-top: none;
+            border-bottom: none;
             margin-top: 0;
-            border-radius: 0 10px 10px 0;
+            margin-bottom: 0;
             height: 40px;
             width: 36px;
+        }
 
+        .topic-sidebar__toggle {
+            border-radius: 0 10px 10px 0;
             .topic-sidebar__toggle-icon {
                 transform: rotate(180deg);
             }
+        }
+        
+        // Hide the expand button completely when minimized
+        .topic-sidebar__expand {
+            display: none;
         }
 
         // Tighten the sidebar chrome when collapsed
@@ -199,21 +245,32 @@
         padding: 4px 0;
         gap: 1px;
 
-        &__icon {
-            width: 36px;
-            height: 34px;
+        &:not(.topic-sidebar--expanded) {
+            .topic-sidebar__icon {
+                width: 36px;
+                height: 34px;
+            }
+            
+            // Hide tooltips on mobile since there is no hover
+            .topic-sidebar__tooltip {
+                display: none;
+            }
+        }
+
+        &--expanded {
+            .topic-sidebar__icon {
+                height: 34px;
+            }
+            .topic-sidebar__tooltip {
+                display: block;
+            }
         }
 
         &__emoji {
             font-size: 1.1rem;
         }
-        
-        // Hide tooltips on mobile since there is no hover
-        &__tooltip {
-            display: none;
-        }
 
-        &__toggle {
+        &__toggle, &__expand {
             width: 36px;
             height: 26px;
             font-size: 0.85rem;
